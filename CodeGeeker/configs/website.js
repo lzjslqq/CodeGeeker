@@ -1,0 +1,1 @@
+export const domain = 'https://www.t278.cn/';

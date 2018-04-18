@@ -1,12 +1,41 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/match/list/list",
+        "pages/match/detail/detail",
+        "pages/photographer/list/list",
+        "pages/photographer/detail/detail",
+        "pages/user/detail/detail",
+        "pages/user/followee/list/list",
+        "pages/user/fav/list/list",
+        "pages/user/upload/upload",
+        "pages/photo/list//list",
+        "pages/photo/detail/detail"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "V视",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [{
+            "pagePath": "pages/index/index",
+            "text": "图片广场"
+        }, {
+            "pagePath": "pages/match/list/list",
+            "text": "近期赛事"
+        }, {
+            "pagePath": "pages/photographer/list/list",
+            "text": "摄影师"
+        }, {
+            "pagePath": "pages/user/detail/detail",
+            "text": "我的"
+        }]
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "downloadFile": 10000
+    },
+    "debug": true
 }
