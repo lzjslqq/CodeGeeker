@@ -19,6 +19,10 @@
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
+        "color": "#888888",
+        "selectedColor": "lightpink",
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
         "list": [{
             "pagePath": "pages/index/index",
             "text": "图片广场"
