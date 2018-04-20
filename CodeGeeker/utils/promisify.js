@@ -5,12 +5,12 @@ let debug = true; // out 开关
 const promisify = (fn) => {
     return (args = {}) => {
         return new Promise((resolve, reject) => {
-            args.success = function(res) {
+            args.success = function (res) {
                 // 成功回调
                 debug && common.out('promise success!', res);
                 resolve(res);
             }
-            args.fail = function(res) {
+            args.fail = function (res) {
                 // 失败回调
                 debug && common.out('promise fail....', res);
                 reject(res);
@@ -20,7 +20,7 @@ const promisify = (fn) => {
     }
 };
 
-Promise.prototype.finally = function(cb) {
+Promise.prototype.finally = function (cb) {
     let instance = this.constructor;
     return this.then(
         value => instance.resolve(cb()).then(() => value),
@@ -39,7 +39,7 @@ const sleep = (ms) => {
 
 
 /*----------------- 网络接口 -----------------*/
-const request = ({ url, data, method, header }) => { return promisify(wx.request)({ url, data, method: method || 'GET', header }); };
+const request = ({ url, data, method = 'GET', header }) => { return promisify(wx.request)({ url, data, method, header }); };
 const uploadFile = ({ url, filePath, name, header = {}, formData = {} }) => { return promisify(wx.uploadFile)({ url, filePath, name, header, formData }); };
 const downloadFile = ({ url }) => { return promisify(wx.downloadFile)({ url }); };
 
@@ -73,11 +73,11 @@ const switchTab = ({ url }) => { return promisify(wx.switchTab)({ url }); };
 
 /*----------------- 媒体接口 - 图片 -----------------*/
 // 调起本地图片选择窗口
-const chooseImage = ({ count, sizeType, sourceType } = {}) => {
+const chooseImage = ({ count = 9, sizeType = 'original', sourceType = 'album' } = {}) => {
     return promisify(wx.chooseImage)({
-        count: count || 9, // 最多可以选择的图片张数，默认9
-        sizeType: sizeType || 'original', // original 原图，compressed 压缩图，默认二者都有
-        sourceType: sourceType || 'album' // album 从相册选图，camera 使用相机，默认二者都有
+        count, // 最多可以选择的图片张数，默认9
+        sizeType, // original 原图，compressed 压缩图，默认二者都有
+        sourceType // album 从相册选图，camera 使用相机，默认二者都有
     });
 };
 // 预览图片列表（本地或外网）
@@ -118,36 +118,36 @@ const openDocument = ({ filePath }) => { return promisify(wx.openDocument)({ fil
 export const promisedApi = {
     sleep: sleep,
     http: {
-        request: request,
-        uploadFile: uploadFile,
-        downloadFile: downloadFile,
+        request,
+        uploadFile,
+        downloadFile,
     },
     open: {
-        getUserInfo: getUserInfo,
-        login: login,
+        getUserInfo,
+        login,
     },
     ui: {
-        showToast: showToast,
-        showLoading: showLoading,
-        showModal: showModal,
-        showActionSheet: showActionSheet,
-        navigateTo: navigateTo,
-        navigateBack: navigateBack,
-        redirectTo: redirectTo,
-        switchTab: switchTab,
+        showToast,
+        showLoading,
+        showModal,
+        showActionSheet,
+        navigateTo,
+        navigateBack,
+        redirectTo,
+        switchTab,
     },
     image: {
-        chooseImage: chooseImage,
-        previewImage: previewImage,
-        getImageInfo: getImageInfo,
-        saveImageToPhotosAlbum: saveImageToPhotosAlbum,
+        chooseImage,
+        previewImage,
+        getImageInfo,
+        saveImageToPhotosAlbum,
     },
     file: {
-        saveFile: saveFile,
-        getFileInfo: getFileInfo,
-        getSavedFileList: getSavedFileList,
-        getSavedFileInfo: getSavedFileInfo,
-        removeSavedFile: removeSavedFile,
-        openDocument: openDocument,
+        saveFile,
+        getFileInfo,
+        getSavedFileList,
+        getSavedFileInfo,
+        removeSavedFile,
+        openDocument,
     },
 };
