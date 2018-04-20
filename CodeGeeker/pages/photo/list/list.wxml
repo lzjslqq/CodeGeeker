@@ -1,21 +1,28 @@
 <view class="list">
-    <view class="hiddenload" style="display:none;">
-        <image wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+    <!-- 图片加载层 -->
+    <view class="hiddenload">
+        <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
     </view>
-    <view class="item" wx:for="{{photoListLeft}}">
-        <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-        <view class="grapher">
-            <image src="{{userInfo.avatarUrl}}"></image>
-            <view>{{userInfo.nickName}}</view>
+    <!-- 左侧列表 -->
+    <view class="list-left" style="width:{{listWidth}}px;">
+        <view class="item" wx:for="{{leftPhotoList}}">
+            <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+            <view class="grapher">
+                <image src="{{userInfo.avatarUrl}}"></image>
+                <view>{{userInfo.nickName}}</view>
+            </view>
+            <view class="favcount">{{item.favcount}}</view>
         </view>
-        <view class="favcount">{{item.favcount}}</view>
     </view>
-    <view class="item" wx:for="{{photoListRight}}">
-        <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-        <view class="grapher">
-            <image src="{{userInfo.avatarUrl}}"></image>
-            <view>{{userInfo.nickName}}</view>
+    <!-- 右侧列表 -->
+    <view class="list-right" style="width:{{listWidth}}px;">
+        <view class="item" wx:for="{{rightPhotoList}}">
+            <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+            <view class="grapher">
+                <image src="{{userInfo.avatarUrl}}"></image>
+                <view>{{userInfo.nickName}}</view>
+            </view>
+            <view class="favcount">{{item.favcount}}</view>
         </view>
-        <view class="favcount">{{item.favcount}}</view>
     </view>
 </view>
