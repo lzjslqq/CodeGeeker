@@ -1,0 +1,21 @@
+<view class="list">
+    <view class="hiddenload" style="display:none;">
+        <image wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+    </view>
+    <view class="item" wx:for="{{photoListLeft}}">
+        <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+        <view class="grapher">
+            <image src="{{userInfo.avatarUrl}}"></image>
+            <view>{{userInfo.nickName}}</view>
+        </view>
+        <view class="favcount">{{item.favcount}}</view>
+    </view>
+    <view class="item" wx:for="{{photoListRight}}">
+        <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+        <view class="grapher">
+            <image src="{{userInfo.avatarUrl}}"></image>
+            <view>{{userInfo.nickName}}</view>
+        </view>
+        <view class="favcount">{{item.favcount}}</view>
+    </view>
+</view>

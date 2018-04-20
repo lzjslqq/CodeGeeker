@@ -1,4 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-
+    <view class="menu" bindtap="gotoPage" data-item="photo">图片详情页</view>
+    <view class="menu" bindtap="gotoPage" data-item="photolist">图片列表</view>
+    <view class="menu" bindtap="gotoPage" data-item="matchphotos">赛事图集</view>
 </view>

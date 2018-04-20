@@ -1,0 +1,10 @@
+.menu {
+    margin: 20rpx 200rpx;
+    width: 350rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 32rpx;
+    color: #888;
+    text-align: left;
+    border-bottom: 2rpx solid #8f8c8c;
+}
