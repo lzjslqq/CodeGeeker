@@ -5,12 +5,12 @@ let debug = true; // out 开关
 const promisify = (fn) => {
     return (args = {}) => {
         return new Promise((resolve, reject) => {
-            args.success = function (res) {
+            args.success = function(res) {
                 // 成功回调
                 debug && common.out('promise success!', res);
                 resolve(res);
             }
-            args.fail = function (res) {
+            args.fail = function(res) {
                 // 失败回调
                 debug && common.out('promise fail....', res);
                 reject(res);
@@ -20,7 +20,7 @@ const promisify = (fn) => {
     }
 };
 
-Promise.prototype.finally = function (cb) {
+Promise.prototype.finally = function(cb) {
     let instance = this.constructor;
     return this.then(
         value => instance.resolve(cb()).then(() => value),
@@ -63,7 +63,7 @@ const showModal = ({ title, content, showCancel, cancelText, cancelColor, confir
 const showActionSheet = ({ itemList }) => { return promisify(wx.showActionSheet)({ itemList }); };
 const navigateTo = ({ url }) => { return promisify(wx.navigateTo)({ url }); };
 const redirectTo = ({ url }) => { return promisify(wx.redirectTo)({ url }); };
-const navigateBack = ({ delta }) => { return promisify(wx.navigateBack)({ delta }); };
+const navigateBack = ({ delta } = {}) => { return promisify(wx.navigateBack)({ delta }); };
 const switchTab = ({ url }) => { return promisify(wx.switchTab)({ url }); };
 
 

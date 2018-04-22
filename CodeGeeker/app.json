@@ -10,6 +10,7 @@
         "pages/user/fav/list/list",
         "pages/user/upload/upload",
         "pages/photo/list/list",
+        "pages/photo/preview/preview",
         "pages/photo/detail/detail"
     ],
     "window": {

@@ -24,6 +24,15 @@ Page({
     onShow: function() {},
     onReady: function() {},
 
+
+
+
+
+
+
+
+
+
     rotateFlipper() {
         this.setData({ hover: true });
         this.rotate();

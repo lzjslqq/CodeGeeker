@@ -1,0 +1,8 @@
+<!-- <view class="container">
+    <view class="shadow"></view>
+    <view class="img" bindtap="goBack">
+        <image src="{{image.src}}" mode="widthFix" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd"></image>
+    </view>
+</view> -->
+
+<zoomview image-src="{{image.src}}"></zoomview>
