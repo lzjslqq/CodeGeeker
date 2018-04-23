@@ -1,0 +1,9 @@
+<view class='header'></view>
+<view class='body'>
+     <image class='user-img' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+     <view class='user-info'>
+          <view class='user-info-name'>我是糟老头</view>
+          <view class='user-info-btn'></view>
+     </view>
+     <view class='user-action'></view>
+</view>

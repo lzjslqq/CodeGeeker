@@ -3,14 +3,23 @@ import { common } from '../../../utils/util';
 const app = getApp()
 
 Page({
-    data: {
+     data: {
 
-    },
+     },
 
-    onLoad: function() {
+     onLoad: function () {
 
-    },
-    onShow: function() {},
-    onReady: function() {},
+          wx.setNavigationBarColor({
+               frontColor: '#ffffff',
+               backgroundColor: '#008CD7',
+               animation: {
+                    duration: 500,
+                    timingFunc: 'easeIn'
+               }
+          })
+
+     },
+     onShow: function () { },
+     onReady: function () { },
 
 })
