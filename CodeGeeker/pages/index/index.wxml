@@ -1,6 +1,36 @@
-<!--index.wxml-->
 <view class="container">
-    <view class="menu" bindtap="gotoPage" data-item="photo">图片详情页</view>
-    <view class="menu" bindtap="gotoPage" data-item="photolist">图片列表</view>
-    <view class="menu" bindtap="gotoPage" data-item="matchphotos">赛事图集</view>
+    <!-- 分类栏 -->
+    <view class="cate">
+        <view class="cate-item {{selectedCateId == item.id ? 'selected':''}}" wx:for="{{cateList}}" data-id="{{item.id}}" bindtap="selectCate">{{item.name}}</view>
+        <view class="cate-item end"></view>
+    </view>
+    <!-- 瀑布流 -->
+    <view class="list">
+        <!-- 图片加载层 -->
+        <view class="hiddenload">
+            <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+        </view>
+        <!-- 左侧列表 -->
+        <view class="list-left" style="width:{{listWidth}}px;">
+            <view class="item" wx:for="{{leftPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+                <view class="grapher">
+                    <image src="{{userInfo.avatarUrl}}"></image>
+                    <view>{{userInfo.nickName}}</view>
+                </view>
+                <view class="favcount">{{item.favcount}}</view>
+            </view>
+        </view>
+        <!-- 右侧列表 -->
+        <view class="list-right" style="width:{{listWidth}}px;">
+            <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+                <view class="grapher">
+                    <image src="{{userInfo.avatarUrl}}"></image>
+                    <view>{{userInfo.nickName}}</view>
+                </view>
+                <view class="favcount">{{item.favcount}}</view>
+            </view>
+        </view>
+    </view>
 </view>

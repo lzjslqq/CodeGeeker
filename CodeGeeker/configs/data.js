@@ -26,6 +26,8 @@ export const authors = [
     { id: 5, name: '摄影师005', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
     { id: 6, name: '摄影师006', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
     { id: 7, name: '摄影师007', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 8, name: '摄影师008', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 9, name: '摄影师009', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
 ];
 
 /**
