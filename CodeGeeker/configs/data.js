@@ -19,13 +19,13 @@ export const categories = [
  * 大师
  */
 export const authors = [
-    { id: 1, name: '摄影师001' },
-    { id: 2, name: '摄影师002' },
-    { id: 3, name: '摄影师003' },
-    { id: 4, name: '摄影师004' },
-    { id: 5, name: '摄影师005' },
-    { id: 6, name: '摄影师006' },
-    { id: 7, name: '摄影师007' },
+    { id: 1, name: '摄影师001', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 2, name: '摄影师002', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 3, name: '摄影师003', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 4, name: '摄影师004', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 5, name: '摄影师005', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 6, name: '摄影师006', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
+    { id: 7, name: '摄影师007', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
 ];
 
 /**

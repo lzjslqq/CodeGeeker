@@ -1,6 +1,6 @@
-<view class="container" style="width:{{window.width}}px;height: {{window.height}}px;" catchtap="goBack" catchtouchstart="onImageTouchStart" catchtouchmove="onImageTouchMove" catchtouchend="onImageTouchEnd">
+<view class="container" style="width:{{window.width}}px;height: {{window.height}}px;" bindtap="goBack">
     <view class="shadow"></view>
-    <view class="img" style="width:{{image.scaleWidth}}px;height:{{image.scaleHeight}}px;left:{{image.left}}px;top:{{image.top}}px;">
-        <image src="{{image.src}}" mode="widthFix" bindload="onImageLoaded"></image>
+    <view class="img" style="width:{{image.scaleWidth}}px;height:{{image.scaleHeight}}px;left:{{image.left}}px;top:{{image.top}}px;" catchtouchstart="onImageTouchStart" catchtouchmove="onImageTouchMove" catchtouchend="onImageTouchEnd">
+        <image src="{{image.src}}" mode="widthFix" bindload="onImageLoaded" bindlongpress="onLongPress"></image>
     </view>
 </view>

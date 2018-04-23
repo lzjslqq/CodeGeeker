@@ -17,8 +17,11 @@ Component({
     data: {
         image: {
             src: '',
+            width: 0,
+            height: 0,
             scaleWidth: 0,
             scaleHeight: 0,
+            ratio: 1,
             left: 0,
             top: 0,
         },
@@ -62,6 +65,9 @@ Component({
         goBack(e) {
             promisedApi.ui.navigateBack();
         },
+        onLongPress(e) {
+            common.out('long press ', e);
+        },
         onImageLoaded(e) {
             // 按比例计算 image 的 scale、position（默认适屏居中）
             let ratioImg = e.detail.width / e.detail.height;
@@ -79,10 +85,13 @@ Component({
             }
 
             this.setData({
+                'image.width': e.detail.width,
+                'image.height': e.detail.height,
                 'image.scaleWidth': scaleW,
                 'image.scaleHeight': scaleH,
                 'image.left': imageL,
                 'image.top': imageT,
+                'image.ratio': ratioImg,
             });
         },
         onImageTouchStart(e) {
@@ -99,13 +108,14 @@ Component({
         },
         onImageTouchMove(e) {
             console.log('move===');
-            console.log(e);
             // 按比例计算 image的size、position
-            let
+            let scaleH, scaleW,
                 imageL = this.data.image.left,
                 imageT = this.data.image.top;
 
             if (e.touches.length == 1) {
+                // 1. 单指拖动
+
                 let sp = this.data.points[0],
                     ep = e.touches[0];
                 let distX = ep.clientX - sp.clientX;
@@ -116,61 +126,70 @@ Component({
                     'image.top': imageT + distY,
                     'points': e.touches,
                 });
+
             } else if (e.touches.length >= 2) {
-                let scaleH, scaleW, ratio;
+                // 2. 双指缩放
+
+                let centerX = this.data.touchesCenter.x,
+                    centerY = this.data.touchesCenter.y;
 
                 let sp1 = this.data.points[0],
                     sp2 = this.data.points[1],
                     ep1 = e.touches[0],
                     ep2 = e.touches[1];
 
-                let dX1 = ep1.clientX - sp1.clientX,
-                    dX2 = ep2.clientX - sp2.clientX,
-                    dY1 = ep1.clientY - sp1.clientY,
-                    dY2 = ep2.clientY - sp2.clientY;
+                let sd = Math.sqrt(Math.pow(sp1.clientX - sp2.clientX, 2) + Math.pow(sp1.clientY - sp2.clientY, 2));
+                let ed = Math.sqrt(Math.pow(ep1.clientX - ep2.clientX, 2) + Math.pow(ep1.clientY - ep2.clientY, 2));
 
-                let centerX = this.data.touchesCenter.x,
-                    centerY = this.data.touchesCenter.y;
+                let ratio = (ed - sd) / this.data.window.width;
 
-                // 1. 判断阀值：30px
-                if (Math.abs(dX1) > 30 || Math.abs(dX2) > 30 || Math.abs(dY1) > 30 || Math.abs(dY2) > 30) {
-                    // 2. 判断中心点是否在图片区域内
-                    if (centerX > this.data.image.left && centerX < this.data.image.left + this.data.image.scaleWidth &&
-                        centerY > this.data.image.top && centerY < this.data.image.top + this.data.image.scaleHeight) {
+                scaleW = (1 + ratio / 2) * this.data.image.scaleWidth;
+                scaleH = scaleW / this.data.image.ratio;
+                imageL = centerX - (centerX - this.data.image.left) * scaleW / this.data.image.scaleWidth;
+                imageT = centerY - (centerY - this.data.image.top) * scaleH / this.data.image.scaleHeight;
 
-                        let d = Math.max(dX1, dX2, dY1, dY2);
-                        if (d == dX1 || d == dX2) {
-                            ratio = d / this.data.window.width;
-
-                        } else {
-                            ratio = d / this.data.window.height;
-
-                        }
-                    }
+                if ((scaleW <= this.data.window.width || scaleH <= this.data.window.height) && scaleW >= 0.5 * this.data.window.width) {
+                    this.setData({
+                        'image.scaleHeight': scaleH,
+                        'image.scaleWidth': scaleW,
+                        'image.left': imageL,
+                        'image.top': imageT,
+                    });
                 }
+
             }
         },
         onImageTouchEnd(e) {
             console.log('end');
             console.log(e);
         },
-        meetScaleCondition(sp1, ep1, sp2, ep2) {
-            let dX1 = ep1.clientX - sp1.clientX,
-                dX2 = ep2.clientX - sp2.clientX,
-                dY1 = ep1.clientY - sp1.clientY,
-                dY2 = ep2.clientY - sp2.clientY;
-
-            // 1. 判断阀值：30px
-            if (Math.abs(dX1) > 30 || Math.abs(dX2) > 30 || Math.abs(dY1) > 30 || Math.abs(dY2) > 30) {
-                // 2. 判断中心点是否在图片区域内
-                let centerX = this.data.touchesCenter.x,
-                    centerY = this.data.touchesCenter.y;
-                if (centerX > this.data.image.left && centerX < this.data.image.left + this.data.image.scaleWidth &&
-                    centerY > this.data.image.top && centerY < this.data.image.top + this.data.image.scaleHeight) {
-                    return true;
-                }
+        // 计算缩放方向、比例
+        calcScaleInfo(dx1, dx2, dy1, dy2) {
+            let direction, d, ratio;
+            let maxd = Math.max(Math.abs(dx1), Math.abs(dx2), Math.abs(dy1), Math.abs(dy2));
+            switch (maxd) {
+                case Math.abs(dx1):
+                    direction = 'x';
+                    d = dx1;
+                    ratio = d / this.data.window.width;
+                    break;
+                case Math.abs(dx2):
+                    direction = 'x';
+                    d = dx2;
+                    ratio = d / this.data.window.width;
+                    break;
+                case Math.abs(dy1):
+                    direction = 'y';
+                    d = dy1;
+                    ratio = d / this.data.window.height;
+                    break;
+                case Math.abs(dy2):
+                    direction = 'y';
+                    d = dy2;
+                    ratio = d / this.data.window.height;
+                    break;
             }
-            return false;
+            return { direction, d, ratio };
         },
     },
     behaviors: [],

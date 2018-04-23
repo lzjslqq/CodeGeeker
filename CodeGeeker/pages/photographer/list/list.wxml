@@ -1,0 +1,10 @@
+<view class="container">
+    <view class="item" wx:for="{{grapherList}}" wx:for-index="{{index}}">
+        <image class="avatar" src="{{item.avatarUrl}}"></image>
+        <view class="detail">
+            <view class="name">{{item.name}}</view>
+            <view class="stat">粉丝 {{item.fanscount}} · 作品 {{item.productcount}}</view>
+        </view>
+        <image class="focus" src="{{item.avatarUrl}}" data-pid="{{item.id}}"></image>
+    </view>
+</view>

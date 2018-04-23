@@ -10,7 +10,7 @@ App({
         promisedApi.open
             .login()
             .then(code => {
-                console.log(code);
+
             });
     },
     globalData: {

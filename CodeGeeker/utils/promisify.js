@@ -1,6 +1,6 @@
 import { common } from './util';
 
-let debug = true; // out 开关
+let debug = false; // out 开关
 
 const promisify = (fn) => {
     return (args = {}) => {

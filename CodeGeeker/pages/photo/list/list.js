@@ -8,7 +8,7 @@ let rightH = 0;
 Page({
     data: {
         pageIndex: 1,
-        pageSize: 3, // 每次加载两张
+        pageSize: 4, // 每次加载两张
         pageCount: 0,
         totalCount: 0, // 当前页面的总图片数，累加
         tempPhotoList: [], // 用于加载每次加载的图集列表中间变量
