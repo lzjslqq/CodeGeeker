@@ -16,24 +16,25 @@ Page({
         rightPhotoList: [],
         screenHeight: 0, // 屏幕高度
         listWidth: 0, // 一列的宽度
-        authorId: 0,
+        grapherId: 0,
         cateId: 0,
+        albumId: 0, // 图集
     },
     onLoad: function(options) {
         // 初始化
         leftH = rightH = 0;
 
-        wx.getSystemInfo({
-            success: res => {
-                this.setData({
-                    screenHeight: res.screenHeight,
-                    listWidth: res.screenWidth * 0.48
-                });
+        promisedApi.ui.setNavigationBarTitle({ title: options.title });
 
-                this.requestImageList();
-            }
+        this.setData({
+            grapherId: options.grapherid || 0,
+            cateId: options.cateid || 0,
+            albumId: options.albumid || 0,
+            screenHeight: app.globalData.window.height,
+            listWidth: app.globalData.window.width * 0.48
         });
 
+        this.requestImageList();
     },
     onShow: function() {},
     onReady: function() {},
@@ -52,11 +53,25 @@ Page({
         // common.out(`加载第${this.data.pageIndex}页。`);
         let pageIndex = this.data.pageIndex,
             pageSize = this.data.pageSize,
+            grapherId = this.data.grapherId,
+            cateId = this.data.cateId,
+            albumId = this.data.albumId,
             totalCount = this.data.totalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.pictures.slice(start, start + pageSize);
+        let list = config.pictures;
 
+        if (grapherId > 0) {
+            list = list.filter(e => e.authorid == grapherId);
+        }
+        if (cateId > 0) {
+            list = list.filter(e => e.cateid == cateId);
+        }
+        if (albumId > 0) {
+            list = list.filter(e => e.albumid == albumId);
+        }
+
+        list = list.slice(start, start + pageSize);
         totalCount += list.length;
 
         this.setData({

@@ -1,5 +1,5 @@
 <view class="container">
-    <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="{{index > 0 ? 'box-shadow: 0px -4px 4px #e9e7e0;':''}}">
+    <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="{{index > 0 ? 'box-shadow: 0px -4px 4px #e9e7e0;':''}}" bindtap="gotoDetail" data-id="{{item.id}}">
         <image class="avatar" src="{{item.avatarUrl}}"></image>
         <view class="detail">
             <view class="name">{{item.name}}</view>

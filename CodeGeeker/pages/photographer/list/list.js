@@ -22,6 +22,9 @@ Page({
         this.requestGrapher();
     },
 
+    gotoDetail(e) {
+        promisedApi.ui.navigateTo({ url: `/pages/photographer/detail/detail?id=${e.currentTarget.dataset.id}` });
+    },
     requestGrapher() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
             return;

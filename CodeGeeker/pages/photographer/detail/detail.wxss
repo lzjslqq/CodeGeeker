@@ -1,0 +1,287 @@
+page {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 630rpx;
+    overflow: hidden;
+    z-index: -2;
+}
+
+.shadow image {
+    width: 100%;
+}
+
+.opacity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 630rpx;
+    z-index: -1;
+    background-color: #fff;
+    opacity: 0.9;
+}
+
+.shim-100 {
+    width: 100%;
+    height: 100rpx;
+}
+
+.focus {
+    position: fixed;
+    bottom: 0rpx;
+    height: 100rpx;
+    width: 100%;
+    line-height: 100rpx;
+    font-size: 36rpx;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 10rpx;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
+}
+
+.grapher-pane {
+    width: 100%;
+    height: 630rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.grapher-pane .avatar {
+    margin: 100rpx 286rpx 0 284rpx;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 90rpx;
+}
+
+.grapher-pane .name {
+    margin-top: 40rpx;
+    line-height: 80rpx;
+    width: 100%;
+    font-size: 42rpx;
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.grapher-pane .stat {
+    line-height: 60rpx;
+    width: 100%;
+    font-size: 28rpx;
+    color: #AA7D50;
+    text-align: center;
+}
+
+.grapher-pane .desc {
+    line-height: 38rpx;
+    padding: 0 40rpx;
+    width: 670rpx;
+    font-size: 24rpx;
+    color: #999999;
+    text-align: center;
+}
+
+.tabs {
+    margin-top: -20rpx;
+    width: 100%;
+    height: 110rpx;
+    border-radius: 20rpx 20rpx 0 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.tabs .tab-1 {
+    width: 374rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #999999;
+}
+
+.tabs .tab-2 {
+    width: 376rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #999999;
+}
+
+.tabs .selected {
+    font-size: 32rpx;
+    color: #FF8D1D;
+    font-weight: bold;
+}
+
+.tabs .line1,
+.tabs .line2 {
+    position: absolute;
+    height: 4rpx;
+    width: 50rpx;
+    top: 80rpx;
+    background-color: #FF8D1D;
+}
+
+.tabs .line1 {
+    left: 162rpx;
+}
+
+.tabs .line2 {
+    right: 162rpx;
+}
+
+.list {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 100rpx;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+
+/*************** tab 1 ******************/
+
+.list-1 {
+    padding: 0;
+    position: absolute;
+    width: 750rpx;
+    left: 0rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.list-1 .list-left {
+    position: absolute;
+    top: 0;
+    left: 10rpx;
+}
+
+.list-1 .list-right {
+    position: absolute;
+    top: 0;
+    right: 10rpx;
+}
+
+.list-1 .item {
+    width: 100%;
+    position: relative;
+}
+
+.list-1 .item .photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 10rpx;
+}
+
+.list-1 .item .grapher {
+    height: 40rpx;
+    position: absolute;
+    bottom: 20rpx;
+    left: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.list-1 .item .grapher image {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 20rpx;
+}
+
+.list-1 .item .grapher view {
+    line-height: 40rpx;
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.list-1 .item .favcount {
+    line-height: 40rpx;
+    position: absolute;
+    bottom: 20rpx;
+    right: 20rpx;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.list-1.hide {
+    left: -750rpx;
+}
+
+
+/*************** tab 2 ******************/
+
+.list-2 {
+    padding: 0 30rpx;
+    position: absolute;
+    left: 750rpx;
+    width: 690rpx;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.list-2.show {
+    left: 0rpx;
+}
+
+.list-2 .item {
+    width: 330rpx;
+    height: 310rpx;
+}
+
+.list-2 .item image {
+    width: 330rpx;
+    height: 180rpx;
+    border-radius: 10rpx;
+}
+
+.list-2 .item .info {
+    padding: 0 10rpx;
+    width: 310rpx;
+}
+
+.list-2 .item .info .title {
+    width: 100%;
+    line-height: 50rpx;
+    font-size: 28rpx;
+    color: #1F2528;
+}
+
+.list-2 .item .info .other {
+    width: 100%;
+    line-height: 30rpx;
+    font-size: 24rpx;
+    color: #999999;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.list-2 .item .info .other .count {
+    position: absolute;
+    left: 0;
+}
+
+.list-2 .item .info .other .time {
+    position: absolute;
+    right: 0;
+}

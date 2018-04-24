@@ -65,6 +65,10 @@ const navigateTo = ({ url }) => { return promisify(wx.navigateTo)({ url }); };
 const redirectTo = ({ url }) => { return promisify(wx.redirectTo)({ url }); };
 const navigateBack = ({ delta } = {}) => { return promisify(wx.navigateBack)({ delta }); };
 const switchTab = ({ url }) => { return promisify(wx.switchTab)({ url }); };
+// 设置导航栏
+const setNavigationBarTitle = ({ title }) => { return promisify(wx.setNavigationBarTitle({ title })) };
+const setNavigationBarColor = ({ frontColor = '#000000', backgroundColor = '#ffffff' }) => { return promisify(wx.setNavigationBarColor({ frontColor, backgroundColor })) };
+// 设置选项卡
 
 
 /*----------------- 动画操作 -----------------*/
@@ -135,6 +139,8 @@ export const promisedApi = {
         navigateBack,
         redirectTo,
         switchTab,
+        setNavigationBarTitle,
+        setNavigationBarColor,
     },
     image: {
         chooseImage,

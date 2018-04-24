@@ -27,20 +27,12 @@ Page({
 
         this.setData({
             cateList: config.categories,
-            selectedCateId: config.categories[0].id
+            selectedCateId: config.categories[0].id,
+            screenHeight: app.globalData.window.height,
+            listWidth: app.globalData.window.width * 0.48,
         });
 
-        wx.getSystemInfo({
-            success: res => {
-                this.setData({
-                    screenHeight: res.screenHeight,
-                    listWidth: res.screenWidth * 0.48
-                });
-
-                this.requestImageList();
-            }
-        });
-
+        this.requestImageList();
     },
     onShow: function() {},
     onReady: function() {},
