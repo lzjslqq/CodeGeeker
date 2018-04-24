@@ -51,7 +51,18 @@ Page({
 
     selectCate(e) {
         let id = e.currentTarget.dataset.id;
-        this.setData({ selectedCateId: id });
+        this.setData({
+            selectedCateId: id,
+            tempPhotoList: [],
+            leftPhotoList: [],
+            rightPhotoList: [],
+            pageIndex: 1,
+            pageCount: 0,
+            totalCount: 0,
+        });
+        leftH = rightH = 0;
+
+        this.requestImageList();
     },
     gotoDetail(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
@@ -60,13 +71,14 @@ Page({
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
             return;
 
-        // common.out(`加载第${this.data.pageIndex}页。`);
+        common.out(`加载第${this.data.pageIndex}页。`);
         let pageIndex = this.data.pageIndex,
             pageSize = this.data.pageSize,
+            cateId = this.data.selectedCateId,
             totalCount = this.data.totalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.pictures.slice(start, start + pageSize);
+        let list = config.pictures.filter(e => e.cateid == cateId).slice(start, start + pageSize);
 
         totalCount += list.length;
 
@@ -103,6 +115,7 @@ Page({
             });
             // 循环初始化加载页面
             if (Math.min(leftH, rightH) + 10 < this.data.screenHeight) {
+                console.log('load more...')
                 this.requestImageList();
             }
         }

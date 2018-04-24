@@ -1,8 +1,9 @@
-<!-- <view class="container">
-    <view class="shadow"></view>
-    <view class="img" bindtap="goBack">
-        <image src="{{image.src}}" mode="widthFix" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd"></image>
+<view class="container">
+    <view class="img-pane" animation="{{imageAnimation}}">
+        <zoomview image-src="{{image.src}}"></zoomview>
     </view>
-</view> -->
-
-<zoomview image-src="{{image.src}}"></zoomview>
+    <view class="cmt-pane" animation="{{commentAnimation}}">
+        <view class="comment" wx:for="{{commentList}}">{{item}}</view>
+    </view>
+</view>
+<view class="trans" bindtap="trans">翻转</view>

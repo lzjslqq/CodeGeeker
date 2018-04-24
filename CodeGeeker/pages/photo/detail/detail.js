@@ -18,23 +18,15 @@ Page({
         imageAnimation: {},
         textAnimation: {},
     },
-    onLoad: function() {
-        this.setData({ image: config.pictures[1] });
+    onLoad: function(options) {
+        this.setData({ image: config.pictures.filter(e => e.id == options.id)[0] });
     },
     onShow: function() {},
     onReady: function() {},
 
 
-
-
-
-
-
-
-
-
     rotateFlipper() {
-        this.setData({ hover: true });
+        this.setData({ hover: !this.data.hover });
         this.rotate();
     },
     rotateImage() {

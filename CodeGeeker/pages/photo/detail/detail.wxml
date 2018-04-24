@@ -1,4 +1,4 @@
-<view class="flip-container" catchtap="rotateFlipper">
+<view class="flip-container">
     <view class="flipper" animation="{{flipAnimation}}">
         <!-- 图片面 -->
         <view class="front {{hover?'hover':''}}" animation="{{imageAnimation}}" catchtap="rotateImage">
@@ -6,10 +6,11 @@
         </view>
 
         <!-- 评论面 -->
-        <!-- <view class="back {{hover?'hover':''}}" animation="{{textAnimation}}" catchtap="rotateText1">
+        <view class="back {{hover?'hover':''}}" animation="{{textAnimation}}" catchtap="rotateText1">
             <view class="comment-list">
                 <view class="comment" wx:for="{{comments}}">{{item}}</view>
             </view>
-        </view> -->
+        </view>
     </view>
+    <view class="trans" catchtap="rotateFlipper">翻转</view>
 </view>
