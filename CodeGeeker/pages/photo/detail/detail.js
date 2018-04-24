@@ -50,8 +50,8 @@ Page({
         });
 
         animation
-            .rotateY(90)
-            .scaleY(10)
+            .rotateY(0)
+            .scaleY(2)
             // .translateY(-100)
             .step();
         this.setData({ imageAnimation: animation.export() });
