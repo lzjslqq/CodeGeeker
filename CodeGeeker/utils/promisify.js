@@ -117,6 +117,11 @@ const openDocument = ({ filePath }) => { return promisify(wx.openDocument)({ fil
 
 
 
+/*----------------- 文件操作 -----------------*/
+const getStorage = ({ key = '' }) => { return promisify(wx.getStorage)({ key }); };
+const setStorage = ({ key = '', data } = {}) => { return promisify(wx.setStorage)({ key, data }); };
+
+
 
 
 export const promisedApi = {
@@ -155,5 +160,9 @@ export const promisedApi = {
         getSavedFileInfo,
         removeSavedFile,
         openDocument,
+    },
+    data: {
+        getStorage,
+        setStorage,
     },
 };

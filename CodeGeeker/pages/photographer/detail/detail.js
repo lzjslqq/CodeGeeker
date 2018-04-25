@@ -49,11 +49,14 @@ Page({
         common.out('reach bottom');
         this.requestImageList();
     },
+    onPageScroll: function(e) {
+        common.out('滑动', e);
+    },
 
-    select(e) {
+    changeTab(e) {
         this.setData({ selectedTab: e.currentTarget.dataset.tabid });
     },
-    gotoDetail(e) {
+    gotoPhotoDetail(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {

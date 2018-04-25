@@ -70,7 +70,7 @@ Page({
             totalCount = this.data.totalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.pictures.filter(e => e.cateid == cateId).slice(start, start + pageSize);
+        let list = config.photoes.filter(e => e.cateid == cateId).slice(start, start + pageSize);
 
         totalCount += list.length;
 
@@ -79,7 +79,7 @@ Page({
             tempPhotoList: this.data.tempPhotoList.concat(list),
             totalCount: totalCount,
             pageIndex: pageIndex + 1,
-            pageCount: config.pictures.length / pageSize | 1,
+            pageCount: config.photoes.length / pageSize | 1,
         });
     },
     onImageLoaded(e) {

@@ -96,18 +96,34 @@ page {
     text-align: center;
 }
 
-.tabs {
-    margin-top: -20rpx;
+.tabs,
+.float-tabs {
     width: 100%;
     height: 110rpx;
-    border-radius: 20rpx 20rpx 0 0;
     background-color: #fff;
     display: flex;
     flex-direction: row;
     position: relative;
 }
 
-.tabs .tab-1 {
+.tabs {
+    margin-top: -20rpx;
+    border-radius: 20rpx 20rpx 0 0;
+    z-index: 5;
+}
+
+.float-tabs {
+    position: fixed;
+    top: 0;
+    z-index: -3;
+}
+
+.float-tabs.hide {
+    height: 0;
+}
+
+.tabs .tab-1,
+.float-tabs .tab-1 {
     width: 374rpx;
     line-height: 100rpx;
     text-align: center;
@@ -115,7 +131,8 @@ page {
     color: #999999;
 }
 
-.tabs .tab-2 {
+.tabs .tab-2,
+.float-tabs .tab-2 {
     width: 376rpx;
     line-height: 100rpx;
     text-align: center;
@@ -123,14 +140,17 @@ page {
     color: #999999;
 }
 
-.tabs .selected {
+.tabs .selected,
+.float-tabs .selected {
     font-size: 32rpx;
     color: #FF8D1D;
     font-weight: bold;
 }
 
 .tabs .line1,
-.tabs .line2 {
+.tabs .line2,
+.float-tabs .line1,
+.float-tabs .line2 {
     position: absolute;
     height: 4rpx;
     width: 50rpx;
@@ -138,11 +158,13 @@ page {
     background-color: #FF8D1D;
 }
 
-.tabs .line1 {
+.tabs .line1,
+.float-tabs .line1 {
     left: 162rpx;
 }
 
-.tabs .line2 {
+.tabs .line2,
+.float-tabs .line2 {
     right: 162rpx;
 }
 
@@ -153,6 +175,7 @@ page {
     position: relative;
     display: flex;
     flex-direction: row;
+    z-index: -4;
 }
 
 

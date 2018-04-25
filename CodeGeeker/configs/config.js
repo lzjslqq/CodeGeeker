@@ -1,10 +1,13 @@
 import { domain } from './website';
-import { categories, authors, pictures, albums } from './data';
+import { data } from './data';
 
 export const config = {
     domain,
-    categories,
-    authors,
-    pictures,
-    albums,
+    categories: data.categories,
+    graphers: data.users.filter(u => u.type == 'grapher'),
+    matches: data.matches,
+    albums: data.albums,
+    photoes: data.photos,
+    followes: data.follows,
+    favs: data.favs,
 }
