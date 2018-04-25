@@ -1,0 +1,63 @@
+<view class="container">
+    <view class="shadow">
+        <image src="{{grapher.avatarUrl}}" mode="widthFix"></image>
+    </view>
+    <view class="opacity"></view>
+    <view class="grapher-pane">
+        <image class="avatar" src="{{grapher.avatarUrl}}"></image>
+        <view class="name">{{grapher.name}}</view>
+        <view class="stat">{{grapher.fanscount}}位粉丝 | 非凡摄影师·已认证</view>
+        <view class="desc">{{grapher.desc}}</view>
+    </view>
+    <view class="tabs">
+        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="select" data-tabid="0">全部 {{1231}}</view>
+        <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="select" data-tabid="1">图集 {{23}}</view>
+        <view class="{{selectedTab==0?'line1':''}}"></view>
+        <view class="{{selectedTab==1?'line2':''}}"></view>
+    </view>
+    <view class="list">
+        <view class="list-1 {{selectedTab==0?'':'hide'}}">
+            <!-- 图片加载层 -->
+            <view class="hiddenload">
+                <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+            </view>
+            <!-- 左侧列表 -->
+            <view class="list-left" style="width:{{listWidth}}px;">
+                <view class="item" wx:for="{{leftPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
+                    <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+                    <view class="grapher">
+                        <image src="{{userInfo.avatarUrl}}"></image>
+                        <view>{{userInfo.nickName}}</view>
+                    </view>
+                    <view class="favcount">{{item.favcount}}</view>
+                </view>
+                <view class="shim-100"></view>
+            </view>
+            <!-- 右侧列表 -->
+            <view class="list-right" style="width:{{listWidth}}px;">
+                <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
+                    <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+                    <view class="grapher">
+                        <image src="{{userInfo.avatarUrl}}"></image>
+                        <view>{{userInfo.nickName}}</view>
+                    </view>
+                    <view class="favcount">{{item.favcount}}</view>
+                </view>
+                <view class="shim-100"></view>
+            </view>
+        </view>
+        <view class="list-2 {{selectedTab==1?'show':''}}">
+            <view class="item" wx:for="{{albumList}}" data-aid="{{item.id}}" data-title="{{item.tile}}" bindtap="gotoPhotoList">
+                <image src="{{item.src}}"></image>
+                <view class="info">
+                    <view class="title">{{item.title}}</view>
+                    <view class="other">
+                        <view class="count">{{item.count}}张</view>
+                        <view class="time">{{item.addtime}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="focus">关注</view>
+</view>
