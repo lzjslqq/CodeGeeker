@@ -9,12 +9,12 @@
                     </view>
                     <view class='action-desc text'>消息</view>
                </view>
-               <view class='action-content'>
+               <navigator class='action-content' url='/pages/user/upload/upload'>
                     <view class='action-icon'>
                          <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
                     </view>
                     <view class='action-desc text'>上传</view>
-               </view>
+               </navigator>
           </view>
      </view>
      <view class='user-info'>
@@ -27,7 +27,7 @@
                <view class='user-desc-list1-auth'>非凡摄影师 · 已认证</view>
           </view>
           <view class='user-desc-list2'>
-               <view class='user-desc-text text'>bject.create方法的第二个参数添加的对象属性（属性p），如果不显式声明，默认是不可遍历</view>
+               <view class='user-desc-text text'>object.create方法的第二个参数添加的对象属性（属性p），如果不显式声明，默认是不可遍历</view>
                <view class='user-desc-icon'>
                     <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
                </view>

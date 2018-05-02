@@ -1,0 +1,20 @@
+page {
+     background: #fff;
+     padding: 0 30rpx;
+}
+
+.upload {
+     width: 690rpx;
+}
+
+.picker {
+     height: 80rpx;
+     width: 690rpx;
+     color: black;
+     text-align: center;
+     line-height: 80rpx;
+     font-size: 28rpx;
+     border: 1rpx #d0d6d9 solid;
+     border-radius: 40rpx;
+     margin-bottom: 40rpx;
+}

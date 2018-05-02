@@ -1,0 +1,4 @@
+<view class="upload">
+     <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{matchArray}}">{{matchArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
+     <picker class='picker' bindchange="bindCategoryChange" value="{{selectedMatchId}}" range="{{categoryArray}}">{{categoryArray[selectedcategoryId]||"选择分类 ▼"}}</picker>
+</view>
