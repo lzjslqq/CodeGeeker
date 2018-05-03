@@ -14,7 +14,7 @@ page {
      text-align: center;
      line-height: 80rpx;
      font-size: 28rpx;
-     border: 1rpx #d0d6d9 solid;
+     border: 1rpx #ffb33a solid;
      border-radius: 40rpx;
      margin-bottom: 40rpx;
 }

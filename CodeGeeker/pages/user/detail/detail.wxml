@@ -2,18 +2,16 @@
      <view class='user-header'>
           <image class='user-img' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
           <view class='user-action'>
-               <view class='action-content'>
-                    <view class='action-icon'>
-                         <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
-                         <view class='msg-num'>2</view>
-                    </view>
-                    <view class='action-desc text'>消息</view>
-               </view>
                <navigator class='action-content' url='/pages/user/upload/upload'>
                     <view class='action-icon'>
-                         <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+                         <image src='/images/user/msg.png'></image>
+                         <view class='msg-num'>2</view>
                     </view>
-                    <view class='action-desc text'>上传</view>
+               </navigator>
+               <navigator class='action-content' url='/pages/user/upload/upload'>
+                    <view class='action-icon'>
+                         <image src='/images/user/upload.png'></image>
+                    </view>
                </navigator>
           </view>
      </view>
@@ -29,7 +27,7 @@
           <view class='user-desc-list2'>
                <view class='user-desc-text text'>object.create方法的第二个参数添加的对象属性（属性p），如果不显式声明，默认是不可遍历</view>
                <view class='user-desc-icon'>
-                    <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+                    <image src='/images/user/edit.png'></image>
                </view>
           </view>
      </view>
@@ -39,18 +37,18 @@
           <view class='num'>513
                <view class='content-name'>个作品</view>
           </view>
-          <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+          <image src='/images/user/product.png'></image>
      </view>
      <view class='content follow'>
           <view class='num'>66
                <view class='content-name'>个关注</view>
           </view>
-          <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+          <image src='/images/user/focus.png'></image>
      </view>
      <view class='content fav'>
           <view class='num'>89
                <view class='content-name'>个点赞</view>
           </view>
-          <image src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+          <image src='/images/user/like.png'></image>
      </view>
 </view>

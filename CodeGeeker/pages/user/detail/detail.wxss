@@ -23,20 +23,12 @@ page {
      float: right;
 }
 
-.action-desc {
-     text-align: center;
-}
-
 .action-content {
      float: left;
      margin-left: 20rpx;
 }
 
 .action-icon {
-     width: 98rpx;
-     height: 98rpx;
-     border: 2rpx #f0f0f0 solid;
-     border-radius: 99rpx;
      position: relative;
 }
 
@@ -44,8 +36,8 @@ page {
      border: 1rpx solid #f04f4f;
      background: #f04f4f;
      position: absolute;
-     top: -5rpx;
-     right: -5rpx;
+     top: 8rpx;
+     right: 8rpx;
      width: 32rpx;
      height: 32rpx;
      border-radius: 32rpx;
@@ -55,11 +47,10 @@ page {
 }
 
 .action-icon image {
-     width: 40rpx;
-     height: 40rpx;
+     width: 120rpx;
+     height: 120rpx;
      position: relative;
-     top: 30rpx;
-     left: 30rpx;
+     border-radius: 120rpx;
 }
 
 .user-info {
