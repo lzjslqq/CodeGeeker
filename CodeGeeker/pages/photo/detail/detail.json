@@ -1,5 +1,5 @@
 {
     "usingComponents": {
-        "zoomview": "/components/zoomview/zoomview"
+        "image-scroll-view": "/components/imagescrollview/imagescrollview"
     }
 }

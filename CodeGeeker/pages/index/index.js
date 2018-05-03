@@ -59,7 +59,8 @@ Page({
         this.requestImageList();
     },
     gotoDetail(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
+        // promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
@@ -79,6 +80,7 @@ Page({
             let g = app.globalData.grapherList.filter(e => e.id == p.grapherid)[0];
             p.grapherName = g.name;
             p.grapherAvatarUrl = g.avatarUrl;
+            p.faved = true;
         });
 
         tempTotalCount += list.length;

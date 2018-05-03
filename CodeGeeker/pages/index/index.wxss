@@ -102,9 +102,17 @@ page {
     display: flex;
 }
 
-.list .item .stat .fav {
+.list .item .stat .fav-img {
     position: absolute;
+    top: 4rpx;
     left: 20rpx;
+    width: 30rpx;
+    height: 28rpx;
+}
+
+.list .item .stat .fav-count {
+    position: absolute;
+    left: 60rpx;
     color: #999999;
 }
 

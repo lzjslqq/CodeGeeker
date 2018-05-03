@@ -14,14 +14,10 @@
         <view class="list-left" style="width:{{listWidth}}px;">
             <view class="item" wx:for="{{leftPhotoList}}">
                 <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
-                <!-- <view class="grapher">
-                    <image src="{{userInfo.avatarUrl}}"></image>
-                    <view>{{userInfo.nickName}}</view>
-                </view>
-                <view class="favcount">{{item.favcount}}</view> -->
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <view class="fav">{{item.favcount}}</view>
+                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <view class="fav-count">{{item.favcount}}</view>
                     <view class="name">{{item.grapherName}}</view>
                     <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
                 </view>
@@ -31,14 +27,10 @@
         <view class="list-right" style="width:{{listWidth}}px;">
             <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
                 <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-                <!-- <view class="grapher">
-                    <image src="{{userInfo.avatarUrl}}"></image>
-                    <view>{{userInfo.nickName}}</view>
-                </view>
-                <view class="favcount">{{item.favcount}}</view> -->
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <view class="fav">{{item.favcount}}</view>
+                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <view class="fav-count">{{item.favcount}}</view>
                     <view class="name">{{item.grapherName}}</view>
                     <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
                 </view>

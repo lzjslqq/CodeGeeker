@@ -6,51 +6,25 @@ const app = getApp()
 Page({
     data: {
         image: {},
-        hover: false,
-        showFront: true,
-        showBack: false,
-        comments: [
-            "适得府君书来得及",
-            "束带结发历史的就，水电费家连锁店几个。手动加个两三点。",
-            "束带结发历史的就个。四大金刚了圣诞节，上的连接方式了的架构师。"
-        ],
-        flipAnimation: {},
-        imageAnimation: {},
-        textAnimation: {},
+        album: {},
     },
     onLoad: function(options) {
-        this.setData({ image: app.globalData.photoList.filter(e => e.id == options.id)[0] });
+        let id = options.id; // image.id
+        let image = app.globalData.photoList.filter(e => e.id == options.id)[0];
+        let album = app.globalData.albumList.filter(e => e.id == image.albumid)[0];
+        this.setData({
+            image: image,
+            album: album
+        });
     },
     onShow: function() {},
     onReady: function() {},
 
-
-    rotateFlipper() {
-        this.setData({ hover: !this.data.hover });
-        this.rotate();
+    last(e) {
+        // let 
     },
-    rotateImage() {
-        this.rotate();
-    },
-    rotateText() {
-        this.setData({ showFront: true, showBack: false });
-    },
+    next(e) {
 
-    // 动画
-    rotate() {
-        let animation = wx.createAnimation({
-            transformOrigin: "center",
-            duration: 1000,
-            timingFunction: "ease-in",
-            delay: 0
-        });
-
-        animation
-            .rotateY(0)
-            .scaleY(2)
-            // .translateY(-100)
-            .step();
-        this.setData({ imageAnimation: animation.export() });
     },
 
 

@@ -1,16 +1,18 @@
-<view class="flip-container">
-    <view class="flipper" animation="{{flipAnimation}}">
-        <!-- 图片面 -->
-        <view class="front {{hover?'hover':''}}" animation="{{imageAnimation}}" catchtap="rotateImage">
-            <image src="{{image.src}}" mode="widthFix"></image>
-        </view>
-
-        <!-- 评论面 -->
-        <view class="back {{hover?'hover':''}}" animation="{{textAnimation}}" catchtap="rotateText1">
-            <view class="comment-list">
-                <view class="comment" wx:for="{{comments}}">{{item}}</view>
-            </view>
+<view class="container">
+    <image-scroll-view image-src="{{image.src}}"></image-scroll-view>
+    <view class="info">
+        <view class="title">{{album.title}}</view>
+        <view class="desc">{{album.desc}}</view>
+        <view class="stat">
+            <view class="page">1/3</view>
+            <image class="fav" src="{{image.faved ? '/images/detail/liked.png' : '/images/detail/like.png'}}"></image>
+            <view class="favcount">{{image.favcount}}</view>
+            <image class="share" src="/images/detail/share.png"></image>
+            <button class="btn-share" open-type="share"></button>
         </view>
     </view>
-    <view class="trans" catchtap="rotateFlipper">翻转</view>
+    <view class="btns">
+        <image class="last" wx:if="{{hasLast}}" src="/images/detail/last.png" bindtap="last"></image>
+        <image class="next" wx:if="{{hasNext}}" src="/images/detail/next.png" bindtap="next"></image>
+    </view>
 </view>

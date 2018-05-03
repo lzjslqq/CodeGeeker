@@ -272,10 +272,18 @@ page {
     color: #999999;
 }
 
-.list-1 .item .info .stat .favcount {
-    line-height: 38rpx;
+.list-1 .item .info .stat .fav-img {
     position: absolute;
-    left: 0rpx;
+    top: 4rpx;
+    left: 0;
+    width: 30rpx;
+    height: 28rpx;
+}
+
+.list-1 .item .info .stat .favcount {
+    position: absolute;
+    line-height: 38rpx;
+    left: 40rpx;
 }
 
 .list-1 .item .info .stat .time {
@@ -291,6 +299,7 @@ page {
     bottom: 20rpx;
     left: 20rpx;
     display: flex;
+    
     flex-direction: row;
     justify-content: flex-start;
 }

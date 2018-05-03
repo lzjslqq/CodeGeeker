@@ -37,6 +37,7 @@
                     <view class="info">
                         <view class="title">{{item.title}}</view>
                         <view class="stat">
+                            <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
                             <view class="favcount">{{item.favcount}}</view>
                             <view class="time">{{item.addtime}} 发布</view>
                         </view>
@@ -51,6 +52,7 @@
                     <view class="info">
                         <view class="title">{{item.title}}</view>
                         <view class="stat">
+                            <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
                             <view class="favcount">{{item.favcount}}</view>
                             <view class="time">{{item.addtime}} 发布</view>
                         </view>
