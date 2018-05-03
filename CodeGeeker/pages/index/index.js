@@ -13,7 +13,8 @@ Page({
         pageIndex: 1,
         pageSize: 4, // 每次加载两张
         pageCount: 0,
-        totalCount: 0, // 当前页面的总图片数，累加
+        totalCount: 0,
+        tempTotalCount: 0, // 当前页面的总图片数，累加
         tempPhotoList: [], // 用于加载每次加载的图集列表中间变量
         leftPhotoList: [],
         rightPhotoList: [],
@@ -26,8 +27,8 @@ Page({
         leftH = rightH = 0;
 
         this.setData({
-            cateList: config.categories,
-            selectedCateId: config.categories[0].id,
+            cateList: app.globalData.cateList,
+            selectedCateId: app.globalData.cateList[0].id,
             screenHeight: app.globalData.window.height,
             listWidth: app.globalData.window.width * 0.48,
         });
@@ -45,6 +46,7 @@ Page({
         let id = e.currentTarget.dataset.id;
         this.setData({
             selectedCateId: id,
+            tempTotalCount: 0,
             tempPhotoList: [],
             leftPhotoList: [],
             rightPhotoList: [],
@@ -67,19 +69,26 @@ Page({
         let pageIndex = this.data.pageIndex,
             pageSize = this.data.pageSize,
             cateId = this.data.selectedCateId,
-            totalCount = this.data.totalCount;
+            tempTotalCount = this.data.tempTotalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.photoes.filter(e => e.cateid == cateId).slice(start, start + pageSize);
+        let list = app.globalData.photoList.filter(e => e.cateid == cateId).slice(start, start + pageSize);
 
-        totalCount += list.length;
+        // 关联字段处理
+        list.map(p => {
+            let g = app.globalData.grapherList.filter(e => e.id == p.grapherid)[0];
+            p.grapherName = g.name;
+            p.grapherAvatarUrl = g.avatarUrl;
+        });
+
+        tempTotalCount += list.length;
 
         this.setData({
             userInfo: app.globalData.userInfo,
             tempPhotoList: this.data.tempPhotoList.concat(list),
-            totalCount: totalCount,
+            tempTotalCount: tempTotalCount,
             pageIndex: pageIndex + 1,
-            pageCount: config.photoes.length / pageSize | 1,
+            pageCount: app.globalData.photoList.length / pageSize | 1,
         });
     },
     onImageLoaded(e) {
@@ -100,7 +109,7 @@ Page({
         }
 
         // 3. 当最后一张加载完成时，更新页面数据
-        if (this.data.leftPhotoList.length + this.data.rightPhotoList.length >= this.data.totalCount) {
+        if (this.data.leftPhotoList.length + this.data.rightPhotoList.length >= this.data.tempTotalCount) {
             this.setData({
                 leftPhotoList: this.data.leftPhotoList,
                 rightPhotoList: this.data.rightPhotoList

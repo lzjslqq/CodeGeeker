@@ -2,7 +2,7 @@
     <!-- 分类栏 -->
     <view class="cate">
         <view class="cate-item {{selectedCateId == item.id ? 'selected':''}}" wx:for="{{cateList}}" data-id="{{item.id}}" bindtap="selectCate">{{item.name}}</view>
-        <view class="cate-item end"></view>
+        <view class="cate-item end">{{' '}}</view>
     </view>
     <!-- 瀑布流 -->
     <view class="list">
@@ -12,24 +12,36 @@
         </view>
         <!-- 左侧列表 -->
         <view class="list-left" style="width:{{listWidth}}px;">
-            <view class="item" wx:for="{{leftPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
-                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-                <view class="grapher">
+            <view class="item" wx:for="{{leftPhotoList}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
+                <!-- <view class="grapher">
                     <image src="{{userInfo.avatarUrl}}"></image>
                     <view>{{userInfo.nickName}}</view>
                 </view>
-                <view class="favcount">{{item.favcount}}</view>
+                <view class="favcount">{{item.favcount}}</view> -->
+                <view class="title">{{item.title}}</view>
+                <view class="stat">
+                    <view class="fav">{{item.favcount}}</view>
+                    <view class="name">{{item.grapherName}}</view>
+                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                </view>
             </view>
         </view>
         <!-- 右侧列表 -->
         <view class="list-right" style="width:{{listWidth}}px;">
             <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
                 <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-                <view class="grapher">
+                <!-- <view class="grapher">
                     <image src="{{userInfo.avatarUrl}}"></image>
                     <view>{{userInfo.nickName}}</view>
                 </view>
-                <view class="favcount">{{item.favcount}}</view>
+                <view class="favcount">{{item.favcount}}</view> -->
+                <view class="title">{{item.title}}</view>
+                <view class="stat">
+                    <view class="fav">{{item.favcount}}</view>
+                    <view class="name">{{item.grapherName}}</view>
+                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                </view>
             </view>
         </view>
     </view>

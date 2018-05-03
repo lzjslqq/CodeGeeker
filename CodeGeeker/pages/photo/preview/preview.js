@@ -18,7 +18,7 @@ Page({
     },
     onLoad: function(options) {
         this.setData({
-            image: config.pictures.filter(e => e.id == options.id)[0],
+            image: app.globalData.photoList.filter(e => e.id == options.id)[0],
             window: app.globalData.window
         });
     },

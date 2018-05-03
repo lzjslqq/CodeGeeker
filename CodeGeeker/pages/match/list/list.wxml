@@ -1,0 +1,10 @@
+<view class="container">
+    <view class="item" wx:for="{{matchList}}" bindtap="gotoMatch" data-mid="{{item.id}}" data-title="{{item.title}}">
+        <image class="bgimage" src="{{item.bgimage}}" mode="scaleToFit"></image>
+        <view class="opacity"></view>
+        <view class="title">{{item.title}} 现场图集</view>
+        <view class="stat">{{'# ' + item.commentcount + ' 人正在讨论 #'}}</view>
+        <image class="home" src="{{item.homepic}}"></image>
+        <image class="visit" src="{{item.visitpic}}"></image>
+    </view>
+</view>

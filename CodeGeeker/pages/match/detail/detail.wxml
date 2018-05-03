@@ -1,0 +1,28 @@
+<view class="slider">
+    <view class="album" wx:for="{{albumList}}">
+        <image src="{{item.bgimage}}"></image>
+        <view class="opacity"></view>
+        <view class="title">{{item.title}}</view>
+        <view class="stat">{{'- ' + item.count + '张 -'}}</view>
+    </view>
+</view>
+<view class="list">
+    <view class="desc">{{'# 已有'}}<text>{{commentUser}}</text>{{'人参与评论 #'}}</view>
+    <view class="item" wx:for="{{commentList}}">
+        <text class="touser" wx:if="{{item.type==2}}">{{'@' + item.toname + '：'}}</text> {{item.content}}
+        <image class="avatar" src="{{userInfo.avatarUrl}}" bindlongpress="selectUser" data-uid="{{item.userid}}"></image>
+        <image class="quote" src="/images/match/quote.png"></image>
+        <view class="stat">
+            <view class="username">{{item.username}}</view>
+            <view class="time">{{item.time}}</view>
+        </view>
+    </view>
+</view>
+<image class="btn-cmt" src="/images/match/comment.png" bindtap="comment"></image>
+<image class="share" src="/images/match/share.png"></image>
+<button class="btn-share" open-type="share"></button>
+<view class="shadow {{showInput ? '' : 'hide'}}" bindtap="hideInput"></view>
+<view class="input-area {{showInput ? '':'hide'}}">
+    <input focus="{{showInput}}" placeholder="我也来说一句..." value="{{toUserId>0 ? '@' + toUserName + '：' : ''}}" placeholder-class="placeholder" bindinput="onInput" />
+    <view class="send" bindtap="send">发送</view>
+</view>

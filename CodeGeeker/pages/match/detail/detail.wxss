@@ -1,0 +1,236 @@
+page {
+    background-color: #F5F5F5;
+}
+
+
+/******** 图集滚动栏 *********/
+
+.slider {
+    top: 0;
+    padding: 20rpx;
+    width: 710rpx;
+    height: 200rpx;
+    background-color: #fff;
+    position: fixed;
+    z-index: 2;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slider .album {
+    margin-right: 20rpx;
+    height: 100%;
+    width: 330rpx;
+    position: relative;
+    display: inline-block;
+    color: #fff;
+}
+
+.slider .album image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10rpx;
+}
+
+.slider .album .opacity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10rpx;
+    background-color: #000;
+    opacity: 0.3;
+}
+
+.slider .album .title {
+    position: absolute;
+    top: 56rpx;
+    line-height: 40rpx;
+    width: 100%;
+    text-align: center;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+.slider .album .stat {
+    position: absolute;
+    top: 118rpx;
+    line-height: 26rpx;
+    width: 100%;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+
+/******** 评论列表 *********/
+
+.list {
+    margin-top: 240rpx;
+    width: 100%;
+    background-color: #F5F5F5;
+}
+
+.list .desc {
+    width: 100%;
+    height: 112rpx;
+    line-height: 112rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #999999;
+    margin-bottom: 40rpx;
+}
+
+.list .desc text {
+    font-size: 28rpx;
+    color: #AA7D50;
+}
+
+.list .item {
+    margin: 0 30rpx 60rpx 60rpx;
+    padding: 40rpx;
+    width: 580rpx;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #333333;
+    text-indent: 2em;
+    background-color: #fff;
+    border-radius: 20rpx;
+    position: relative;
+}
+
+.list .item text {
+    color: #AA7D50;
+}
+
+.list .item .avatar {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 32rpx;
+    position: absolute;
+    top: -32rpx;
+    left: -32rpx;
+}
+
+.list .item .quote {
+    position: absolute;
+    top: 40rpx;
+    left: 40rpx;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.list .item .stat {
+    margin-top: 20rpx;
+    display: flex;
+    text-indent: 0rpx;
+}
+
+.list .item .stat .username {
+    width: fit-content;
+    font-size: 24rpx;
+    color: #AA7D50;
+    text-align: left;
+}
+
+.list .item .stat .time {
+    position: absolute;
+    right: 40rpx;
+    display: inline;
+    font-size: 20rpx;
+    color: #B3B3B3;
+}
+
+
+/******** 分享、评论按钮 *********/
+
+.btn-cmt {
+    position: fixed;
+    bottom: 280rpx;
+    right: 30rpx;
+    width: 100rpx;
+    height: 100rpx;
+    z-index: 5;
+}
+
+.share,
+.btn-share {
+    position: fixed;
+    bottom: 160rpx;
+    right: 30rpx;
+    width: 100rpx;
+    height: 100rpx;
+    z-index: 5;
+}
+
+.btn-share {
+    opacity: 0;
+}
+
+
+/******** 输入框 *********/
+
+.shadow {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.2;
+    z-index: 4;
+}
+
+.shadow.hide {
+    display: none;
+}
+
+.input-area {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 120rpx;
+    border-radius: 20rpx 20rpx 0 0;
+    background-color: #fff;
+    z-index: 5;
+}
+
+.input-area.hide {
+    display: none;
+}
+
+.input-area input {
+    width: 550rpx;
+    height: 100%;
+    margin: 0rpx 140rpx 0 30rpx;
+    line-height: 32rpx;
+    font-size: 28rpx;
+    color: #000;
+}
+
+.input-area .placeholder {
+    color: #B3B3B3;
+}
+
+.input-area .send {
+    position: absolute;
+    top: 26rpx;
+    right: 30rpx;
+    width: 120rpx;
+    height: 68rpx;
+    border-radius: 34rpx;
+    line-height: 66rpx;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
+}

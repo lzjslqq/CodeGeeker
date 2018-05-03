@@ -21,6 +21,7 @@ Page({
         albumId: 0, // 图集
     },
     onLoad: function(options) {
+        common.out(options);
         // 初始化
         leftH = rightH = 0;
 
@@ -59,10 +60,10 @@ Page({
             totalCount = this.data.totalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.pictures;
+        let list = app.globalData.photoList;
 
         if (grapherId > 0) {
-            list = list.filter(e => e.authorid == grapherId);
+            list = list.filter(e => e.grapherid == grapherId);
         }
         if (cateId > 0) {
             list = list.filter(e => e.cateid == cateId);
@@ -79,7 +80,7 @@ Page({
             tempPhotoList: this.data.tempPhotoList.concat(list),
             totalCount: totalCount,
             pageIndex: pageIndex + 1,
-            pageCount: config.pictures.length / pageSize | 1,
+            pageCount: app.globalData.photoList.length / pageSize | 1,
         });
     },
     onImageLoaded(e) {

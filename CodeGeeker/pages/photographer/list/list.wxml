@@ -1,10 +1,11 @@
 <view class="container">
-    <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="{{index > 0 ? 'box-shadow: 0px -4px 4px #e9e7e0;':''}}" bindtap="gotoDetail" data-id="{{item.id}}">
+    <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="box-shadow: 0px -4px 4px #e9e7e0;" bindtap="gotoDetail" data-id="{{item.id}}">
         <image class="avatar" src="{{item.avatarUrl}}"></image>
         <view class="detail">
             <view class="name">{{item.name}}</view>
             <view class="stat">粉丝 {{item.fanscount}} · 作品 {{item.productcount}}</view>
         </view>
-        <image class="focus" src="{{item.avatarUrl}}" data-pid="{{item.id}}"></image>
+        <view class="{{item.focused ? 'focused' : 'nofocus'}}" data-gid="{{item.id}}" catchtap="focus">{{item.focused ? '- 取关' : '+ 关注'}}</view>
+        <!-- <image class="focus" src="{{item.avatarUrl}}" data-gid="{{item.id}}" catchtap="focus"></image> -->
     </view>
 </view>

@@ -15,14 +15,13 @@ page {
 
 .cate {
     position: fixed;
-    padding: 0 20rpx;
-    width: 710rpx;
+    margin: 0 10rpx;
+    width: 730rpx;
     height: 100rpx;
     top: 0;
     z-index: 9;
     background-color: #fff;
     display: flex;
-    /* display: inline-block; */
     white-space: nowrap;
     overflow-x: scroll;
 }
@@ -42,7 +41,9 @@ page {
 }
 
 .cate .cate-item.end {
-    width: 50rpx;
+    width: 100rpx;
+    height: 100%;
+    margin-right: 100rpx;
 }
 
 .cate .cate-item.selected {
@@ -75,6 +76,7 @@ page {
 .list .item {
     width: 100%;
     position: relative;
+    margin-bottom: 90rpx;
 }
 
 .list .item .photo {
@@ -83,34 +85,40 @@ page {
     border-radius: 10rpx;
 }
 
-.list .item .grapher {
-    height: 40rpx;
+.list .item .title {
     position: absolute;
-    bottom: 20rpx;
     left: 20rpx;
+    bottom: -40rpx;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #2E2B48;
+}
+
+.list .item .stat {
+    position: relative;
+    bottom: -40rpx;
+    line-height: 32rpx;
+    font-size: 24rpx;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
 }
 
-.list .item .grapher image {
-    width: 40rpx;
-    height: 40rpx;
-    border-radius: 20rpx;
-}
-
-.list .item .grapher view {
-    line-height: 40rpx;
-    margin-left: 20rpx;
-    font-size: 24rpx;
-    color: #fff;
-}
-
-.list .item .favcount {
-    line-height: 40rpx;
+.list .item .stat .fav {
     position: absolute;
-    bottom: 20rpx;
+    left: 20rpx;
+    color: #999999;
+}
+
+.list .item .stat .name {
+    color: #FF8D1D;
+    position: absolute;
+    line-height: 32rpx;
+    right: 60rpx;
+}
+
+.list .item .stat .avatar {
+    position: absolute;
+    height: 32rpx;
+    width: 32rpx;
+    border-radius: 16rpx;
     right: 20rpx;
-    font-size: 24rpx;
-    color: #fff;
 }

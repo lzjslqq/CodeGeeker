@@ -12,7 +12,7 @@ import { domain } from './website';
  */
 
 // type：1 user，2 grapher
-class UserInfo {
+export class UserInfo {
     constructor({ id, name, avatarUrl, type, fanscount, productcount, desc }) {
         this.id = id;
         this.name = name;
@@ -25,7 +25,7 @@ class UserInfo {
 }
 
 // 比赛
-class Match {
+export class Match {
     constructor({ id, title, home, visit, homepic, visitpic, time }) {
         this.id = id;
         this.title = title;
@@ -38,7 +38,7 @@ class Match {
 }
 
 // 图集类别
-class Album {
+export class Album {
     constructor({ id, title, desc, grapherid, matchid, cateid, addtime }) {
         this.id = id;
         this.title = title;
@@ -51,8 +51,8 @@ class Album {
 }
 
 // 图片。关联点：首页分类、图集（摄影师）、比赛
-class Photo {
-    constructor({ id, title, src, grapherid, albumid, cateid, matchid, favcount, commentcount }) {
+export class Photo {
+    constructor({ id, title, src, grapherid, albumid, cateid, matchid, favcount, commentcount, addtime }) {
         this.id = id;
         this.title = title;
         this.src = src;
@@ -62,11 +62,12 @@ class Photo {
         this.matchid = matchid;
         this.favcount = favcount;
         this.commentcount = commentcount;
+        this.addtime = addtime;
     }
 }
 
 // 关注
-class Follow {
+export class Follow {
     constructor({ userid, grapherid }) {
         this.userid = userid;
         this.grapherid = grapherid;
@@ -74,10 +75,25 @@ class Follow {
 }
 
 // 点赞
-class Fav {
+export class Fav {
     constructor({ photoid, userid }) {
         this.photoid = photoid;
         this.userid = userid;
+    }
+}
+
+// 赛事评论
+export class Comment {
+    constructor({ id, userid, username, matchid, content, type, touserid, toname, time }) {
+        this.id = id;
+        this.userid = userid;
+        this.username = username;
+        this.matchid = matchid;
+        this.type = type; // 1.普通评论，2.回复评论
+        this.touserid = touserid;
+        this.toname = toname;
+        this.content = content;
+        this.time = time;
     }
 }
 
@@ -90,7 +106,8 @@ let
     albums = [],
     photos = [],
     follows = [],
-    favs = [];
+    favs = [],
+    comments = [];
 
 // CategoryList
 categories = [
@@ -113,7 +130,7 @@ for (let i = 0; i < 20; i++) {
     users.push(new UserInfo({
         id: i + 1,
         name: isGrapher ? `摄影师${i+1}` : `用户${i+1}`,
-        avatarUrl: `${domain}/codegeek/authors/author${idx}.jpg`,
+        avatarUrl: `${domain}/codegeek/authors/author${idx>9?idx:'0'+idx}.jpg`,
         type: isGrapher ? 'grapher' : 'user',
         fanscount: Math.random() * 1000 | 0,
         productcount: Math.random() * 100 | 0,
@@ -122,89 +139,137 @@ for (let i = 0; i < 20; i++) {
 }
 
 // MatchList
-for (let i = 0; i < 32; i++) {
-    let
-        idx1 = (i + 1) % 10 > 0 ? (i + 1) % 10 : 1,
-        idx2 = (i + 1) % 7 > 0 ? (i + 1) % 7 : 1;
-    matches.push(new Match({
-        id: i + 1,
-        title: `比赛${i+1>9 ? i+1: '0'+(i+1)}`,
-        homepic: `${domain}/codegeek/authors/author${idx1}.jpg`,
-        home: '阿根廷',
-        homepic: `${domain}/codegeek/authors/author${idx2}.jpg`,
-        home: '德国',
-        time: '2018-06-12 12:20:20',
-    }));
-}
+matches = [
+    { id: 1, title: '德国vs西班牙', home: '德国', homepic: '', visit: '西班牙', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 2, title: '英格兰vs葡萄牙', home: '英格兰', homepic: '', visit: '葡萄牙', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 3, title: '俄罗斯vs巴西', home: '俄罗斯', homepic: '', visit: '巴西', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 4, title: '挪威vs比利时', home: '挪威', homepic: '', visit: '比利时', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 5, title: '爱尔兰vs乌拉圭', home: '爱尔兰', homepic: '', visit: '乌拉圭', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 6, title: '埃及vs玻利维亚', home: '埃及', homepic: '', visit: '玻利维亚', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 7, title: '法国vs日本', home: '法国', homepic: '', visit: '日本', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 8, title: '土耳其vs刚果', home: '土耳其', homepic: '', visit: '刚果', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 9, title: '冰岛vs威尔士', home: '冰岛', homepic: '', visit: '威尔士', visitpic: '', time: '2018-06-12 12:20:20' },
+];
 
 // AlbumList
-for (let i = 0; i < 30; i++) {
-    let grapherList = users.filter(u => u.type == 'grapher');
-    let
-        cateId = Math.random() * categories.length | 0,
-        matchId = Math.random() * matches.length | 0,
-        idx = Math.random() * grapherList.length | 0,
-        grahperId = grapherList[idx].id;
+let ak = 0;
+users.filter(e => e.type == 'grapher').forEach(e => {
+    let num = Math.random() * 10 | 1;
+    for (let j = 0; j < num; j++) {
+        let
+            cateId = Math.random() * categories.length | 0,
+            matchId = Math.random() * matches.length | 0,
+            grahperId = e.id;
 
-    albums.push(new Album({
-        id: i + 1,
-        title: `图集${i+1>9 ? i+1: '0'+(i+1)}`,
-        desc: '束带结发历史的就了。适得府君书两地分居，数据的法律手段监理公司来得及。四大金刚了圣诞节发。老数据的过了圣诞节饭。',
-        grapherid: grahperId,
-        matchid: matchId,
-        cateid: cateId,
-        addtime: '2018-06-12 12:20:20',
-    }));
-}
+        albums.push(new Album({
+            id: ak + 1,
+            title: `图集${ak+1>9 ? ak+1: '0'+(ak+1)}`,
+            desc: '束带结发历史的就了。适得府君书两地分居，数据的法律手段监理公司来得及。四大金刚了圣诞节发。老数据的过了圣诞节饭。',
+            grapherid: grahperId,
+            matchid: matchId,
+            cateid: cateId,
+            addtime: '2018-06-12',
+        }));
+        ak++;
+    }
+});
 
 // PhotoList
-for (let i = 0; i < 100; i++) {
-    let grapherList = users.filter(u => u.type == 'grapher');
-    let
-        albumId = Math.random() * albums.length | 0,
-        cateId = Math.random() * categories.length | 0,
-        matchId = Math.random() * matches.length | 0,
-        idx = Math.random() * grapherList.length | 0,
-        grahperId = grapherList[idx].id;
-    let k = (i + 1) % 21 > 0 ? (i + 1) % 21 : 1;
-    photos.push(new Photo({
-        id: i + 1,
-        title: `照片${i+1>9 ? i+1: '0'+(i+1)}`,
-        src: `${domain}/codegeek/photos/${k}.jpg`,
-        grapherid: grahperId,
-        albumid: albumId,
-        cateid: cateId,
-        matchid: matchId,
-        favcount: Math.random() * 1000 | 0,
-        commentcount: Math.random() * 100 | 0,
-    }));
+let pk = 0;
+for (let i = 0; i < albums.length; i++) {
+    let num = Math.random() * 10 | 1;
+    for (let j = 0; j < num; j++) {
+        let
+            album = albums[i],
+            albumId = album.id,
+            cateId = album.cateid,
+            matchId = album.matchid,
+            grahperId = album.grapherid;
+        let k = (pk + 1) % 21 > 0 ? (pk + 1) % 21 : 1;
+        photos.push(new Photo({
+            id: pk + 1,
+            title: `照片${pk+1>9 ? pk+1: '0'+(pk+1)}`,
+            src: `${domain}/codegeek/photos/${k}.jpg`,
+            grapherid: grahperId,
+            albumid: albumId,
+            cateid: cateId,
+            matchid: matchId,
+            favcount: Math.random() * 1000 | 0,
+            commentcount: Math.random() * 100 | 0,
+            addtime: '2018-06-12',
+        }));
+        pk++;
+    }
 }
 
 // FollowList
-for (let i = 0; i < 100; i++) {
-    let grapherList = users.filter(u => u.type == 'grapher');
+let fk = 0,
+    userId = 1000,
+    grapherList = users.filter(u => u.type == 'grapher');
+while (true) {
     let
-        userId = Math.random() * users.length | 0,
         idx = Math.random() * grapherList.length | 0,
         grahperId = grapherList[idx].id;
 
-    follows.push(new Follow({
-        userid: userId,
-        grapherid: grahperId,
-    }));
+    if (follows.length > (grapherList.length / 3 | 1)) {
+        break;
+    } else if (follows.findIndex(e => e.grapherid == grahperId) == -1) {
+        follows.push(new Follow({
+            userid: userId,
+            grapherid: grahperId,
+        }));
+    }
 }
 
 // FavList
-for (let i = 0; i < 100; i++) {
-    let
-        photoId = Math.random() * photos.length | 0,
-        userId = Math.random() * users.length | 0;
-
-    favs.push(new Fav({
-        photoid: photoId,
-        userid: userId,
-    }));
+let fak = 0;
+for (let i = 0; i < 20; i++) {
+    let photoId = Math.random() * photos.length | 1;
+    if (favs.findIndex(e => e.photoid == photoId) == -1) {
+        favs.push(new Fav({
+            photoid: photoId,
+            userid: userId,
+        }));
+    }
 }
+
+// CommentList
+let ck = 0;
+for (let i = 0; i < matches.length; i++) {
+    let num = Math.random() * 10 | 1;
+    let touserid = Math.random() * users.length | 0;
+    for (let j = 0; j < num; j++) {
+        let
+            match = matches[i],
+            matchId = match.id,
+            userIdx = Math.random() * users.length | 1,
+            userId = users[userIdx].id,
+            userName = users[userIdx].name;
+        let
+            type = Math.round(Math.random() * 2),
+            touserId = 0,
+            toName = '';
+
+        if (type == 2) {
+            touserId = touserid;
+            toName = users[touserid].name;
+        }
+
+        comments.push(new Comment({
+            id: ck + 1,
+            userid: userId,
+            username: userName,
+            matchid: matchId,
+            type: type,
+            touserid: touserId,
+            toname: toName,
+            content: '水电费家连锁店几个。说了的快感尽量少的附加费。数据量大附件管理是的，四大金刚了圣诞节发。说了的反光镜上了的。是否登录个建设了大姐夫我了。了房价高了圣诞节。圣诞节发过来时代额外热耳机我了。',
+            time: '2018-06-12',
+        }));
+        ck++;
+    }
+}
+
 
 
 export const data = {
@@ -215,51 +280,5 @@ export const data = {
     photos,
     follows,
     favs,
+    comments,
 }
-
-// export const authors = [
-//     { id: 1, name: '摄影师001', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 2, name: '摄影师002', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 3, name: '摄影师003', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 4, name: '摄影师004', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 5, name: '摄影师005', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 6, name: '摄影师006', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 7, name: '摄影师007', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 8, name: '摄影师008', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-//     { id: 9, name: '摄影师009', avatarUrl: `${domain}/codegeek/authors/author01.jpg`, fanscount: 2342, productcount: 12, desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。', },
-// ];
-
-
-// export const albums = [
-//     { id: 1, title: '世界杯第1天', authorid: 1, addtime: '2018-04-10 23:23:23' },
-//     { id: 2, title: '世界杯第2天', authorid: 2, addtime: '2018-04-10 23:23:23' },
-//     { id: 3, title: '世界杯第3天', authorid: 2, addtime: '2018-04-10 23:23:23' },
-//     { id: 4, title: '世界杯第4天', authorid: 3, addtime: '2018-04-10 23:23:23' },
-//     { id: 5, title: '世界杯第5天', authorid: 2, addtime: '2018-04-10 23:23:23' },
-//     { id: 6, title: '世界杯第6天', authorid: 2, addtime: '2018-04-10 23:23:23' },
-//     { id: 7, title: '世界杯第7天', authorid: 2, addtime: '2018-04-10 23:23:23' },
-// ];
-
-// export const pictures = [
-//     { id: 1, cateid: 1, authorid: 1, albumid: 1, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/1.jpg` },
-//     { id: 2, cateid: 3, authorid: 2, albumid: 2, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/2.jpg` },
-//     { id: 3, cateid: 3, authorid: 2, albumid: 3, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/3.jpg` },
-//     { id: 4, cateid: 1, authorid: 2, albumid: 3, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/4.jpg` },
-//     { id: 5, cateid: 5, authorid: 2, albumid: 4, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/5.jpg` },
-//     { id: 6, cateid: 6, authorid: 6, albumid: 5, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/6.jpg` },
-//     { id: 7, cateid: 7, authorid: 7, albumid: 6, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/7.jpg` },
-//     { id: 8, cateid: 3, authorid: 2, albumid: 3, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/8.jpg` },
-//     { id: 9, cateid: 3, authorid: 2, albumid: 2, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/9.jpg` },
-//     { id: 10, cateid: 3, authorid: 2, albumid: 1, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/10.jpg` },
-//     { id: 11, cateid: 6, authorid: 6, albumid: 1, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/11.jpg` },
-//     { id: 12, cateid: 7, authorid: 2, albumid: 4, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/12.jpg` },
-//     { id: 13, cateid: 4, authorid: 6, albumid: 6, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/13.jpg` },
-//     { id: 14, cateid: 3, authorid: 2, albumid: 7, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/14.jpg` },
-//     { id: 15, cateid: 5, authorid: 2, albumid: 2, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/15.jpg` },
-//     { id: 16, cateid: 3, authorid: 2, albumid: 1, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/16.jpg` },
-//     { id: 17, cateid: 3, authorid: 2, albumid: 2, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/17.jpg` },
-//     { id: 18, cateid: 1, authorid: 7, albumid: 3, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/18.jpg` },
-//     { id: 19, cateid: 3, authorid: 1, albumid: 5, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/19.jpg` },
-//     { id: 20, cateid: 6, authorid: 2, albumid: 2, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/20.jpg` },
-//     { id: 21, cateid: 4, authorid: 1, albumid: 1, favcount: 12333, commentcount: 22, src: `${domain}/codegeek/photos/21.jpg` },
-// ];

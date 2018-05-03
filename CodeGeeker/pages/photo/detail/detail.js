@@ -19,7 +19,7 @@ Page({
         textAnimation: {},
     },
     onLoad: function(options) {
-        this.setData({ image: config.pictures.filter(e => e.id == options.id)[0] });
+        this.setData({ image: app.globalData.photoList.filter(e => e.id == options.id)[0] });
     },
     onShow: function() {},
     onReady: function() {},
@@ -31,10 +31,6 @@ Page({
     },
     rotateImage() {
         this.rotate();
-        // this.setData({ showFront: false, showBack: true });
-        // promisedApi.sleep(500).then(() => {
-        //     // this.setData({ hover: false });
-        // });
     },
     rotateText() {
         this.setData({ showFront: true, showBack: false });

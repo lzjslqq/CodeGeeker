@@ -1,6 +1,6 @@
 import { promisedApi } from '../../../utils/promisify';
 import { common } from '../../../utils/util';
-import { config } from '../../../configs/config';
+import { Follow } from '../../../configs/data';
 
 const app = getApp();
 let leftH = 0;
@@ -12,7 +12,8 @@ Page({
         pageIndex: 1,
         pageSize: 4, // 每次加载两张
         pageCount: 0,
-        totalCount: 0, // 当前页面的总图片数，累加
+        totalCount: 0,
+        tempTotalCount: 0, // 当前页面的总图片数，累加
         tempPhotoList: [], // 用于加载每次加载的图集列表中间变量
         leftPhotoList: [],
         rightPhotoList: [],
@@ -24,13 +25,17 @@ Page({
         // 初始化
         leftH = rightH = 0;
 
-        let grapher = config.authors.filter(e => e.id == options.id)[0];
+        let grapher = app.globalData.grapherList.filter(e => e.id == options.id)[0];
+        let userId = app.globalData.userInfo.id;
+        let grapherId = grapher.id;
+        grapher.focused = app.globalData.followList.findIndex(e => e.grapherid == grapherId && e.userid == userId) > -1;
+        console.log(grapher);
 
-        let picList = config.pictures.filter(p => p.authorid == options.id);
-        let albumList = config.albums.filter(e => e.authorid == options.id && picList.some(p => p.albumid == e.id));
+        let picList = app.globalData.photoList.filter(p => p.grapherid == options.id);
+        let albumList = app.globalData.albumList.filter(e => e.grapherid == options.id && picList.some(p => p.albumid == e.id));
         albumList.map(e => {
-            e.src = config.pictures.filter(p => p.authorid == options.id && p.albumid == e.id)[0].src;
-            e.count = config.pictures.filter(p => p.authorid == options.id && p.albumid == e.id).length;
+            e.src = app.globalData.photoList.filter(p => p.grapherid == options.id && p.albumid == e.id)[0].src;
+            e.count = app.globalData.photoList.filter(p => p.grapherid == options.id && p.albumid == e.id).length;
         });
 
         promisedApi.ui.setNavigationBarTitle({ title: grapher.name });
@@ -66,25 +71,28 @@ Page({
         common.out(`加载第${this.data.pageIndex}页。`);
         let pageIndex = this.data.pageIndex,
             pageSize = this.data.pageSize,
-            authorId = this.data.grapher.id,
-            totalCount = this.data.totalCount;
+            grapherId = this.data.grapher.id,
+            totalCount = this.data.totalCount,
+            tempTotalCount = this.data.tempTotalCount;
 
         let start = (pageIndex - 1) * pageSize;
-        let list = config.pictures;
+        let list = app.globalData.photoList;
 
-        if (authorId > 0) {
-            list = list.filter(e => e.authorid == authorId);
+        if (grapherId > 0) {
+            list = list.filter(e => e.grapherid == grapherId);
         }
 
+        totalCount = list.length;
         list = list.slice(start, start + pageSize);
-        totalCount += list.length;
+        tempTotalCount += list.length;
 
         this.setData({
             userInfo: app.globalData.userInfo,
             tempPhotoList: this.data.tempPhotoList.concat(list),
+            tempTotalCount: tempTotalCount,
             totalCount: totalCount,
             pageIndex: pageIndex + 1,
-            pageCount: config.pictures.length / pageSize | 1,
+            pageCount: app.globalData.photoList.length / pageSize | 1,
         });
     },
     onImageLoaded(e) {
@@ -98,14 +106,14 @@ Page({
         // 2. 判断两边总高后，放入列表
         if (leftH <= rightH) {
             this.data.leftPhotoList.push(img);
-            leftH += scaleH;
+            leftH += scaleH + 60;
         } else {
             this.data.rightPhotoList.push(img);
-            rightH += scaleH;
+            rightH += scaleH + 60;
         }
 
         // 3. 当最后一张加载完成时，更新页面数据
-        if (this.data.leftPhotoList.length + this.data.rightPhotoList.length >= this.data.totalCount) {
+        if (this.data.leftPhotoList.length + this.data.rightPhotoList.length >= this.data.tempTotalCount) {
             this.setData({
                 leftPhotoList: this.data.leftPhotoList,
                 rightPhotoList: this.data.rightPhotoList
@@ -115,6 +123,38 @@ Page({
     },
     gotoPhotoList(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/list/list?grapherid=${this.data.grapher.id}&albumid=${e.currentTarget.dataset.aid}&title=${e.currentTarget.dataset.title}` });
+    },
+    focus(e) {
+        let list = [];
+        let
+            grapherId = e.currentTarget.dataset.gid,
+            userId = app.globalData.userInfo.id;
+
+        app.globalData.followList.forEach(e => {
+            if (e.grapherid != grapherId || e.userid != userId) {
+                list.push(e); // removed
+            }
+        });
+
+        // check
+        if (this.data.grapher.focused) {
+            console.log('will 取关');
+            app.globalData.followList = list;
+            // 更新界
+            this.data.grapher.focused = false;
+            this.setData({
+                grapher: this.data.grapher
+            });
+        } else {
+            console.log('will 关注');
+            list.push(new Follow({ userid: userId, grapherid: grapherId }));
+            app.globalData.followList = list;
+            // 更新界面
+            this.data.grapher.focused = true;
+            this.setData({
+                grapher: this.data.grapher
+            });
+        }
     },
 
 })

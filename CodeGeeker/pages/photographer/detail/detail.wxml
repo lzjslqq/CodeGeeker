@@ -6,18 +6,21 @@
     <view class="grapher-pane">
         <image class="avatar" src="{{grapher.avatarUrl}}"></image>
         <view class="name">{{grapher.name}}</view>
-        <view class="stat">{{grapher.fanscount}}位粉丝 | 非凡摄影师·已认证</view>
+        <view class="stat">
+            <view class="fans">{{grapher.fanscount}} 位粉丝</view>
+            <view class="tag">非凡摄影师 · 已认证</view>
+        </view>
         <view class="desc">{{grapher.desc}}</view>
     </view>
     <view class="float-tabs">
-        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{1231}}</view>
-        <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{23}}</view>
+        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{totalCount}}</view>
+        <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{albumList.length}}</view>
         <view class="{{selectedTab==0?'line1':''}}"></view>
         <view class="{{selectedTab==1?'line2':''}}"></view>
     </view>
     <view class="tabs">
-        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{1231}}</view>
-        <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{23}}</view>
+        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{totalCount}}</view>
+        <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{albumList.length}}</view>
         <view class="{{selectedTab==0?'line1':''}}"></view>
         <view class="{{selectedTab==1?'line2':''}}"></view>
     </view>
@@ -29,25 +32,29 @@
             </view>
             <!-- 左侧列表 -->
             <view class="list-left" style="width:{{listWidth}}px;">
-                <view class="item" wx:for="{{leftPhotoList}}" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
+                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{leftPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
                     <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-                    <view class="grapher">
-                        <image src="{{userInfo.avatarUrl}}"></image>
-                        <view>{{userInfo.nickName}}</view>
+                    <view class="info">
+                        <view class="title">{{item.title}}</view>
+                        <view class="stat">
+                            <view class="favcount">{{item.favcount}}</view>
+                            <view class="time">{{item.addtime}} 发布</view>
+                        </view>
                     </view>
-                    <view class="favcount">{{item.favcount}}</view>
                 </view>
                 <view class="shim-100"></view>
             </view>
             <!-- 右侧列表 -->
             <view class="list-right" style="width:{{listWidth}}px;">
-                <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
+                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{rightPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
                     <image class="photo" src="{{item.src}}" mode="widthFix"></image>
-                    <view class="grapher">
-                        <image src="{{userInfo.avatarUrl}}"></image>
-                        <view>{{userInfo.nickName}}</view>
+                    <view class="info">
+                        <view class="title">{{item.title}}</view>
+                        <view class="stat">
+                            <view class="favcount">{{item.favcount}}</view>
+                            <view class="time">{{item.addtime}} 发布</view>
+                        </view>
                     </view>
-                    <view class="favcount">{{item.favcount}}</view>
                 </view>
                 <view class="shim-100"></view>
             </view>
@@ -58,12 +65,12 @@
                 <view class="info">
                     <view class="title">{{item.title}}</view>
                     <view class="other">
-                        <view class="count">{{item.count}}张</view>
-                        <view class="time">{{item.addtime}}</view>
+                        <view class="count">{{item.count}} 张</view>
+                        <view class="time">{{item.addtime}} 发布</view>
                     </view>
                 </view>
             </view>
         </view>
     </view>
-    <view class="focus">关注</view>
+    <view class="{{grapher.focused ? 'focused' : 'focus'}}" data-gid="{{grapher.id}}" catchtap="focus">{{grapher.focused ? '取关' : '关注'}}</view>
 </view>
