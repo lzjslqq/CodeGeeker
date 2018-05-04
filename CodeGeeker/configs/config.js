@@ -11,5 +11,6 @@ export const config = {
     photoes: data.photos,
     followes: data.follows,
     favs: data.favs,
+    messages: data.messages,
     comments: data.comments,
 }

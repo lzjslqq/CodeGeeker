@@ -1,4 +1,5 @@
 import { domain } from './website';
+import { promisedApi } from '../utils/promisify';
 
 /**
  * 数据集：
@@ -9,6 +10,8 @@ import { domain } from './website';
  *  5. 关注列表 Follow
  *  6. 点赞列表 Fav
  *  7. 比赛列表 Match
+ *  8. 消息列表 Message
+ *  9. 评论列表 Comment
  */
 
 // type：1 user，2 grapher
@@ -101,6 +104,22 @@ export class Comment {
     }
 }
 
+// 消息
+// type: fav/follow
+export class Message {
+    constructor({ id, grapherid, userid, username, type, time, photoid, photosrc, albumtitle }) {
+        this.id = id;
+        this.grapherid = grapherid;
+        this.userid = userid;
+        this.username = username;
+        this.type = type;
+        this.time = time;
+        this.photoid = photoid;
+        this.photosrc = photosrc;
+        this.albumtitle = albumtitle;
+    }
+}
+
 
 
 let
@@ -111,6 +130,7 @@ let
     photos = [],
     follows = [],
     favs = [],
+    messages = [],
     comments = [];
 
 // CategoryList
@@ -127,6 +147,23 @@ categories = [
 ];
 
 // UserList
+// 当前用户
+promisedApi.data.getStorage({ key: 'userInfo' })
+    .then(res => {
+        if (res.data) {
+            let info = res.data;
+            console.log(111111)
+            users.push(new UserInfo({
+                id: info.id,
+                name: '摄影师',
+                avatarUrl: info.avatarUrl,
+                type: 'grapher',
+                fanscount: Math.random() * 1000 | 0,
+                productcount: Math.random() * 100 | 0,
+                desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。',
+            }));
+        }
+    });
 for (let i = 0; i < 20; i++) {
     let isGrapher = (Math.random() * 10 | 0) % 3 == 1;
 
@@ -157,19 +194,31 @@ matches = [
 
 // AlbumList
 let ak = 0;
+let userInfo = wx.getStorage({
+    key: 'userInfo',
+    success: function(res) {
+        // success
+    },
+    fail: function() {
+        // fail
+    },
+    complete: function() {
+        // complete
+    }
+})
 users.filter(e => e.type == 'grapher').forEach(e => {
     let num = Math.random() * 10 | 1;
     for (let j = 0; j < num; j++) {
         let
             cateId = Math.random() * categories.length | 0,
             matchId = Math.random() * matches.length | 0,
-            grahperId = e.id;
+            grapherId = e.id;
 
         albums.push(new Album({
             id: ak + 1,
             title: `图集${ak+1>9 ? ak+1: '0'+(ak+1)}`,
             desc: '束带结发历史的就了。适得府君书两地分居，数据的法律手段监理公司来得及。四大金刚了圣诞节发。老数据的过了圣诞节饭。',
-            grapherid: grahperId,
+            grapherid: grapherId,
             matchid: matchId,
             cateid: cateId,
             addtime: '2018-06-12',
@@ -188,14 +237,14 @@ for (let i = 0; i < albums.length; i++) {
             albumId = album.id,
             cateId = album.cateid,
             matchId = album.matchid,
-            grahperId = album.grapherid;
-        let garpher = users.filter(e => e.id == grahperId)[0];
+            grapherId = album.grapherid;
+        let garpher = users.filter(e => e.id == grapherId)[0];
         let k = (pk + 1) % 21 > 0 ? (pk + 1) % 21 : 1;
         photos.push(new Photo({
             id: pk + 1,
             title: `照片${pk+1>9 ? pk+1: '0'+(pk+1)}`,
             src: `${domain}/codegeek/photos/${k}.jpg`,
-            grapherid: grahperId,
+            grapherid: grapherId,
             grapheravatar: garpher.avatarUrl,
             albumid: albumId,
             cateid: cateId,
@@ -217,20 +266,19 @@ let fk = 0,
 while (true) {
     let
         idx = Math.random() * grapherList.length | 0,
-        grahperId = grapherList[idx].id;
+        grapherId = grapherList[idx].id;
 
     if (follows.length > (grapherList.length / 3 | 1)) {
         break;
-    } else if (follows.findIndex(e => e.grapherid == grahperId) == -1) {
+    } else if (follows.findIndex(e => e.grapherid == grapherId) == -1) {
         follows.push(new Follow({
             userid: userId,
-            grapherid: grahperId,
+            grapherid: grapherId,
         }));
     }
 }
 
 // FavList
-let fak = 0;
 for (let i = 0; i < 20; i++) {
     let photoId = Math.random() * photos.length | 1;
     if (favs.findIndex(e => e.photoid == photoId) == -1) {
@@ -238,6 +286,35 @@ for (let i = 0; i < 20; i++) {
             photoid: photoId,
             userid: userId,
         }));
+    }
+}
+
+// MessageList
+let mk = 0;
+let gList = users.filter(u => u.type == 'grapher');
+for (let i = 0; i < gList.length; i++) {
+    let rand = Math.random() * 20 | 1;
+    let photoList = photos.filter(p => p.grapherid == gList[i].id);
+    for (let j = 0; j < rand; j++) {
+        let type = Math.round(Math.random()) == 1 ? 'fav' : 'follow';
+        let idx = Math.random() * users.length | 0;
+        let msg = new Message({
+            id: mk + 1,
+            grapherid: gList[i].id,
+            userid: users[idx].id,
+            username: users[idx].name,
+            type: type,
+            time: '2018-05-05 12:12:12',
+        });
+        if (type == 'fav') {
+            idx = Math.random() * photoList.length | 0;
+            msg.photoid = photoList[idx].id;
+            msg.photosrc = photoList[idx].src;
+            msg.albumtitle = albums.filter(a => a.id == photoList[idx].albumid)[0].title;
+        }
+
+        messages.push(msg);
+        mk++;
     }
 }
 
@@ -290,5 +367,6 @@ export const data = {
     photos,
     follows,
     favs,
+    messages,
     comments,
 }

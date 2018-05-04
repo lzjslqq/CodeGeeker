@@ -59,7 +59,6 @@ Page({
         this.requestImageList();
     },
     gotoDetail(e) {
-        // promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
         promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {
@@ -71,7 +70,7 @@ Page({
             pageSize = this.data.pageSize,
             cateId = this.data.selectedCateId,
             tempTotalCount = this.data.tempTotalCount,
-            userId = app.globalData.userInfo.id || 100;
+            userId = 100;
 
         let start = (pageIndex - 1) * pageSize;
         let list = app.globalData.photoList.filter(e => e.cateid == cateId).slice(start, start + pageSize);

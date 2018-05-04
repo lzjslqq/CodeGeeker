@@ -45,7 +45,7 @@ Page({
     },
 
     gotoDetail(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)

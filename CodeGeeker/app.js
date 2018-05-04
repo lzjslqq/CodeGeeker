@@ -1,5 +1,6 @@
 import { promisedApi } from './utils/promisify';
 import { config } from './configs/config';
+import { UserInfo } from './configs/data';
 
 App({
     onLaunch: function() {
@@ -13,6 +14,7 @@ App({
         this.globalData.photoList = config.photoes;
         this.globalData.followList = config.followes;
         this.globalData.favList = config.favs;
+        this.globalData.messageList = config.messages;
         this.globalData.commentList = config.comments;
 
         promisedApi.data.setStorage({ key: 'data', data: this.globalData });
@@ -22,6 +24,9 @@ App({
             .then(res => {
                 this.globalData.userInfo = res.userInfo;
                 this.globalData.userInfo.id = 100;
+
+                // 加入到全局 userList 中
+                promisedApi.data.setStorage({ key: 'userInfo', data: this.globalData.userInfo });
             });
         promisedApi.open
             .login()
