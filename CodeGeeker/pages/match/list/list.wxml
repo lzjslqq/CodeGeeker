@@ -1,6 +1,6 @@
 <view class="container">
     <view class="item" wx:for="{{matchList}}" bindtap="gotoMatch" data-mid="{{item.id}}" data-title="{{item.title}}">
-        <image class="bgimage" src="{{item.bgimage}}" mode="scaleToFit"></image>
+        <image class="bgimage" src="{{item.bgimage}}" mode="aspectFill"></image>
         <view class="opacity"></view>
         <view class="title">{{item.title}} 现场图集</view>
         <view class="stat">{{'# ' + item.commentcount + ' 人正在讨论 #'}}</view>

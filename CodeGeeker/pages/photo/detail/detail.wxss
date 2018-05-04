@@ -3,6 +3,16 @@
     width: 100%;
 }
 
+.grapher {
+    position: absolute;
+    top: 40rpx;
+    left: 40rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 40rpx;
+    z-index: 10;
+}
+
 .info {
     width: 100%;
     position: fixed;

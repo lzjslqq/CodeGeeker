@@ -16,8 +16,8 @@ Page({
             } else {
                 e.bgimage = defaultSrc;
             }
-            e.commentcount = app.globalData.commentList.filter(c => c.matchid == e.id).length;
-            e.homepic = e.visitpic = app.globalData.userInfo.avatarUrl;
+            let commentList = app.globalData.commentList.filter(c => c.matchid == e.id);
+            e.commentcount = app.globalData.userList.filter(u => commentList.findIndex(c => c.userid == u.id) > -1).length;
         });
         this.setData({ matchList: matches });
     },

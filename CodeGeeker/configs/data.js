@@ -39,7 +39,7 @@ export class Match {
 
 // 图集类别
 export class Album {
-    constructor({ id, title, desc, grapherid, matchid, cateid, addtime }) {
+    constructor({ id, title, desc, grapherid, matchid, cateid, addtime, count }) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -47,22 +47,25 @@ export class Album {
         this.matchid = matchid;
         this.cateid = cateid;
         this.addtime = addtime;
+        this.count = count;
     }
 }
 
 // 图片。关联点：首页分类、图集（摄影师）、比赛
 export class Photo {
-    constructor({ id, title, src, grapherid, albumid, cateid, matchid, favcount, commentcount, addtime }) {
+    constructor({ id, title, src, grapherid, grapheravatar, albumid, cateid, matchid, favcount, commentcount, addtime, sortid }) {
         this.id = id;
         this.title = title;
         this.src = src;
         this.grapherid = grapherid;
+        this.grapheravatar = grapheravatar;
         this.albumid = albumid;
         this.cateid = cateid;
         this.matchid = matchid;
         this.favcount = favcount;
         this.commentcount = commentcount;
         this.addtime = addtime;
+        this.sortid = sortid;
     }
 }
 
@@ -84,10 +87,11 @@ export class Fav {
 
 // 赛事评论
 export class Comment {
-    constructor({ id, userid, username, matchid, content, type, touserid, toname, time }) {
+    constructor({ id, userid, username, useravatar, matchid, content, type, touserid, toname, time }) {
         this.id = id;
         this.userid = userid;
         this.username = username;
+        this.useravatar = useravatar;
         this.matchid = matchid;
         this.type = type; // 1.普通评论，2.回复评论
         this.touserid = touserid;
@@ -140,15 +144,15 @@ for (let i = 0; i < 20; i++) {
 
 // MatchList
 matches = [
-    { id: 1, title: '德国vs西班牙', home: '德国', homepic: '', visit: '西班牙', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 2, title: '英格兰vs葡萄牙', home: '英格兰', homepic: '', visit: '葡萄牙', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 3, title: '俄罗斯vs巴西', home: '俄罗斯', homepic: '', visit: '巴西', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 4, title: '挪威vs比利时', home: '挪威', homepic: '', visit: '比利时', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 5, title: '爱尔兰vs乌拉圭', home: '爱尔兰', homepic: '', visit: '乌拉圭', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 6, title: '埃及vs玻利维亚', home: '埃及', homepic: '', visit: '玻利维亚', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 7, title: '法国vs日本', home: '法国', homepic: '', visit: '日本', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 8, title: '土耳其vs刚果', home: '土耳其', homepic: '', visit: '刚果', visitpic: '', time: '2018-06-12 12:20:20' },
-    { id: 9, title: '冰岛vs威尔士', home: '冰岛', homepic: '', visit: '威尔士', visitpic: '', time: '2018-06-12 12:20:20' },
+    { id: 1, title: '阿根廷vs巴西', home: '阿根廷', homepic: '/images/flag/argentina.png', visit: '巴西', visitpic: '/images/flag/brazil.png', time: '2018-06-12 12:20:20' },
+    { id: 2, title: '哥伦比亚vs法国', home: '哥伦比亚', homepic: '/images/flag/columbia.png', visit: '法国', visitpic: '/images/flag/france.png', time: '2018-06-12 12:20:20' },
+    { id: 3, title: '德国vs日本', home: '德国', homepic: '/images/flag/germany.png', visit: '日本', visitpic: '/images/flag/japan.png', time: '2018-06-12 12:20:20' },
+    { id: 4, title: '波兰vs葡萄牙', home: '波兰', homepic: '/images/flag/poland.png', visit: '葡萄牙', visitpic: '/images/flag/portugal.png', time: '2018-06-12 12:20:20' },
+    { id: 5, title: '巴西vs德国', home: '巴西', homepic: '/images/flag/brazil.png', visit: '德国', visitpic: '/images/flag/germany.png', time: '2018-06-12 12:20:20' },
+    { id: 6, title: '葡萄牙vs哥伦比亚', home: '葡萄牙', homepic: '/images/flag/portugal.png', visit: '哥伦比亚', visitpic: '/images/flag/columbia.png', time: '2018-06-12 12:20:20' },
+    { id: 7, title: '法国vs日本', home: '法国', homepic: '/images/flag/france.png', visit: '日本', visitpic: '/images/flag/japan.png', time: '2018-06-12 12:20:20' },
+    { id: 8, title: '波兰vs阿根廷', home: '波兰', homepic: '/images/flag/poland.png', visit: '阿根廷', visitpic: '/images/flag/argentina.png', time: '2018-06-12 12:20:20' },
+    { id: 9, title: '阿根廷vs葡萄牙', home: '阿根廷', homepic: '/images/flag/argentina.png', visit: '葡萄牙', visitpic: '/images/flag/portugal.png', time: '2018-06-12 12:20:20' },
 ];
 
 // AlbumList
@@ -185,20 +189,24 @@ for (let i = 0; i < albums.length; i++) {
             cateId = album.cateid,
             matchId = album.matchid,
             grahperId = album.grapherid;
+        let garpher = users.filter(e => e.id == grahperId)[0];
         let k = (pk + 1) % 21 > 0 ? (pk + 1) % 21 : 1;
         photos.push(new Photo({
             id: pk + 1,
             title: `照片${pk+1>9 ? pk+1: '0'+(pk+1)}`,
             src: `${domain}/codegeek/photos/${k}.jpg`,
             grapherid: grahperId,
+            grapheravatar: garpher.avatarUrl,
             albumid: albumId,
             cateid: cateId,
             matchid: matchId,
             favcount: Math.random() * 1000 | 0,
             commentcount: Math.random() * 100 | 0,
             addtime: '2018-06-12',
+            sortid: j + 1,
         }));
         pk++;
+        album.count = num;
     }
 }
 
@@ -244,7 +252,8 @@ for (let i = 0; i < matches.length; i++) {
             matchId = match.id,
             userIdx = Math.random() * users.length | 1,
             userId = users[userIdx].id,
-            userName = users[userIdx].name;
+            userName = users[userIdx].name,
+            userAvatar = users[userIdx].avatarUrl;
         let
             type = Math.round(Math.random() * 2),
             touserId = 0,
@@ -259,6 +268,7 @@ for (let i = 0; i < matches.length; i++) {
             id: ck + 1,
             userid: userId,
             username: userName,
+            useravatar: userAvatar,
             matchid: matchId,
             type: type,
             touserid: touserId,

@@ -10,7 +10,6 @@
         "pages/user/fav/list/list",
         "pages/user/upload/upload",
         "pages/photo/list/list",
-        "pages/photo/preview/preview",
         "pages/photo/detail/detail"
     ],
     "window": {
@@ -21,21 +20,29 @@
     },
     "tabBar": {
         "color": "#888888",
-        "selectedColor": "lightpink",
+        "selectedColor": "#FF8D1D",
         "backgroundColor": "#fff",
         "borderStyle": "black",
         "list": [{
             "pagePath": "pages/index/index",
-            "text": "图片广场"
+            "text": "图片广场",
+            "iconPath": "/images/tab/photolist.png",
+            "selectedIconPath": "/images/tab/photolisted.png"
         }, {
             "pagePath": "pages/match/list/list",
-            "text": "近期赛事"
+            "text": "近期赛事",
+            "iconPath": "/images/tab/match.png",
+            "selectedIconPath": "/images/tab/matched.png"
         }, {
             "pagePath": "pages/photographer/list/list",
-            "text": "摄影师"
+            "text": "摄影师",
+            "iconPath": "/images/tab/grapher.png",
+            "selectedIconPath": "/images/tab/graphered.png"
         }, {
             "pagePath": "pages/user/detail/detail",
-            "text": "我的"
+            "text": "我的",
+            "iconPath": "/images/tab/user.png",
+            "selectedIconPath": "/images/tab/usered.png"
         }]
     },
     "networkTimeout": {

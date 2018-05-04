@@ -62,7 +62,7 @@ Page({
         this.setData({ selectedTab: e.currentTarget.dataset.tabid });
     },
     gotoPhotoDetail(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/preview/preview?id=${e.currentTarget.dataset.id}` });
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
@@ -73,7 +73,8 @@ Page({
             pageSize = this.data.pageSize,
             grapherId = this.data.grapher.id,
             totalCount = this.data.totalCount,
-            tempTotalCount = this.data.tempTotalCount;
+            tempTotalCount = this.data.tempTotalCount,
+            userId = app.globalData.userInfo.id || 100;
 
         let start = (pageIndex - 1) * pageSize;
         let list = app.globalData.photoList;
@@ -81,6 +82,11 @@ Page({
         if (grapherId > 0) {
             list = list.filter(e => e.grapherid == grapherId);
         }
+
+        // 关联字段处理
+        list.map(p => {
+            p.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == p.id).length > 0;
+        });
 
         totalCount = list.length;
         list = list.slice(start, start + pageSize);

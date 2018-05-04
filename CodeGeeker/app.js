@@ -21,7 +21,7 @@ App({
             .getUserInfo()
             .then(res => {
                 this.globalData.userInfo = res.userInfo;
-                this.globalData.userInfo.id = 1;
+                this.globalData.userInfo.id = 100;
             });
         promisedApi.open
             .login()

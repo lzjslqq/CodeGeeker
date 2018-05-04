@@ -22,7 +22,8 @@ Page({
         listWidth: 0, // 一列的宽度
     },
 
-    onLoad: function() {
+    onLoad: function() {},
+    onShow: function() {
         // 初始化
         leftH = rightH = 0;
 
@@ -35,7 +36,6 @@ Page({
 
         this.requestImageList();
     },
-    onShow: function() {},
     onReady: function() {},
     onReachBottom: function() {
         common.out('reach bottom');
@@ -70,7 +70,8 @@ Page({
         let pageIndex = this.data.pageIndex,
             pageSize = this.data.pageSize,
             cateId = this.data.selectedCateId,
-            tempTotalCount = this.data.tempTotalCount;
+            tempTotalCount = this.data.tempTotalCount,
+            userId = app.globalData.userInfo.id || 100;
 
         let start = (pageIndex - 1) * pageSize;
         let list = app.globalData.photoList.filter(e => e.cateid == cateId).slice(start, start + pageSize);
@@ -80,7 +81,7 @@ Page({
             let g = app.globalData.grapherList.filter(e => e.id == p.grapherid)[0];
             p.grapherName = g.name;
             p.grapherAvatarUrl = g.avatarUrl;
-            p.faved = true;
+            p.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == p.id).length > 0;
         });
 
         tempTotalCount += list.length;

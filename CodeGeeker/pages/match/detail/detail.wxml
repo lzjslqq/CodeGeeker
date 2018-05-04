@@ -1,6 +1,6 @@
 <view class="slider">
-    <view class="album" wx:for="{{albumList}}">
-        <image src="{{item.bgimage}}"></image>
+    <view class="album" wx:for="{{albumList}}" bindtap="gotoPhotoList" data-id="{{item.id}}">
+        <image src="{{item.bgimage}}" mode="aspectFill"></image>
         <view class="opacity"></view>
         <view class="title">{{item.title}}</view>
         <view class="stat">{{'- ' + item.count + '张 -'}}</view>
@@ -10,7 +10,7 @@
     <view class="desc">{{'# 已有'}}<text>{{commentUser}}</text>{{'人参与评论 #'}}</view>
     <view class="item" wx:for="{{commentList}}">
         <text class="touser" wx:if="{{item.type==2}}">{{'@' + item.toname + '：'}}</text> {{item.content}}
-        <image class="avatar" src="{{userInfo.avatarUrl}}" bindlongpress="selectUser" data-uid="{{item.userid}}"></image>
+        <image class="avatar" src="{{item.useravatar}}" bindlongpress="selectUser" data-uid="{{item.userid}}"></image>
         <image class="quote" src="/images/match/quote.png"></image>
         <view class="stat">
             <view class="username">{{item.username}}</view>

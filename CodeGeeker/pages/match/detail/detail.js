@@ -27,7 +27,7 @@ Page({
             e.count = app.globalData.photoList.filter(c => c.albumid == e.id).length;
         });
         let commentList = app.globalData.commentList.filter(e => e.matchid == options.matchid).sort((a, b) => a.id < b.id);
-        let commentUser = app.globalData.userList.filter(e => commentList.findIndex(c => c.userid == e.id)).length;
+        let commentUser = app.globalData.userList.filter(e => commentList.findIndex(c => c.userid == e.id) > -1).length;
         this.setData({
             matchId: options.matchid,
             matchTitle: options.title,
@@ -49,6 +49,9 @@ Page({
         }
     },
 
+    gotoPhotoList(e) {
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.id}&sortid=1` });
+    },
     selectUser(e) {
         let uid = e.currentTarget.dataset.uid;
         let user = app.globalData.userList.filter(e => e.id == uid)[0];
@@ -78,6 +81,7 @@ Page({
             id: maxId + 1,
             userid: that.data.userInfo.id,
             username: that.data.userInfo.nickName,
+            useravatar: that.data.userInfo.avatarUrl,
             matchid: that.data.matchId,
             content: value,
             type: that.data.toUserId > 0 ? 2 : 1,
@@ -92,6 +96,7 @@ Page({
         this.setData({
             commentList: commentList,
             commentUser: commentUser,
+            showInput: false,
         });
     },
 })
