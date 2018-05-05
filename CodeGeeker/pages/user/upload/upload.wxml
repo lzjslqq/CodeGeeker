@@ -1,4 +1,45 @@
-<view class="upload">
+<view class="header">
      <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{matchArray}}">{{matchArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
      <picker class='picker' bindchange="bindCategoryChange" value="{{selectedMatchId}}" range="{{categoryArray}}">{{categoryArray[selectedcategoryId]||"选择分类 ▼"}}</picker>
 </view>
+<view class='content'>
+     <view class='title'>标题</view>
+     <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text'></input>
+     <view class='title'>描述</view>
+     <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text'></textarea>
+     <view class='title'>添加图片</view>
+     <view class='img-container'>
+          <view class='img-item item-add'>
+               <image class='img-add' src='/images/upload/add.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='img-item'>
+               <image class='img-upload' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
+               <image class='img-delete' src='/images/upload/delete.png'></image>
+          </view>
+          <view class='empty'></view>
+          <view class='empty'></view>
+          <view class='empty'></view>
+     </view>
+     <view class='container-desc'>-- 已添加了6张图片 --</view>
+</view>
+<view class='btn-publish'>发布图集</view>
