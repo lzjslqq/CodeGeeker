@@ -4,13 +4,11 @@ const app = getApp()
 
 Page({
     data: {
-        messageList: [],
-        userInfo: {},
+
     },
-    onLoad: function(options) {
-        let grapherId = 1;
-        let msgs = app.globalData.messageList;
-        this.setData({ messageList: msgs });
+
+    onLoad: function() {
+
     },
     onShow: function() {},
     onReady: function() {},

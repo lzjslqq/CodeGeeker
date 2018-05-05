@@ -1,11 +1,16 @@
 <view class="container">
     <view class="item" wx:for="{{messageList}}">
-        <view class="time">- {{item.time}} -</view>
-        <view class="title">{{item.type == 'fav' ? '作品被点赞啦！' : '涨粉咯~'}}</view>
-        <view class="detail">
-            <block wx:if="{{item.type == 'fav'}}">"{{item.username}}"点赞了你的作品：{{item.albumtitle}}</block>
-            <block wx:else>"{{item.username}}"偷偷关注了你！</block>
-        </view>
-        <image src="{{item.photosrc}}"></image>
+        <block wx:if="{{item.type == 'fav'}}">
+            <view class="time">- {{item.time}} -</view>
+            <view class="title">作品被点赞啦！</view>
+            <view class="detail">“{{item.username}}”点赞了你的作品：{{item.albumtitle}}</view>
+            <image class="pic" src="{{item.photosrc}}"></image>
+        </block>
+        <block wx:else>
+            <view class="time">- {{item.time}} -</view>
+            <view class="title">涨粉咯~</view>
+            <view class="detail">“{{item.username}}”偷偷关注了你！</view>
+            <image class="pic" src="/images/user/msglist.png"></image>
+        </block>
     </view>
 </view>
