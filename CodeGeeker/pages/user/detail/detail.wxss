@@ -1,6 +1,9 @@
 page {
      background: #fff;
-     padding: 0 60rpx;
+     display: flex;
+     flex-flow: column wrap;
+     justify-content: flex-start;
+     align-items: center;
 }
 
 .user {
@@ -162,7 +165,7 @@ page {
      background: -o-linear-gradient(right, #00c3b7, #00d7cf);
      background: -moz-linear-gradient(right, #00c3b7, #00d7cf);
      background: linear-gradient(to right, #00c3b7, #00d7cf);
-     box-shadow: 5rpx 8rpx 15rpx #00d7cf;
+     box-shadow: 3rpx 5rpx 10rpx #00d7cf;
 }
 
 .follow {
@@ -170,7 +173,7 @@ page {
      background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
      background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
      background: linear-gradient(to right, #ff8d1d, #ffb33a);
-     box-shadow: 5rpx 8rpx 15rpx #ffb33a;
+     box-shadow: 3rpx 5rpx 10rpx #ffb33a;
 }
 
 .fav {
@@ -178,7 +181,7 @@ page {
      background: -o-linear-gradient(right, #f72e35, #fa5c6b);
      background: -moz-linear-gradient(right, #f72e35, #fa5c6b);
      background: linear-gradient(to right, #f72e35, #fa5c6b);
-     box-shadow: 5rpx 8rpx 15rpx #fa5c6b;
+     box-shadow: 3rpx 5rpx 10rpx #fa5c6b;
 }
 
 .num {

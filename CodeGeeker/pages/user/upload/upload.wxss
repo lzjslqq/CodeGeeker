@@ -1,17 +1,24 @@
 page {
      background: #fff;
-     padding: 0 30rpx;
+     display: flex;
+     flex-flow: column wrap;
+     justify-content: flex-start;
+     align-items: center;
 }
 
 .header {
      width: 690rpx;
      height: 280rpx;
      border-bottom: 2rpx #e6e6e6 solid;
+     display: flex;
+     flex-flow: column wrap;
+     justify-content: center;
+     align-items: center;
 }
 
 .picker {
      height: 80rpx;
-     width: 690rpx;
+     width: 680rpx;
      color: black;
      text-align: center;
      line-height: 80rpx;
@@ -25,12 +32,14 @@ page {
      display: flex;
      flex-flow: column wrap;
      padding-bottom: 120rpx;
+     width: 690rpx;
 }
 
 .title {
      font-size: 32rpx;
      color: #2e2b48;
      margin: 40rpx 0 20rpx 0;
+     width: 690rpx;
 }
 
 .input-title {
