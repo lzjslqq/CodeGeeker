@@ -97,6 +97,7 @@ Page({
             commentList: commentList,
             commentUser: commentUser,
             showInput: false,
+            toUserId: 0,
         });
     },
 })

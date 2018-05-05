@@ -147,23 +147,6 @@ categories = [
 ];
 
 // UserList
-// 当前用户
-promisedApi.data.getStorage({ key: 'userInfo' })
-    .then(res => {
-        if (res.data) {
-            let info = res.data;
-            console.log(111111)
-            users.push(new UserInfo({
-                id: info.id,
-                name: '摄影师',
-                avatarUrl: info.avatarUrl,
-                type: 'grapher',
-                fanscount: Math.random() * 1000 | 0,
-                productcount: Math.random() * 100 | 0,
-                desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。',
-            }));
-        }
-    });
 for (let i = 0; i < 20; i++) {
     let isGrapher = (Math.random() * 10 | 0) % 3 == 1;
 
@@ -194,18 +177,6 @@ matches = [
 
 // AlbumList
 let ak = 0;
-let userInfo = wx.getStorage({
-    key: 'userInfo',
-    success: function(res) {
-        // success
-    },
-    fail: function() {
-        // fail
-    },
-    complete: function() {
-        // complete
-    }
-})
 users.filter(e => e.type == 'grapher').forEach(e => {
     let num = Math.random() * 10 | 1;
     for (let j = 0; j < num; j++) {
@@ -261,7 +232,7 @@ for (let i = 0; i < albums.length; i++) {
 
 // FollowList
 let fk = 0,
-    userId = 1000,
+    userId = 100,
     grapherList = users.filter(u => u.type == 'grapher');
 while (true) {
     let

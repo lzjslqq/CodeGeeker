@@ -7,9 +7,10 @@ Page({
         messageList: [],
         userInfo: {},
     },
-
-    onLoad: function() {
-        // let msgs = app.globalData.messageList.filter(m => m.grapherid == )
+    onLoad: function(options) {
+        let grapherId = 1;
+        let msgs = app.globalData.messageList.filter(m => m.grapherid == grapherId);
+        this.setData({ messageList: msgs });
     },
     onShow: function() {},
     onReady: function() {},

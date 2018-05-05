@@ -17,22 +17,33 @@ App({
         this.globalData.messageList = config.messages;
         this.globalData.commentList = config.comments;
 
-        promisedApi.data.setStorage({ key: 'data', data: this.globalData });
-
         promisedApi.open
             .getUserInfo()
             .then(res => {
-                this.globalData.userInfo = res.userInfo;
-                this.globalData.userInfo.id = 100;
+                let userInfo = res.userInfo;
+                userInfo.id = 100;
+                this.globalData.userInfo = userInfo;
 
-                // 加入到全局 userList 中
-                promisedApi.data.setStorage({ key: 'userInfo', data: this.globalData.userInfo });
+                this.globalData.userList.push(new UserInfo({
+                    id: userInfo.id,
+                    name: userInfo.nickName,
+                    avatarUrl: userInfo.avatarUrl,
+                    type: 'grapher',
+                    fanscount: Math.random() * 1000 | 0,
+                    productcount: Math.random() * 100 | 0,
+                    desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。',
+                }));
+
+                // 存入缓存
+                promisedApi.data.setStorage({ key: 'data', data: this.globalData });
             });
+
         promisedApi.open
             .login()
             .then(code => {
 
             });
+
         wx.getSystemInfo({
             success: function(res) {
                 that.globalData.window = {

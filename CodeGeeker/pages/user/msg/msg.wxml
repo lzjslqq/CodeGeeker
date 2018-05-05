@@ -1,3 +1,11 @@
 <view class="container">
-    <view class=""></view>
+    <view class="item" wx:for="{{messageList}}">
+        <view class="time">- {{item.time}} -</view>
+        <view class="title">{{item.type == 'fav' ? '作品被点赞啦！' : '涨粉咯~'}}</view>
+        <view class="detail">
+            <block wx:if="{{item.type == 'fav'}}">"{{item.username}}"点赞了你的作品：{{item.albumtitle}}</block>
+            <block wx:else>"{{item.username}}"偷偷关注了你！</block>
+        </view>
+        <image src="{{item.photosrc}}"></image>
+    </view>
 </view>
