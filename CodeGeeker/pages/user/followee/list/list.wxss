@@ -1,0 +1,91 @@
+page {
+    width: 100%;
+    background-color: #F5F5F5;
+}
+
+.container {
+    padding: 30rpx;
+    width: 690rpx;
+    height: 100%;
+    background-color: #F5F5F5;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.nolist {
+    margin-top: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.item {
+    width: 332rpx;
+    height: 340rpx;
+    margin-bottom: 70rpx;
+    position: relative;
+    background-color: #fff;
+    border-radius: 20rpx;
+}
+
+.item .avatar {
+    height: 120rpx;
+    width: 120rpx;
+    margin: 50rpx 106rpx 0 106rpx;
+    border-radius: 60rpx;
+}
+
+.item .detail .name {
+    margin-top: 20rpx;
+    width: 100%;
+    line-height: 32rpx;
+    font-size: 28rpx;
+    color: #000;
+    text-align: center;
+}
+
+.item .detail .stat {
+    margin-top: 20rpx;
+    width: 100%;
+    line-height: 28rpx;
+    font-size: 24rpx;
+    color: #AA7D50;
+    text-align: center;
+}
+
+.item .nofocus {
+    line-height: 64rpx;
+    font-size: 28rpx;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    height: 64rpx;
+    width: 140rpx;
+    border-radius: 32rpx;
+    margin-top: 30rpx;
+    margin-left: 96rpx;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
+}
+
+.item .focused {
+    position: absolute;
+    line-height: 64rpx;
+    font-size: 28rpx;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    height: 64rpx;
+    width: 140rpx;
+    border-radius: 32rpx;
+    margin-top: 30rpx;
+    margin-left: 96rpx;
+    background: -webkit-linear-gradient(left, #878595, #A9A8B2);
+    background: -o-linear-gradient(right, #878595, #A9A8B2);
+    background: -moz-linear-gradient(right, #878595, #A9A8B2);
+    background: linear-gradient(to right, #878595, #A9A8B2);
+}

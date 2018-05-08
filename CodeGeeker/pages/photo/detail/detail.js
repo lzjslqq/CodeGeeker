@@ -96,7 +96,7 @@ Page({
 
         if (allFavList.findIndex(e => e.userid == userId && e.photoid == photoId) > -1) {
             // 更新全局变量
-            app.globalData.favList = allFavList.filter(e => e.userid != userId && e.photoid != photoId);
+            app.globalData.favList = allFavList.filter(e => !(e.userid == userId && e.photoid == photoId));
             // 更新页面变量
             let favcount = this.data.image.favcount - 1;
             this.setData({

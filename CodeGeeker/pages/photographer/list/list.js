@@ -14,7 +14,13 @@ Page({
     },
     onLoad: function() {},
     onShow: function() {
-        this.data.followList = app.globalData.followList;
+        this.setData({
+            followList: app.globalData.followList,
+            grapherList: [],
+            totalCount: 0,
+            pageIndex: 1,
+            pageCount: 0,
+        });
         this.requestGrapherList();
     },
     onReady: function() {},
@@ -52,46 +58,30 @@ Page({
         });
     },
     focus(e) {
-        let list = [];
         let
             grapherId = e.currentTarget.dataset.gid,
-            userId = app.globalData.userInfo.id;
+            userId = this.data.userId;
 
-        let had = false; // whether had followed
+        // 1. 除去的列表
+        let list = [];
         app.globalData.followList.forEach(e => {
-            if (e.grapherid != grapherId && e.userid != userId) {
-                list.push(e); // removed 
-            } else {
-                had = true;
+            if (e.grapherid != grapherId || e.userid != userId) {
+                list.push(e);
             }
         });
-
-        // check
-        if (had) {
-            console.log('will 取关');
+        // 2. 操作后的列表
+        if (app.globalData.followList.findIndex(f => f.userid == userId && f.grapherid == grapherId) > -1) {
             app.globalData.followList = list;
-            // 更新界面
-            this.data.grapherList.map(e => {
-                if (e.id == grapherId) {
-                    e.focused = false;
-                }
-            });
-            this.setData({
-                grapherList: this.data.grapherList
-            });
         } else {
-            console.log('will 关注');
-            list.push(new Follow({ userid: userId, grapherid: grapherId }));
-            app.globalData.followList = list;
-            // 更新界面
-            this.data.grapherList.map(e => {
-                if (e.id == grapherId) {
-                    e.focused = true;
-                }
-            });
-            this.setData({
-                grapherList: this.data.grapherList
-            });
+            app.globalData.followList.push(new Follow({ userid: userId, grapherid: grapherId }));
         }
+
+        // 更新界面
+        this.data.grapherList.map(e => {
+            if (e.id == grapherId) {
+                e.focused = !e.focused;
+            }
+        });
+        this.setData({ grapherList: this.data.grapherList });
     },
 })

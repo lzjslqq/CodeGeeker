@@ -63,7 +63,7 @@
         </view>
         <view class="list-2 {{selectedTab==1?'show':''}}">
             <view class="item" wx:for="{{albumList}}" data-aid="{{item.id}}" data-title="{{item.title}}" bindtap="gotoPhotoList">
-                <image src="{{item.src}}"></image>
+                <image src="{{item.src}}" mode="aspectFill"></image>
                 <view class="info">
                     <view class="title">{{item.title}}</view>
                     <view class="other">

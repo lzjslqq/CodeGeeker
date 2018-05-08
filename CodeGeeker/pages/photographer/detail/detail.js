@@ -64,6 +64,9 @@ Page({
     gotoPhotoDetail(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
+    gotoPhotoList(e) {
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.aid}&sortid=1` });
+    },
     requestImageList() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
             return;
@@ -126,9 +129,6 @@ Page({
             });
         }
 
-    },
-    gotoPhotoList(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/list/list?grapherid=${this.data.grapher.id}&albumid=${e.currentTarget.dataset.aid}&title=${e.currentTarget.dataset.title}` });
     },
     focus(e) {
         let list = [];

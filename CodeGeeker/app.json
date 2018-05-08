@@ -10,6 +10,7 @@
         "pages/user/fav/list/list",
         "pages/user/upload/upload",
         "pages/user/msg/msg",
+        "pages/user/product/product",
         "pages/photo/list/list",
         "pages/photo/detail/detail"
     ],

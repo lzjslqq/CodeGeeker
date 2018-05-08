@@ -1,27 +1,27 @@
 <view class="header">
-     <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{matchArray}}">{{matchArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
-     <picker class='picker' bindchange="bindCategoryChange" value="{{selectedMatchId}}" range="{{categoryArray}}">{{categoryArray[selectedcategoryId]||"选择分类 ▼"}}</picker>
+    <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{matchArray}}">{{matchArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
+    <picker class='picker' bindchange="bindCategoryChange" value="{{selectedMatchId}}" range="{{categoryArray}}">{{categoryArray[selectedcategoryId]||"选择分类 ▼"}}</picker>
 </view>
 <view class='content'>
-     <view class='title'>标题</view>
-     <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text'></input>
-     <view class='title'>描述</view>
-     <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text'></textarea>
-     <view class='title'>添加图片</view>
-     <view class='img-container'>
-          <view class='img-item item-add' catchtap='bindChooseImage'>
-               <image class='img-add' src='/images/upload/add.png'></image>
-          </view>
-          <block wx:if='{{ tempPhotoPathList.length > 0 }}'>
-               <view class='img-item' wx:for='{{ tempPhotoPathList }}'>
-                    <image class='img-upload' src='{{ item }}'></image>
-                    <image class='img-delete' src='/images/upload/delete.png' catchtap='bindDeleteImage' data-index='{{ index }}'></image>
-               </view>
-          </block>
-          <view class='empty'></view>
-          <view class='empty'></view>
-          <view class='empty'></view>
-     </view>
-     <view class='container-desc' wx:if='{{ tempPhotoPathList.length > 0 }}'>-- 已选择{{tempPhotoPathList.length}}张图片 --</view>
+    <view class='title'>标题</view>
+    <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text'></input>
+    <view class='title'>描述</view>
+    <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text'></textarea>
+    <view class='title'>添加图片</view>
+    <view class='img-container'>
+        <view class='img-item item-add' catchtap='bindChooseImage'>
+            <image class='img-add' src='/images/upload/add.png'></image>
+        </view>
+        <block wx:if='{{ tempPhotoPathList.length > 0 }}'>
+            <view class='img-item' wx:for='{{ tempPhotoPathList }}'>
+                <image class='img-upload' src='{{ item }}' mode="aspectFill"></image>
+                <image class='img-delete' src='/images/upload/delete.png' catchtap='bindDeleteImage' data-index='{{ index }}'></image>
+            </view>
+        </block>
+        <view class='empty'></view>
+        <view class='empty'></view>
+        <view class='empty'></view>
+    </view>
+    <view class='container-desc' wx:if='{{ tempPhotoPathList.length > 0 }}'>-- 已选择{{tempPhotoPathList.length}}张图片 --</view>
 </view>
 <view class='btn-publish' bindtap='bindPublish' wx:if='{{ tempPhotoPathList.length > 0 }}'>发布图集</view>

@@ -11,7 +11,7 @@ Page({
         cateList: [],
         selectedCateId: 0,
         pageIndex: 1,
-        pageSize: 4, // 每次加载两张
+        pageSize: 2, // 每次加载两张
         pageCount: 0,
         totalCount: 0,
         tempTotalCount: 0, // 当前页面的总图片数，累加
@@ -32,6 +32,12 @@ Page({
             selectedCateId: app.globalData.cateList[0].id,
             screenHeight: app.globalData.window.height,
             listWidth: app.globalData.window.width * 0.48,
+            tempPhotoList: [],
+            tempTotalCount: 0,
+            pageIndex: 1,
+            pageCount: 0,
+            leftPhotoList: [],
+            rightPhotoList: []
         });
 
         this.requestImageList();
@@ -70,7 +76,7 @@ Page({
             pageSize = this.data.pageSize,
             cateId = this.data.selectedCateId,
             tempTotalCount = this.data.tempTotalCount,
-            userId = 100;
+            userId = (app.globalData.userInfo || {})["id"] || 100;
 
         let start = (pageIndex - 1) * pageSize;
         let list = app.globalData.photoList.filter(e => e.cateid == cateId).slice(start, start + pageSize);
@@ -86,7 +92,6 @@ Page({
         tempTotalCount += list.length;
 
         this.setData({
-            userInfo: app.globalData.userInfo,
             tempPhotoList: this.data.tempPhotoList.concat(list),
             tempTotalCount: tempTotalCount,
             pageIndex: pageIndex + 1,

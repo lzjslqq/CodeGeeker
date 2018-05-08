@@ -1,0 +1,35 @@
+<view class="container">
+    <!-- 瀑布流 -->
+    <view class="list">
+        <!-- 图片加载层 -->
+        <view class="hiddenload">
+            <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+        </view>
+        <!-- 左侧列表 -->
+        <view class="list-left" style="width:{{listWidth}}px;">
+            <view class="item" wx:for="{{leftPhotoList}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="stat">
+                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <view class="fav-count">{{item.favcount}}</view>
+                    <view class="name">{{item.grapherName}}</view>
+                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                </view>
+            </view>
+        </view>
+        <!-- 右侧列表 -->
+        <view class="list-right" style="width:{{listWidth}}px;">
+            <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="stat">
+                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <view class="fav-count">{{item.favcount}}</view>
+                    <view class="name">{{item.grapherName}}</view>
+                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

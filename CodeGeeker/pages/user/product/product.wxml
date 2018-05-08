@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="item" wx:for="{{albumList}}">
+        <image class="img" src="{{item.src}}" mode="aspectFill" bindtap="gotoAlbumDetail" data-aid="{{item.id}}"></image>
+        <view class="right">
+            <view class="title">{{item.title}}</view>
+            <view class="stat">
+                <view class="count">{{item.count}}张</view>
+                <view class="time">{{item.addtime}}</view>
+            </view>
+            <image class="icon-edit" src="/images/user/edit.png" bindtap="gotoEdit" data-aid="{{item.id}}"></image>
+        </view>
+        <view class="line"></view>
+    </view>
+</view>
