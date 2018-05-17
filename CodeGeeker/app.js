@@ -1,4 +1,5 @@
 import { promisedApi } from './utils/promisify';
+import { common } from './utils/util';
 import { config } from './configs/config';
 import { UserInfo } from './configs/data';
 
@@ -20,6 +21,7 @@ App({
         promisedApi.open
             .getUserInfo()
             .then(res => {
+                common.out('用户信息：', res);
                 let userInfo = res.userInfo;
                 userInfo.id = 100;
                 this.globalData.userInfo = userInfo;
@@ -54,7 +56,7 @@ App({
         })
     },
     globalData: {
-        userInfo: null,
+        userInfo: {},
         window: {
             height: 0,
             width: 0
