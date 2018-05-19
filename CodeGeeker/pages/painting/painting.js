@@ -1,3 +1,4 @@
+import { promisedApi } from '../../utils/promisify';
 const app = getApp();
 
 Page({
@@ -53,6 +54,20 @@ Page({
       */
      onShow: function () {
 
+     },
+
+     imgLoad(event) {
+
+          // 获取图片信息，主要为宽高，选择合适的自适应方式（将最大边完整显示）
+          let [height, width] = [this.data.canvasWidth / event.detail.width * event.detail.height, this.data.canvasWidth];
+          if (height > this.data.windowHeight - 110) {
+               height = this.data.windowHeight - 110;
+               width = height / event.detail.height * event.detail.width;
+          }
+          this.setData({
+               canvasHeight: height,
+               canvasWidth: width
+          });
      },
      /**
       * 用户点击右上角分享

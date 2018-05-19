@@ -1,3 +1,4 @@
+<image hidden='{{ true }}' src='{{ backgroundImg.src }}' bindload="imgLoad"></image>
 <view class="operation">
      <text>取消</text>
      <text>保存并分享</text>
