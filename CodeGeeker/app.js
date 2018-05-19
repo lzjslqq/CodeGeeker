@@ -2,6 +2,8 @@ import { promisedApi } from './utils/promisify';
 import { common } from './utils/util';
 import { config } from './configs/config';
 import { UserInfo } from './configs/data';
+import UserService from './services/userService';
+let userService = new UserService();
 
 App({
     onLaunch: function() {
@@ -18,32 +20,47 @@ App({
         this.globalData.messageList = config.messages;
         this.globalData.commentList = config.comments;
 
-        promisedApi.open
-            .getUserInfo()
+        // 授权登录功能
+        promisedApi.open.getSetting()
             .then(res => {
-                common.out('用户信息：', res);
-                let userInfo = res.userInfo;
-                userInfo.id = 100;
-                this.globalData.userInfo = userInfo;
+                common.out('==== getSetting ====', res);
+                if (res.authSetting["scope.userInfo"]) {
 
-                this.globalData.userList.push(new UserInfo({
-                    id: userInfo.id,
-                    name: userInfo.nickName,
-                    avatarUrl: userInfo.avatarUrl,
-                    type: 'grapher',
-                    fanscount: Math.random() * 1000 | 0,
-                    productcount: Math.random() * 100 | 0,
-                    desc: '收到反馈熟练搭建。说的贵方了石岛聚福林，四大金刚了圣诞节。是来得及发了圣诞节。',
-                }));
-
-                // 存入缓存
-                promisedApi.data.setStorage({ key: 'data', data: this.globalData });
-            });
-
-        promisedApi.open
-            .login()
-            .then(code => {
-
+                    promisedApi.open.checkSession()
+                        .then(res => {
+                            // session_key 未过期，通过 key 来请求
+                            promisedApi.data.getStorage({ key: 'token' })
+                                .then(res => {
+                                    common.out('token ====', res);
+                                    userService.checkToken({ token: res })
+                                        .then(res => {
+                                            if (res.data.errcode == 200) {
+                                                // 成功
+                                                userService.getUserInfoByToken({ token: res })
+                                                    .then(res => {
+                                                        common.out('userInfo ==== ', res.data.userInfo);
+                                                        this.globalData.userInfo = res.data.userInfo;
+                                                    });
+                                            } else {
+                                                // token 过期                                    
+                                                this.getUserInfoByLogin();
+                                            }
+                                        });
+                                })
+                                .catch(() => {
+                                    common.out('getStorage catch ====');
+                                    // session_key 过期或未登录过，重新 wx.login
+                                    this.getUserInfoByLogin();
+                                });
+                        })
+                        .catch(() => {
+                            common.out('checkSession catch ====');
+                            // session_key 过期或未登录过，重新 wx.login
+                            this.getUserInfoByLogin();
+                        });
+                } else {
+                    this.globalData.showAuthBtn = true;
+                }
             });
 
         wx.getSystemInfo({
@@ -55,6 +72,40 @@ App({
             }
         })
     },
+
+    // 通过 wx.login 方式获取用户信息的流程
+    getUserInfoByLogin() {
+        promisedApi.open.login()
+            .then(res1 => {
+                common.out('code ====', res1.code);
+                userService.getUserInfoByCode({ code: res1.code })
+                    .then(res2 => {
+                        common.out('userInfo ====', res2.data);
+                        if (res2.data.errcode == 200) {
+                            // 1. 200-成功
+                            this.globalData.userInfo = res2.data.userInfo;
+                            let token = res2.data.userInfo.token;
+                            promisedApi.data.setStorage({ key: 'token', data: token });
+                        } else if (res2.data.errcode == 201) {
+                            // 2. 201-新增用户（需要进一步写入nickname等信息）
+                            let token = res2.data.token;
+                            promisedApi.open.getUserInfo()
+                                .then(res3 => {
+                                    userService.updateUser({ token, nickName: res3.data.userInfo.nickName, avatarUrl: res3.data.userInfo.avatarUrl })
+                                        .then(res4 => {
+                                            this.globalData.userInfo = res4.data.userInfo;
+                                            let token = res4.data.userInfo.token;
+                                            promisedApi.data.setStorage({ key: 'token', data: token });
+                                        });
+                                });
+                        } else {
+                            // 3. 101-失败
+                            promisedApi.ui.showToast({ title: '服务器繁忙，请稍后再试！', duration: 2000 });
+                        }
+                    });
+            });
+    },
+
     globalData: {
         userInfo: {},
         window: {

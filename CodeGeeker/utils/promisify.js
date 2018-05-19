@@ -48,6 +48,9 @@ const downloadFile = ({ url }) => { return promisify(wx.downloadFile)({ url }); 
 const getUserInfo = () => { return promisify(wx.getUserInfo)(); };
 // 获取临时登录凭证（code）
 const login = () => { return promisify(wx.login)(); };
+const openSetting = () => { return promisify(wx.openSetting)() };
+const getSetting = () => { return promisify(wx.getSetting)() };
+const checkSession = () => { return promisify(wx.checkSession)() };
 
 
 /*----------------- 客服消息接口 -----------------*/
@@ -76,14 +79,14 @@ const setNavigationBarColor = ({ frontColor = '#000000', backgroundColor = '#fff
 
 
 /*----------------- 媒体接口 - 图片 -----------------*/
-// 调起本地图片选择窗口
-const chooseImage = ({ count = 9, sizeType = 'original', sourceType = 'album' } = {}) => {
-    return promisify(wx.chooseImage)({
-        count, // 最多可以选择的图片张数，默认9
-        sizeType, // original 原图，compressed 压缩图，默认二者都有
-        sourceType // album 从相册选图，camera 使用相机，默认二者都有
-    });
-};
+// 
+/**
+ * 调起本地图片选择窗口
+ * @param {Number} count  -最多可以选择的图片张数，默认9
+ * @param {String} sizeType  -original 原图，compressed 压缩图，默认二者都有  
+ * @param {String} sourceType  -album 从相册选图，camera 使用相机，默认二者都有
+ */
+const chooseImage = ({ count = 9, sizeType = 'original', sourceType = 'album' } = {}) => { return promisify(wx.chooseImage)({ count, sizeType, sourceType }); };
 // 预览图片列表（本地或外网）
 const previewImage = ({ current = undefined, urls = [] } = {}) => { return promisify(wx.previewImage)({ current, urls }); };
 // 获取图片信息（本地或外网）
@@ -134,6 +137,9 @@ export const promisedApi = {
     open: {
         getUserInfo,
         login,
+        openSetting,
+        getSetting,
+        checkSession,
     },
     ui: {
         showToast,
