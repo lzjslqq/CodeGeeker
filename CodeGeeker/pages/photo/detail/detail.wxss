@@ -1,109 +1,119 @@
 .container {
-    height: 100%;
-    width: 100%;
+     height: 100%;
+     width: 100%;
 }
 
 .grapher {
-    position: absolute;
-    top: 40rpx;
-    left: 40rpx;
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 40rpx;
-    z-index: 10;
+     position: absolute;
+     top: 40rpx;
+     left: 40rpx;
+     width: 80rpx;
+     height: 80rpx;
+     border-radius: 40rpx;
+     z-index: 10;
+}
+
+.vshow {
+     position: absolute;
+     top: 40rpx;
+     right: 40rpx;
+     width: 80rpx;
+     height: 80rpx;
+     border-radius: 40rpx;
+     z-index: 10;
 }
 
 .info {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    z-index: 9;
+     width: 100%;
+     position: fixed;
+     bottom: 0;
+     z-index: 9;
 }
 
 .info .title {
-    margin-left: 30rpx;
-    width: 690rpx;
-    line-height: 42rpx;
-    font-size: 36rpx;
-    color: #fff;
-    font-weight: bold;
+     margin-left: 30rpx;
+     width: 690rpx;
+     line-height: 42rpx;
+     font-size: 36rpx;
+     color: #fff;
+     font-weight: bold;
 }
 
 .info .desc {
-    padding: 30rpx 30rpx 0 30rpx;
-    width: 690rpx;
-    line-height: 34rpx;
-    font-size: 28rpx;
-    color: #fff;
+     padding: 30rpx 30rpx 0 30rpx;
+     width: 690rpx;
+     line-height: 34rpx;
+     font-size: 28rpx;
+     color: #fff;
 }
 
 .info .stat {
-    width: 100%;
-    height: 100rpx;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    bottom: 0;
+     width: 100%;
+     height: 100rpx;
+     position: relative;
+     display: flex;
+     flex-direction: row;
+     bottom: 0;
 }
 
 .info .stat .page {
-    line-height: 100rpx;
-    position: absolute;
-    left: 30rpx;
-    font-size: 24rpx;
-    color: #fff;
+     line-height: 100rpx;
+     position: absolute;
+     left: 30rpx;
+     font-size: 24rpx;
+     color: #fff;
 }
 
 .info .stat .fav {
-    position: absolute;
-    left: 550rpx;
-    top: 34rpx;
-    width: 34rpx;
-    height: 32rpx;
+     position: absolute;
+     left: 550rpx;
+     top: 34rpx;
+     width: 34rpx;
+     height: 32rpx;
 }
 
 .info .stat .favcount {
-    line-height: 100rpx;
-    position: absolute;
-    left: 590rpx;
-    font-size: 24rpx;
-    color: #fff;
+     line-height: 100rpx;
+     position: absolute;
+     left: 590rpx;
+     font-size: 24rpx;
+     color: #fff;
 }
 
 .info .stat .share {
-    position: absolute;
-    right: 30rpx;
-    top: 34rpx;
-    width: 36rpx;
-    height: 32rpx;
+     position: absolute;
+     right: 30rpx;
+     top: 34rpx;
+     width: 36rpx;
+     height: 32rpx;
 }
 
 .info .stat .btn-share {
-    position: absolute;
-    right: 30rpx;
-    top: 34rpx;
-    width: 36rpx;
-    height: 32rpx;
-    opacity: 0;
+     position: absolute;
+     right: 30rpx;
+     top: 34rpx;
+     width: 36rpx;
+     height: 32rpx;
+     opacity: 0;
 }
 
 .btns {
-    width: 100%;
-    position: fixed;
-    top: 45%;
-    z-index: 9;
+     width: 100%;
+     position: fixed;
+     top: 45%;
+     z-index: 9;
 }
 
 .btns .last {
-    position: absolute;
-    left: 20rpx;
-    height: 120rpx;
-    width: 120rpx;
+     position: absolute;
+     left: 20rpx;
+     height: 120rpx;
+     width: 120rpx;
 }
 
 .btns .next {
-    position: absolute;
-    right: 20rpx;
-    height: 120rpx;
-    width: 120rpx;
+     position: absolute;
+     right: 20rpx;
+     height: 120rpx;
+     width: 120rpx;
 }

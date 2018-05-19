@@ -1,0 +1,20 @@
+/* pages/painting/painting.wxss */
+
+page {
+     background-color: #000;
+}
+
+.operation {
+     width: 690rpx;
+     height: 100rpx;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     padding: 0 30rpx;
+     align-items: center;
+}
+
+.operation text {
+     color: #ff8d1d;
+     font-size: 32rpx;
+}
