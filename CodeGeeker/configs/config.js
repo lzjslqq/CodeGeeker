@@ -1,8 +1,9 @@
-import { domain } from './website';
+import { domain, apiUrl } from './apiUrl';
 import { data } from './data';
 
 export const config = {
     domain,
+    apiUrl,
     users: data.users,
     categories: data.categories,
     graphers: data.users.filter(u => u.type == 'grapher'),
