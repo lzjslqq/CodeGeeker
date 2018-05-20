@@ -9,6 +9,8 @@ App({
     onLaunch: function() {
         let that = this;
 
+        this.login();
+
         this.globalData.userList = config.users;
         this.globalData.cateList = config.categories;
         this.globalData.grapherList = config.graphers;
@@ -20,48 +22,9 @@ App({
         this.globalData.messageList = config.messages;
         this.globalData.commentList = config.comments;
 
-        // 授权登录功能
-        promisedApi.open.getSetting()
-            .then(res => {
-                common.out('==== getSetting ====', res);
-                if (res.authSetting["scope.userInfo"]) {
+        console.log(config);
 
-                    promisedApi.open.checkSession()
-                        .then(res => {
-                            // session_key 未过期，通过 key 来请求
-                            promisedApi.data.getStorage({ key: 'token' })
-                                .then(res => {
-                                    common.out('token ====', res);
-                                    userService.checkToken({ token: res })
-                                        .then(res => {
-                                            if (res.data.errcode == 200) {
-                                                // 成功
-                                                userService.getUserInfoByToken({ token: res })
-                                                    .then(res => {
-                                                        common.out('userInfo ==== ', res.data.userInfo);
-                                                        this.globalData.userInfo = res.data.userInfo;
-                                                    });
-                                            } else {
-                                                // token 过期                                    
-                                                this.getUserInfoByLogin();
-                                            }
-                                        });
-                                })
-                                .catch(() => {
-                                    common.out('getStorage catch ====');
-                                    // session_key 过期或未登录过，重新 wx.login
-                                    this.getUserInfoByLogin();
-                                });
-                        })
-                        .catch(() => {
-                            common.out('checkSession catch ====');
-                            // session_key 过期或未登录过，重新 wx.login
-                            this.getUserInfoByLogin();
-                        });
-                } else {
-                    this.globalData.showAuthBtn = true;
-                }
-            });
+
 
         wx.getSystemInfo({
             success: function(res) {
@@ -73,8 +36,62 @@ App({
         })
     },
 
+    // 授权登录功能
+    login(cb) {
+        promisedApi.open.getSetting()
+            .then(res => {
+                common.out('==== getSetting ====', res);
+                if (res.authSetting["scope.userInfo"]) {
+                    // 确定授权
+
+                    promisedApi.open.checkSession()
+                        .then(res => {
+                            // session_key 未过期，通过 key 来请求
+                            promisedApi.data.getStorage({ key: 'token' })
+                                .then(res => {
+                                    let token = res.data;
+                                    common.out('token ====', token);
+                                    userService.checkToken({ token: token })
+                                        .then(res => {
+                                            if (res.data.errcode == 200) {
+                                                // 成功
+                                                userService.getUserInfoByToken({ token: token })
+                                                    .then(res => {
+                                                        common.out('userInfo ==== ', res.data.userInfo);
+                                                        this.globalData.userInfo = res.data.userInfo;
+                                                        cb && cb();
+                                                    });
+                                            } else {
+                                                // token 过期                                    
+                                                this.getUserInfoByLogin(cb);
+                                            }
+                                        });
+                                })
+                                .catch(() => {
+                                    common.out('getStorage catch ====');
+                                    // session_key 过期或未登录过，重新 wx.login
+                                    this.getUserInfoByLogin(cb);
+                                });
+                        })
+                        .catch(() => {
+                            common.out('checkSession catch ====');
+                            // session_key 过期或未登录过，重新 wx.login
+                            this.getUserInfoByLogin(cb);
+                        });
+                } else {
+                    // 拒绝授权
+                    promisedApi.ui.showModal({ title: '提示', content: '拒绝授权将会影响部分功能的使用，确定取消授权？', cancelText: '取消', confirmText: '授权' })
+                        .then(res => {
+                            if (res.confirm) {
+                                promisedApi.ui.switchTab({ url: `/pages/user/detail/detail` });
+                            }
+                        });
+                }
+            });
+    },
+
     // 通过 wx.login 方式获取用户信息的流程
-    getUserInfoByLogin() {
+    getUserInfoByLogin(cb) {
         promisedApi.open.login()
             .then(res1 => {
                 common.out('code ====', res1.code);
@@ -86,16 +103,19 @@ App({
                             this.globalData.userInfo = res2.data.userInfo;
                             let token = res2.data.userInfo.token;
                             promisedApi.data.setStorage({ key: 'token', data: token });
+                            cb && cb();
                         } else if (res2.data.errcode == 201) {
                             // 2. 201-新增用户（需要进一步写入nickname等信息）
                             let token = res2.data.token;
                             promisedApi.open.getUserInfo()
                                 .then(res3 => {
-                                    userService.updateUser({ token, nickName: res3.data.userInfo.nickName, avatarUrl: res3.data.userInfo.avatarUrl })
+                                    // 3. 写入微信用户的主要字段信息
+                                    userService.updateUser({ token, nickName: res3.userInfo.nickName, avatarUrl: res3.userInfo.avatarUrl })
                                         .then(res4 => {
                                             this.globalData.userInfo = res4.data.userInfo;
                                             let token = res4.data.userInfo.token;
                                             promisedApi.data.setStorage({ key: 'token', data: token });
+                                            cb && cb();
                                         });
                                 });
                         } else {

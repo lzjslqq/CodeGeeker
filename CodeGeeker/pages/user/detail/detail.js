@@ -4,24 +4,20 @@ const app = getApp()
 
 Page({
     data: {
-
+        userInfo: {},
     },
 
     onLoad: function() {
-
-        wx.setNavigationBarColor({
-            frontColor: '#ffffff',
-            backgroundColor: '#008CD7',
-            animation: {
-                duration: 500,
-                timingFunc: 'easeIn'
-            }
-        })
-
+        this.setData({ userInfo: app.globalData.userInfo });
     },
     onShow: function() {},
     onReady: function() {},
 
+    getUserInfo(e) {
+        app.login(() => {
+            this.setData({ userInfo: app.globalData.userInfo });
+        });
+    },
     // 我的作品列表，对应图集列表页
     gotoProductList(e) {
         promisedApi.ui.navigateTo({ url: `/pages/user/product/product` });
