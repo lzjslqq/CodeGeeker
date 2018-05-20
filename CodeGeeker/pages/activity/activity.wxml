@@ -1,14 +1,14 @@
-<view class="container">
+<view class="{{ showSlideUp ? 'container slidup':'' }}">
      <navigator class="activity" url='/pages/match/list/list'>
           <image class='top' src="/images/activity/worldcup.png"></image>
-          <text class='match-text'>VIVO&2018世界杯活动火热进行中</text>
+          <view class='top-text'>VIVO&2018世界杯活动火热进行中</view>
      </navigator>
      <navigator class="activity" url='/pages/match/list/list'>
           <image class='activity-cover' src="/images/activity/knowledge.png"></image>
-          <text>想和非凡摄影师一样拍得一手好照片？</text>
+          <view class='activity-text'>想和非凡摄影师一样拍得一手好照片？</view>
      </navigator>
      <navigator class="activity" url='/pages/match/list/list'>
           <image class='activity-cover' src="/images/activity/520.png"></image>
-          <text>520虐“狗”节,秀出你的爱</text>
+          <view class='activity-text'>520虐“狗”节,秀出你的爱</view>
      </navigator>
 </view>

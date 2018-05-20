@@ -1,4 +1,5 @@
 .container {
+     position: relative;
      background-color: #fff;
      width: 690rpx;
      height: 100%;
@@ -9,8 +10,36 @@
      align-items: center;
 }
 
+.slidup {
+     animation: slidup 0.5s;
+     -moz-animation: slidup 0.5s;
+     -webkit-animation: slidup 0.5s;
+     -o-animation: slidup 0.5s;
+}
+
+@keyframes slidup {
+     from {
+          bottom: -700rpx;
+     }
+
+     to {
+          bottom: 0rpx;
+     }
+}
+
+/* Safari and Chrome */
+
+@-webkit-keyframes slidup {
+     from {
+          bottom: -700rpx;
+     }
+
+     to {
+          bottom: 0rpx;
+     }
+}
+
 .activity {
-     width: 690rpx;
      margin-bottom: 30rpx;
      display: flex;
      flex-direction: column;
@@ -27,10 +56,18 @@
      height: 240rpx;
 }
 
+.activity image {
+     margin-top: 18rpx;
+}
 .activity text {
      font-size: 30rpx;
 }
 
-.match-text {
+.top-text {
+     font-size: 36rpx;
      color: #ff8d1d;
+}
+
+.activity-text {
+     font-size: 28rpx;
 }
