@@ -1,4 +1,4 @@
-import { domain } from './website';
+import { domain } from './apiUrl';
 import { promisedApi } from '../utils/promisify';
 
 /**
