@@ -1,54 +1,64 @@
-<view class='user'>
-    <view class='user-header'>
-        <image class='user-img' src='https://www.t278.cn//codegeek/authors/author01.jpg'></image>
-        <view class='user-action'>
-            <navigator class='action-content' url='/pages/user/msg/msg'>
-                <view class='action-icon'>
-                    <image src='/images/user/msg.png'></image>
-                    <view class='msg-num'>2</view>
-                </view>
-            </navigator>
-            <navigator class='action-content' url='/pages/user/upload/upload'>
-                <view class='action-icon'>
-                    <image src='/images/user/upload.png'></image>
-                </view>
-            </navigator>
-        </view>
+<block wx:if="{{!userInfo || !userInfo.id}}">
+    <view class="container">
+        <image class="auth-bg" src="/images/user/bg.png" mode="scaleToFill"></image>
+        <image class="auth-bg-user" src="/images/user/bg_user.png"></image>
+        <view class="auth-btn-view">登录账号</view>
+        <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
     </view>
-    <view class='user-info'>
-        <view class='user-name'>老头啊老头</view>
-        <view class='user-btn'>我要认证</view>
-    </view>
-    <view class='user-desc'>
-        <view class='user-desc-list1'>
-            <view class='user-desc-list1-fan'>88位粉丝</view>
-            <view class='user-desc-list1-auth'>非凡摄影师 · 已认证</view>
+</block>
+<block wx:else>
+    <view class='user'>
+        <view class='user-header'>
+            <image class='user-img' src='{{userInfo.avatarUrl}}'></image>
+            <view class='user-action' wx:if="{{userInfo.type == 'grapher'}}">
+                <navigator class='action-content' url='/pages/user/msg/msg'>
+                    <view class='action-icon'>
+                        <image src='/images/user/msg.png'></image>
+                        <view class='msg-num'>2</view>
+                    </view>
+                </navigator>
+                <navigator class='action-content' url='/pages/user/upload/upload'>
+                    <view class='action-icon'>
+                        <image src='/images/user/upload.png'></image>
+                    </view>
+                </navigator>
+            </view>
         </view>
-        <view class='user-desc-list2'>
-            <view class='user-desc-text text'>object.create方法的第二个参数添加的对象属性（属性p），如果不显式声明，默认是不可遍历</view>
-            <view class='user-desc-icon'>
-                <image src='/images/user/edit.png'></image>
+        <view class='user-info'>
+            <view class='user-name'>{{userInfo.nickName}}</view>
+            <view class='user-btn' wx:if="{{userInfo.type == 'user'}}">认证非凡摄影师</view>
+        </view>
+        <view class='user-desc' wx:if="{{userInfo.type == 'grapher'}}">
+            <view class='user-desc-list1'>
+                <view class='user-desc-list1-fan'>{{userInfo.fansCount}}位粉丝</view>
+                <view class='user-desc-list1-auth'>非凡摄影师 · 已认证</view>
+            </view>
+            <view class='user-desc-list2'>
+                <view class='user-desc-text text'>{{userInfo.shortDesc}}</view>
+                <view class='user-desc-icon'>
+                    <image src='/images/user/edit.png'></image>
+                </view>
             </view>
         </view>
     </view>
-</view>
-<view class='body'>
-    <view class='content product' bindtap="gotoProductList">
-        <view class='num'>513
-            <view class='content-name'>个作品</view>
+    <view class='body'>
+        <view class='content product' bindtap="gotoProductList" wx:if="{{userInfo.type == 'grapher'}}">
+            <view class='num'>{{userInfo.productCount}}
+                <view class='content-name'>个作品</view>
+            </view>
+            <image src='/images/user/product.png'></image>
         </view>
-        <image src='/images/user/product.png'></image>
-    </view>
-    <view class='content follow' bindtap="gotoGrapherList">
-        <view class='num'>66
-            <view class='content-name'>个关注</view>
+        <view class='content follow' bindtap="gotoGrapherList">
+            <view class='num'>{{userInfo.focusCount}}
+                <view class='content-name'>个关注</view>
+            </view>
+            <image src='/images/user/focus.png'></image>
         </view>
-        <image src='/images/user/focus.png'></image>
-    </view>
-    <view class='content fav' bindtap="gotoFavList">
-        <view class='num'>89
-            <view class='content-name'>个点赞</view>
+        <view class='content fav' bindtap="gotoFavList">
+            <view class='num'>{{userInfo.favCount}}
+                <view class='content-name'>个点赞</view>
+            </view>
+            <image src='/images/user/like.png'></image>
         </view>
-        <image src='/images/user/like.png'></image>
     </view>
-</view>
+</block>
