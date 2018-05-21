@@ -34,8 +34,9 @@
                 <view class='user-desc-list1-auth'>非凡摄影师 · 已认证</view>
             </view>
             <view class='user-desc-list2'>
-                <view class='user-desc-text text'>{{userInfo.shortDesc}}</view>
-                <view class='user-desc-icon'>
+                <view wx:if='{{ !isEditing }}' class='user-desc-text text'>{{ userInfo.shortDesc || '写点东西展示下自己吧' }}</view>
+                <input wx:else class='user-desc-text text' focus="{{ true }}"  value='{{ userInfo.shortDesc }}' placeholder='写点东西展示下自己吧' bindconfirm="endEditUserDesc"></input>
+                <view class='user-desc-icon' bindtap="editUserDesc">
                     <image src='/images/user/edit.png'></image>
                 </view>
             </view>
