@@ -14,7 +14,8 @@
         "pages/photo/list/list",
         "pages/photo/detail/detail",
         "pages/painting/painting",
-        "pages/activity/activity"
+        "pages/activity/activity",
+        "pages/vote/vote"
     ],
     "window": {
         "backgroundTextStyle": "light",
