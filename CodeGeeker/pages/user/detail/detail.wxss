@@ -174,7 +174,6 @@ page {
 .user-desc-text {
     display: inline-block;
     width: 575rpx;
-    max-height: 110rpx;
     text-indent: 40rpx;
     text-align: left;
     overflow: hidden;
@@ -266,4 +265,66 @@ page {
 .content image {
     width: 66rpx;
     height: 66rpx;
+}
+
+
+/******** 输入框 *********/
+
+.shadow {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.2;
+    z-index: 4;
+}
+
+.shadow.hide {
+    display: none;
+}
+
+.input-area {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 120rpx;
+    border-radius: 20rpx 20rpx 0 0;
+    background-color: #fff;
+    z-index: 5;
+}
+
+.input-area.hide {
+    display: none;
+}
+
+.input-area input {
+    width: 550rpx;
+    height: 100%;
+    margin: 0rpx 140rpx 0 30rpx;
+    line-height: 32rpx;
+    font-size: 28rpx;
+    color: #000;
+}
+
+.input-area .placeholder {
+    color: #B3B3B3;
+}
+
+.input-area .send {
+    position: absolute;
+    top: 26rpx;
+    right: 30rpx;
+    width: 120rpx;
+    height: 68rpx;
+    border-radius: 34rpx;
+    line-height: 66rpx;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
 }

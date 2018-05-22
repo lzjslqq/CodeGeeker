@@ -1,0 +1,6 @@
+<text>单张或多张图片上传</text>
+<view wx:for="{{imgSrcList}}" wx:key="idx" wx:for-item="item">
+    <view>{{item.idx}}</view>
+    <image src="{{item.src}}"></image>
+</view>
+<button class="btn" bindtap="chooseImg">选择图片</button>
