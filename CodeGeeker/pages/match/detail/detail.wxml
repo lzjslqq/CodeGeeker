@@ -7,7 +7,7 @@
      </view>
 </view>
 <view class="list">
-     <view class='vote'>
+     <view class='vote' bindtap="vote">
           <image src="/images/match/vote_min.png"></image>
           <text>想让非凡摄影师拍些什么，你来投票决定！</text>
      </view>

@@ -1,1 +1,102 @@
 /* pages/vote/vote.wxss */
+
+page {
+     background-color: #fff;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+}
+
+.vote {
+     background-color: #caf5cd;
+     width: 690rpx;
+     border: 2rpx solid #a9a8b2;
+     border-radius: 20rpx;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+}
+
+.title {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 34rpx;
+     font-weight: bold;
+     width: 100%;
+     height: 100rpx;
+     color: #353535;
+     text-align: center;
+     border-bottom: 2rpx solid #a9a8b2;
+}
+
+.item {
+     width: 660rpx;
+     height: 100rpx;
+     padding-left: 30rpx;
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: center;
+     border-bottom: 2rpx solid #a9a8b2;
+}
+
+.item .item-name {
+     font-size: 30rpx;
+}
+
+.submit {
+     width: 100%;
+     height: 150rpx;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.btn-submit {
+     height: 80rpx;
+     width: 180rpx;
+     font-size: 30rpx;
+     color: #12b758;
+     border: 2rpx solid #12b758;
+     border-radius: 10rpx;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.result {
+     background-color: #caf5cd;
+     width: 690rpx;
+     border-radius: 20rpx;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     padding: 30rpx 0;
+}
+
+.result-item {
+     display: flex;
+     flex-direction: column;
+     width: 660rpx;
+     height: 100rpx;
+     justify-content: flex-start;
+     padding: 15rpx 0 15rpx 30rpx;
+}
+
+.vote-text {
+     width: 630rpx;
+     display: flex;
+     justify-content: space-between;
+}
+
+.result-item text {
+     font-size: 26rpx;
+     color: #353535;
+}
+
+.result-item  progress {
+     width: 630rpx;
+     height: 40rpx;
+}

@@ -1,6 +1,6 @@
 <view class="container">
      <view class='match-group'>
-          <image src="/images/match/vote_min.png"></image>
+          <image src="/images/match/calendar.png"></image>
           <text>2018-6-14 小组赛</text>
      </view>
      <view class="item" wx:for="{{matchList}}" bindtap="gotoMatch" data-mid="{{item.id}}" data-title="{{item.title}}">

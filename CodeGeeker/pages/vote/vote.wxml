@@ -1,1 +1,95 @@
-投票页面
+阿根廷VS巴西（小组赛）
+<view class='vote' wx:if='{{ !hasVoted }}'>
+     <text class='title'>选出你最想要看的球星（可多选）</text>
+     <checkbox-group bindchange="checkboxChange">
+          <view class='item'>
+               <checkbox value="1" checked="{{ false }}" />
+               <text class='item-name'>梅西1</text>
+          </view>
+          <view class='item'>
+               <checkbox value="2" checked="{{ false }}" />
+               <text class='item-name'>梅西2</text>
+          </view>
+          <view class='item'>
+               <checkbox value="3" checked="{{ false }}" />
+               <text class='item-name'>梅西3</text>
+          </view>
+          <view class='item'>
+               <checkbox value="4" checked="{{ false }}" />
+               <text class='item-name'>梅西4</text>
+          </view>
+          <view class='item'>
+               <checkbox value="5" checked="{{ false }}" />
+               <text class='item-name'>梅西5</text>
+          </view>
+          <view class='item'>
+               <checkbox value="6" checked="{{ false }}" />
+               <text class='item-name'>梅西6</text>
+          </view>
+          <view class='item'>
+               <checkbox value="7" checked="{{ false }}" />
+               <text class='item-name'>梅西7</text>
+          </view>
+          <view class='item'>
+               <checkbox value="8" checked="{{ false }}" />
+               <text class='item-name'>梅西8</text>
+          </view>
+     </checkbox-group>
+     <view class='submit'>
+          <view class='btn-submit' data-voteid='1' bindtap="vote">提交</view>
+     </view>
+</view>
+<view wx:if="{{ hasVoted }}">
+     投票结果
+     <view class='result'>
+          <view class='result-item' wx:for='{{ result }}'>
+               <view class='vote-text'>
+                    <text>{{ item.name }}</text>
+                    <text>{{ item.count }}</text>
+               </view>
+               <progress percent="{{ (item.count / totalVotedCount)*100 }}" stroke-width="14" active />
+          </view>
+          <!-- <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西2</text>
+                    <text>45555</text>
+               </view>
+               <progress percent="80" stroke-width="14" active />
+          </view>
+          <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西3</text>
+                    <text>45000</text>
+               </view>
+               <progress percent="70" stroke-width="14" active />
+          </view>
+          <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西4</text>
+                    <text>42547</text>
+               </view>
+               <progress percent="60" stroke-width="14" active />
+          </view>
+          <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西5</text>
+                    <text>32548</text>
+               </view>
+               <progress percent="40" stroke-width="14" active />
+          </view>
+          <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西6</text>
+                    <text>22548</text>
+               </view>
+               <progress percent="38" stroke-width="14" active />
+          </view>
+          <view class='result-item'>
+               <view class='vote-text'>
+                    <text>梅西7</text>
+                    <text>12548</text>
+               </view>
+               <progress percent="25" stroke-width="14" active />
+          </view> -->
+     </view>
+</view>
