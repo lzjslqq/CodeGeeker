@@ -11,10 +11,10 @@
                 <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <image class="fav-img" src="/images/index/liked.png"></image>
                     <view class="fav-count">{{item.favcount}}</view>
-                    <view class="name">{{item.grapherName}}</view>
-                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                    <view class="name">{{item.nickname}}</view>
+                    <image class="avatar" src="{{item.avatarurl}}"></image>
                 </view>
             </view>
         </view>
@@ -24,10 +24,10 @@
                 <image class="photo" src="{{item.src}}" mode="widthFix"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <image class="fav-img" src="/images/index/liked.png"></image>
                     <view class="fav-count">{{item.favcount}}</view>
-                    <view class="name">{{item.grapherName}}</view>
-                    <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
+                    <view class="name">{{item.nickname}}</view>
+                    <image class="avatar" src="{{item.avatarurl}}"></image>
                 </view>
             </view>
         </view>

@@ -1,16 +1,18 @@
 <view class="container">
     <view class="item" wx:for="{{messageList}}">
         <block wx:if="{{item.type == 'fav'}}">
-            <view class="time">- {{item.time}} -</view>
+            <view class="time">- {{item.addtime}} -</view>
             <view class="title">作品被点赞啦！</view>
-            <view class="detail">“{{item.username}}”点赞了你的作品：{{item.albumtitle}}</view>
-            <image class="pic" src="{{item.photosrc}}"></image>
+            <view class="detail">“{{item.username}}”点赞了你的作品：{{item.title}}</view>
+            <image class="pic" src="{{item.src}}" mode="aspectFill"></image>
+            <view class="dot" wx:if="{{item.isread==1}}"></view>
         </block>
         <block wx:else>
-            <view class="time">- {{item.time}} -</view>
+            <view class="time">- {{item.addtime}} -</view>
             <view class="title">涨粉咯~</view>
             <view class="detail">“{{item.username}}”偷偷关注了你！</view>
             <image class="pic" src="/images/user/msglist.png"></image>
+            <view class="dot" wx:if="{{item.isread==1}}"></view>
         </block>
     </view>
 </view>

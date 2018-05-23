@@ -1,7 +1,9 @@
 import { promisedApi } from '../../../utils/promisify';
+import { config } from '../../../configs/config';
 import { common } from '../../../utils/util';
-
-const app = getApp()
+import { services } from '../../../services/services';
+const app = getApp();
+let matchService = new services.MatchService();
 
 Page({
     data: {

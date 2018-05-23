@@ -3,17 +3,17 @@
 </view>
 <view class='content'>
     <view class='title'>标题</view>
-    <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text' value="{{album.title || ''}}"></input>
+    <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text' value="{{album.title || ''}}" bindinput="onInputTitle"></input>
     <view class='title'>描述</view>
-    <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text' value="{{album.desc || ''}}"></textarea>
+    <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text' value="{{album.desc || ''}}" bindinput="onInputDesc"></textarea>
     <view class='title'>添加图片</view>
     <view class='img-container'>
         <view class='img-item item-add' catchtap='bindChooseImage'>
             <image class='img-add' src='/images/upload/add.png'></image>
         </view>
-        <block wx:if='{{ tempPhotoPathList.length > 0 }}'>
-            <view class='img-item' wx:for='{{ tempPhotoPathList }}'>
-                <image class='img-upload' src='{{ item }}' mode="aspectFill"></image>
+        <block wx:if='{{ tempPhotoList.length > 0 }}'>
+            <view class='img-item' wx:for='{{ tempPhotoList }}'>
+                <image class='img-upload' src='{{ item.src }}' mode="aspectFill"></image>
                 <image class='img-delete' src='/images/upload/delete.png' catchtap='bindDeleteImage' data-index='{{ index }}'></image>
             </view>
         </block>
@@ -21,6 +21,6 @@
         <view class='empty'></view>
         <view class='empty'></view>
     </view>
-    <view class='container-desc' wx:if='{{ tempPhotoPathList.length > 0 }}'>-- 已选择{{tempPhotoPathList.length}}张图片 --</view>
+    <view class='container-desc' wx:if='{{ tempPhotoList.length > 0 }}'>-- 已选择{{tempPhotoList.length}}张图片 --</view>
 </view>
-<view class='btn-publish' bindtap='bindPublish' wx:if='{{ tempPhotoPathList.length > 0 }}'>发布图集</view>
+<view class='btn-publish' bindtap='bindPublish' wx:if='{{ tempPhotoList.length > 0 }}'>发布图集</view>

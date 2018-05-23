@@ -1,25 +1,23 @@
 import { promisedApi } from '../../../utils/promisify';
+import { config } from '../../../configs/config';
 import { common } from '../../../utils/util';
-const app = getApp()
+import { services } from '../../../services/services';
+const app = getApp();
+let userService = new services.UserService();
+let albumService = new services.AlbumService();
 
 Page({
     data: {
-        userId: 0,
+        userInfo: {},
         albumList: [],
     },
     onLoad: function() {
+        this.data.userInfo = app.globalData.userInfo;
 
-        let albumList = app.globalData.albumList;
-        albumList.map(e => {
-            e.src = app.globalData.photoList.filter(p => p.albumid == e.id)[0].src;
-            e.count = app.globalData.photoList.filter(p => p.albumid == e.id).length;
-        });
-
-        this.setData({
-            userId: app.globalData.userInfo.id,
-            // albumList: app.globalData.albumList.filter(a => a.grapherid == app.globalData.userInfo.id),
-            albumList: albumList,
-        });
+        albumService.getAlbumList({ grapherid: this.data.userInfo.id })
+            .then(res => {
+                this.setData({ albumList: res });
+            });
     },
     onShow: function() {},
     onReady: function() {},

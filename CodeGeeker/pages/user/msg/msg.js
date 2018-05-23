@@ -1,6 +1,9 @@
 import { promisedApi } from '../../../utils/promisify';
+import { config } from '../../../configs/config';
 import { common } from '../../../utils/util';
-const app = getApp()
+import { services } from '../../../services/services';
+const app = getApp();
+let userService = new services.UserService();
 
 Page({
     data: {
@@ -8,9 +11,11 @@ Page({
         userInfo: {},
     },
     onLoad: function(options) {
-        let grapherId = 1;
-        let msgs = app.globalData.messageList;
-        this.setData({ messageList: msgs });
+        this.data.userInfo = app.globalData.userInfo;
+        userService.getMessageList({ userid: this.data.userInfo.id })
+            .then(res => {
+                this.setData({ messageList: res });
+            });
     },
     onShow: function() {},
     onReady: function() {},

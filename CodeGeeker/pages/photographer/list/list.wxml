@@ -1,15 +1,16 @@
 <view class="container">
-     <view class='summary'>
-          <image src="/images/grapher/vivo_grapher.png"></image>
-          <text>非凡摄影师是VIVO官方从广大足球迷中层层筛选出来的杰出摄影师，可为观众呈现世界杯期间独家热身场内图片</text>
-     </view>
-     <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="box-shadow: 0px -4px 4px #e9e7e0;" bindtap="gotoDetail" data-id="{{item.id}}">
-          <image class="avatar" src="{{item.avatarUrl}}"></image>
-          <view class="detail">
-               <view class="name">{{item.name}}</view>
-               <view class="stat">粉丝 {{item.fanscount}} · 作品 {{item.productcount}}</view>
-          </view>
-          <view class="{{item.focused ? 'focused' : 'nofocus'}}" data-gid="{{item.id}}" catchtap="focus">{{item.focused ? '- 取关' : '+ 关注'}}</view>
-          <!-- <image class="focus" src="{{item.avatarUrl}}" data-gid="{{item.id}}" catchtap="focus"></image> -->
-     </view>
+    <view class='summary'>
+        <image src="/images/grapher/vivo_grapher.png"></image>
+        <text>非凡摄影师是VIVO官方从广大足球迷中层层筛选出来的杰出摄影师，旨在为观众呈现世界杯期间各场比赛的独家现场精彩图集。</text>
+    </view>
+    <view class="item" wx:for="{{grapherList}}" wx:for-index="index" style="box-shadow: 0px -4px 4px #e9e7e0;" bindtap="gotoDetail" data-id="{{item.id}}">
+        <image class="avatar" src="{{item.avatarUrl}}"></image>
+        <image class="logo" src="/images/grapher/grapher_logo_small.png"></image>
+        <view class="detail">
+            <view class="name">{{item.nickName}}</view>
+            <view class="stat">粉丝 {{item.fansCount}} · 作品 {{item.productCount}}</view>
+        </view>
+        <view class="{{item.focused == 1 ? 'focused' : 'nofocus'}}" data-gid="{{item.id}}" catchtap="focus">{{item.focused ==1 ? '- 取关' : '+ 关注'}}</view>
+        <!-- <image class="focus" src="{{item.avatarUrl}}" data-gid="{{item.id}}" catchtap="focus"></image> -->
+    </view>
 </view>

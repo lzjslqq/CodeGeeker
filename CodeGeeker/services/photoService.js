@@ -5,10 +5,10 @@ import { config } from '../configs/config';
 export default class PhotoService {
     constructor() {}
 
-    getPhotoListByCate({ cateid }) {
+    getPhotoListByCate({ cateid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getPhotoListByCate,
-                data: { cateid },
+                data: { cateid, userid },
                 method: 'POST'
             })
             .then(res => {
@@ -19,10 +19,10 @@ export default class PhotoService {
             });
     }
 
-    getPhotoListByAlbum({ albumid }) {
+    getPhotoListByAlbum({ albumid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getPhotoListByAlbum,
-                data: { albumid },
+                data: { albumid, userid },
                 method: 'POST'
             })
             .then(res => {
@@ -33,10 +33,10 @@ export default class PhotoService {
             });
     }
 
-    getPhotoListByGrapher({ grapherid }) {
+    getPhotoListByGrapher({ grapherid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getPhotoListByGrapher,
-                data: { grapherid },
+                data: { grapherid, userid },
                 method: 'POST'
             })
             .then(res => {
@@ -61,10 +61,10 @@ export default class PhotoService {
             });
     }
 
-    getPhotoDetail({ albumid, sortid }) {
+    getPhotoDetail({ albumid, sortid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getPhotoDetail,
-                data: { albumid, sortid },
+                data: { albumid, sortid, userid },
                 method: 'POST'
             })
             .then(res => {

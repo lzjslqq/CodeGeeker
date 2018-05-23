@@ -1,18 +1,19 @@
 import { promisedApi } from '../../../utils/promisify';
+import { config } from '../../../configs/config';
 import { common } from '../../../utils/util';
-import { Follow } from '../../../configs/data';
-
+import { services } from '../../../services/services';
 const app = getApp();
+let userService = new services.UserService();
+let photoService = new services.PhotoService();
+let albumService = new services.AlbumService();
+
 let leftH = 0;
 let rightH = 0;
 
 Page({
     data: {
+        userInfo: {},
         grapher: {},
-        pageIndex: 1,
-        pageSize: 4, // 每次加载两张
-        pageCount: 0,
-        totalCount: 0,
         tempTotalCount: 0, // 当前页面的总图片数，累加
         tempPhotoList: [], // 用于加载每次加载的图集列表中间变量
         leftPhotoList: [],
@@ -25,34 +26,27 @@ Page({
         // 初始化
         leftH = rightH = 0;
 
-        let grapher = app.globalData.grapherList.filter(e => e.id == options.id)[0];
-        let userId = app.globalData.userInfo.id;
-        let grapherId = grapher.id;
-        grapher.focused = app.globalData.followList.findIndex(e => e.grapherid == grapherId && e.userid == userId) > -1;
-        console.log(grapher);
+        this.data.userInfo = app.globalData.userInfo;
+        this.data.grapher.id = options.id;
 
-        let picList = app.globalData.photoList.filter(p => p.grapherid == options.id);
-        let albumList = app.globalData.albumList.filter(e => e.grapherid == options.id && picList.some(p => p.albumid == e.id));
-        albumList.map(e => {
-            e.src = app.globalData.photoList.filter(p => p.grapherid == options.id && p.albumid == e.id)[0].src;
-            e.count = app.globalData.photoList.filter(p => p.grapherid == options.id && p.albumid == e.id).length;
-        });
+        userService.getGrapherDetail({ grapherid: this.data.grapher.id, userid: this.data.userInfo.id })
+            .then(res => {
+                promisedApi.ui.setNavigationBarTitle({ title: res.nickName });
 
-        promisedApi.ui.setNavigationBarTitle({ title: grapher.name });
+                this.setData({
+                    grapher: res,
+                    listWidth: app.globalData.window.width * 0.48,
+                });
 
-        this.setData({
-            grapher: grapher,
-            albumList: albumList,
-            listWidth: app.globalData.window.width * 0.48,
-        });
-
-        this.requestImageList();
+                this.requestPhotoList();
+                this.requestAlbumList();
+            });
     },
     onShow: function() {},
     onReady: function() {},
     onReachBottom: function() {
-        common.out('reach bottom');
-        this.requestImageList();
+        // common.out('reach bottom');
+        // this.requestImageList();
     },
     onPageScroll: function(e) {
         common.out('滑动', e);
@@ -67,42 +61,17 @@ Page({
     gotoPhotoList(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.aid}&sortid=1` });
     },
-    requestImageList() {
-        if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
-            return;
-
-        common.out(`加载第${this.data.pageIndex}页。`);
-        let pageIndex = this.data.pageIndex,
-            pageSize = this.data.pageSize,
-            grapherId = this.data.grapher.id,
-            totalCount = this.data.totalCount,
-            tempTotalCount = this.data.tempTotalCount,
-            userId = app.globalData.userInfo.id || 100;
-
-        let start = (pageIndex - 1) * pageSize;
-        let list = app.globalData.photoList;
-
-        if (grapherId > 0) {
-            list = list.filter(e => e.grapherid == grapherId);
-        }
-
-        // 关联字段处理
-        list.map(p => {
-            p.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == p.id).length > 0;
-        });
-
-        totalCount = list.length;
-        list = list.slice(start, start + pageSize);
-        tempTotalCount += list.length;
-
-        this.setData({
-            userInfo: app.globalData.userInfo,
-            tempPhotoList: this.data.tempPhotoList.concat(list),
-            tempTotalCount: tempTotalCount,
-            totalCount: totalCount,
-            pageIndex: pageIndex + 1,
-            pageCount: app.globalData.photoList.length / pageSize | 1,
-        });
+    requestPhotoList() {
+        photoService.getPhotoListByGrapher({ grapherid: this.data.grapher.id, userid: this.data.userInfo.id })
+            .then(res => {
+                this.setData({ tempPhotoList: res, tempTotalCount: res.length });
+            });
+    },
+    requestAlbumList() {
+        albumService.getAlbumList({ grapherid: this.data.grapher.id })
+            .then(res => {
+                this.setData({ albumList: res });
+            });
     },
     onImageLoaded(e) {
         let img = this.data.tempPhotoList.filter(p => p.id == e.target.dataset.index)[0];
@@ -128,39 +97,20 @@ Page({
                 rightPhotoList: this.data.rightPhotoList
             });
         }
-
     },
     focus(e) {
-        let list = [];
         let
-            grapherId = e.currentTarget.dataset.gid,
-            userId = app.globalData.userInfo.id;
+            grapherid = this.data.grapher.id,
+            userid = this.data.userInfo.id;
 
-        app.globalData.followList.forEach(e => {
-            if (e.grapherid != grapherId || e.userid != userId) {
-                list.push(e); // removed
-            }
-        });
-
-        // check
-        if (this.data.grapher.focused) {
-            console.log('will 取关');
-            app.globalData.followList = list;
-            // 更新界
-            this.data.grapher.focused = false;
-            this.setData({
-                grapher: this.data.grapher
+        userService.updateFollow({ userid, grapherid })
+            .then(res => {
+                userService.getGrapherDetail({ grapherid, userid })
+                    .then(res => {
+                        console.log(res);
+                        this.setData({ grapher: res });
+                    });
             });
-        } else {
-            console.log('will 关注');
-            list.push(new Follow({ userid: userId, grapherid: grapherId }));
-            app.globalData.followList = list;
-            // 更新界面
-            this.data.grapher.focused = true;
-            this.setData({
-                grapher: this.data.grapher
-            });
-        }
     },
 
 })

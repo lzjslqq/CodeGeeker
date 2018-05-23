@@ -18,6 +18,7 @@ export default class AlbumService {
                 return [];
             });
     }
+
     getAlbumDetail({ albumid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getAlbumDetail,
@@ -29,6 +30,40 @@ export default class AlbumService {
                     return JSON.parse(res.data.data);
                 }
                 return {};
+            });
+    }
+
+    /**
+     * albumid , 0-新增，1-修改 
+     */
+    updateAlbum({ albumid, matchid, grapherid, title, desc }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateAlbum,
+                data: { albumid, matchid, grapherid, title, desc },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return res.data.data;
+                }
+                return 0;
+            });
+    }
+
+    /**
+     * 新增或修改相册对应的图片数据
+     */
+    updateAlbumPhotos({ albumid, photoPathList }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateAlbumPhotos,
+                data: { albumid, photoPathList },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return 1;
+                }
+                return 0;
             });
     }
 

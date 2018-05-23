@@ -1,6 +1,9 @@
 import { promisedApi } from '../../../../utils/promisify';
+import { config } from '../../../../configs/config';
 import { common } from '../../../../utils/util';
-const app = getApp()
+import { services } from '../../../../services/services';
+const app = getApp();
+let photoService = new services.PhotoService();
 let leftH = 0;
 let rightH = 0;
 
@@ -25,82 +28,25 @@ Page({
         // 初始化
         leftH = rightH = 0;
 
-        let favPhotoList = app.globalData.favList.filter(f => f.userid == this.data.userId).map(e => e.photoid);
-
-        this.setData({
-            favPhotoList: favPhotoList,
-            screenHeight: app.globalData.window.height,
-            listWidth: app.globalData.window.width * 0.48,
-            tempTotalCount: 0,
-            tempPhotoList: [],
-            leftPhotoList: [],
-            rightPhotoList: [],
-            pageIndex: 1,
-            pageCount: 0,
-        });
-
         this.requestImageList();
     },
     onReady: function() {},
-    onReachBottom: function() {
-        common.out('reach bottom');
-        this.requestImageList();
-    },
+    onReachBottom: function() {},
 
-    selectCate(e) {
-        let id = e.currentTarget.dataset.id;
-        this.setData({
-            selectedCateId: id,
-            tempTotalCount: 0,
-            tempPhotoList: [],
-            leftPhotoList: [],
-            rightPhotoList: [],
-            pageIndex: 1,
-            pageCount: 0,
-        });
-        leftH = rightH = 0;
-
-        this.requestImageList();
-    },
     gotoDetail(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
     requestImageList() {
-        if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
-            return;
-
-        common.out(`加载第${this.data.pageIndex}页。`);
-        let
-            favPhotoList = this.data.favPhotoList,
-            pageIndex = this.data.pageIndex,
-            pageSize = this.data.pageSize,
-            tempTotalCount = this.data.tempTotalCount,
-            pageCount = this.data.pageCount;
-
-        // 总数据
-        let list = app.globalData.photoList.filter(p => favPhotoList.findIndex(pid => pid == p.id) > -1);
-        pageCount = list.length / pageSize | 1;
-
-        // 分页
-        let start = (pageIndex - 1) * pageSize;
-        list = list.slice(start, start + pageSize);
-
-        // 关联字段处理
-        list.map(p => {
-            let g = app.globalData.grapherList.filter(e => e.id == p.grapherid)[0];
-            p.grapherName = g.name;
-            p.grapherAvatarUrl = g.avatarUrl;
-            p.faved = true;
-        });
-
-        tempTotalCount += list.length;
-
-        this.setData({
-            tempPhotoList: this.data.tempPhotoList.concat(list),
-            tempTotalCount: tempTotalCount,
-            pageIndex: pageIndex + 1,
-            pageCount: pageCount,
-        });
+        photoService.getPhotoListByFav({ userid: this.data.userId })
+            .then(res => {
+                this.setData({
+                    favPhotoList: res,
+                    screenHeight: app.globalData.window.height,
+                    listWidth: app.globalData.window.width * 0.48,
+                    tempPhotoList: res,
+                    tempTotalCount: res.length,
+                });
+            });
     },
     onImageLoaded(e) {
         let img = this.data.tempPhotoList.filter(p => p.id == e.target.dataset.index)[0];
@@ -125,11 +71,6 @@ Page({
                 leftPhotoList: this.data.leftPhotoList,
                 rightPhotoList: this.data.rightPhotoList
             });
-            // 循环初始化加载页面
-            if (Math.min(leftH, rightH) + 10 < this.data.screenHeight) {
-                console.log('load more...')
-                this.requestImageList();
-            }
         }
 
     },

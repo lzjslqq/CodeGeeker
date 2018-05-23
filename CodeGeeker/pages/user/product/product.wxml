@@ -1,6 +1,6 @@
 <view class="container">
     <view class="item" wx:for="{{albumList}}">
-        <image class="img" src="{{item.src}}" mode="aspectFill" bindtap="gotoAlbumDetail" data-aid="{{item.id}}"></image>
+        <image class="img" src="{{item.imageurl}}" mode="aspectFill" bindtap="gotoAlbumDetail" data-aid="{{item.id}}"></image>
         <view class="right">
             <view class="title">{{item.title}}</view>
             <view class="stat">

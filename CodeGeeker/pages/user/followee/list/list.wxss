@@ -37,6 +37,14 @@ page {
     border-radius: 60rpx;
 }
 
+.item .logo {
+    position: absolute;
+    top: 130rpx;
+    left: 200rpx;
+    width: 40rpx;
+    height: 40rpx;
+}
+
 .item .detail .name {
     margin-top: 20rpx;
     width: 100%;

@@ -37,12 +37,28 @@ export default class UserService {
         });
     }
 
+    // 更新摄影师介绍
+    updateGrapherDesc({ grapherid, desc }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateGrapherDesc,
+                data: { grapherid, desc },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return 1;
+                }
+                return 0;
+            });
+    }
+
+
     // ---- 摄影师
 
-    getGrapherList() {
+    getGrapherList({ userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getGrapherList,
-                data: {},
+                data: { userid },
                 method: 'POST'
             })
             .then(res => {
@@ -67,10 +83,10 @@ export default class UserService {
             });
     }
 
-    getGrapherDetail({ grapherid }) {
+    getGrapherDetail({ grapherid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getGrapherDetail,
-                data: { grapherid },
+                data: { grapherid, userid },
                 method: 'POST'
             })
             .then(res => {
@@ -78,6 +94,20 @@ export default class UserService {
                     return JSON.parse(res.data.data);
                 }
                 return {};
+            });
+    }
+
+    updateFollow({ userid, grapherid }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateFollow,
+                data: { userid, grapherid },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return res.data.count;
+                }
+                return 0;
             });
     }
 
@@ -97,13 +127,13 @@ export default class UserService {
             });
     }
 
-    updateMessageStatus({ userid }) {
-        return promisedApi.http.request({
-            url: config.apiUrl.updateMessageStatus,
-            data: { userid },
-            method: 'POST'
-        });
-    }
+    // updateMessageStatus({ userid }) {
+    //     return promisedApi.http.request({
+    //         url: config.apiUrl.updateMessageStatus,
+    //         data: { userid },
+    //         method: 'POST'
+    //     });
+    // }
 
     getUnReadMessageCount({ userid }) {
         return promisedApi.http.request({

@@ -15,7 +15,7 @@
                 <navigator class='action-content' url='/pages/user/msg/msg'>
                     <view class='action-icon'>
                         <image src='/images/user/msg.png'></image>
-                        <view class='msg-num'>99+</view>
+                        <view class='msg-num'>{{messageCount > 99 ? '99+' : messageCount}}</view>
                     </view>
                 </navigator>
                 <navigator class='action-content' url='/pages/user/upload/upload'>
@@ -36,7 +36,6 @@
             </view>
             <view class='user-desc-list2'>
                 <view class='user-desc-text text'>{{ userInfo.shortDesc || '写点东西展示下自己吧' }}</view>
-                <!-- <input wx:else class='user-desc-text text' focus="{{ true }}" value='{{ userInfo.shortDesc }}' placeholder='写点东西展示下自己吧' bindblur="endEditUserDesc"></input> -->
                 <view class='user-desc-icon' bindtap="toEdit">
                     <image src='/images/user/edit.png'></image>
                 </view>
@@ -65,7 +64,7 @@
     </view>
     <view class="shadow {{isEditing ? '' : 'hide'}}" bindtap="hideInput"></view>
     <view class="input-area {{isEditing ? '':'hide'}}">
-        <input focus="{{isEditing}}" placeholder="快来编辑你的展示信息吧~" value="{{userInfo.shortDesc}}" placeholder-class="placeholder" bindinput="onInput" />
+        <textarea focus="{{isEditing}}" placeholder="快来编辑你的展示信息吧~" value="{{userInfo.shortDesc}}" placeholder-class="placeholder" bindinput="onInput" />
         <view class="send" bindtap="send">确定</view>
     </view>
 </block>

@@ -299,7 +299,7 @@ page {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 120rpx;
+    height: 220rpx;
     border-radius: 20rpx 20rpx 0 0;
     background-color: #fff;
     z-index: 5;
@@ -309,12 +309,12 @@ page {
     display: none;
 }
 
-.input-area input {
+.input-area textarea {
     width: 550rpx;
     height: 100%;
-    margin: 0rpx 140rpx 0 30rpx;
+    margin: 40rpx 140rpx 0 30rpx;
     line-height: 32rpx;
-    font-size: 28rpx;
+    font-size: 24rpx;
     color: #000;
 }
 
@@ -324,7 +324,7 @@ page {
 
 .input-area .send {
     position: absolute;
-    top: 26rpx;
+    top: 40rpx;
     right: 30rpx;
     width: 120rpx;
     height: 68rpx;

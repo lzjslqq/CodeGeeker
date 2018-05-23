@@ -5,21 +5,21 @@
     <view class="opacity"></view>
     <view class="grapher-pane">
         <image class="avatar" src="{{grapher.avatarUrl}}"></image>
-        <view class="name">{{grapher.name}}</view>
+        <view class="name">{{grapher.nickName}}</view>
         <view class="stat">
-            <view class="fans">{{grapher.fanscount}} 位粉丝</view>
+            <view class="fans">{{grapher.fansCount}} 位粉丝</view>
             <view class="tag">非凡摄影师 · 已认证</view>
         </view>
-        <view class="desc">{{grapher.desc}}</view>
+        <view class="desc">{{grapher.shortDesc}}</view>
     </view>
     <view class="float-tabs">
-        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{totalCount}}</view>
+        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{tempTotalCount}}</view>
         <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{albumList.length}}</view>
         <view class="{{selectedTab==0?'line1':''}}"></view>
         <view class="{{selectedTab==1?'line2':''}}"></view>
     </view>
     <view class="tabs">
-        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{totalCount}}</view>
+        <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{tempTotalCount}}</view>
         <view class="tab-2 {{selectedTab==1?'selected':''}}" bindtap="changeTab" data-tabid="1">图集 {{albumList.length}}</view>
         <view class="{{selectedTab==0?'line1':''}}"></view>
         <view class="{{selectedTab==1?'line2':''}}"></view>
@@ -37,7 +37,7 @@
                     <view class="info">
                         <view class="title">{{item.title}}</view>
                         <view class="stat">
-                            <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                            <image class="fav-img" src="{{item.faved==1 ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
                             <view class="favcount">{{item.favcount}}</view>
                             <view class="time">{{item.addtime}} 发布</view>
                         </view>
@@ -52,7 +52,7 @@
                     <view class="info">
                         <view class="title">{{item.title}}</view>
                         <view class="stat">
-                            <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                            <image class="fav-img" src="{{item.faved==1 ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
                             <view class="favcount">{{item.favcount}}</view>
                             <view class="time">{{item.addtime}} 发布</view>
                         </view>
@@ -63,7 +63,7 @@
         </view>
         <view class="list-2 {{selectedTab==1?'show':''}}">
             <view class="item" wx:for="{{albumList}}" data-aid="{{item.id}}" data-title="{{item.title}}" bindtap="gotoPhotoList">
-                <image src="{{item.src}}" mode="aspectFill"></image>
+                <image src="{{item.imageurl}}" mode="aspectFill"></image>
                 <view class="info">
                     <view class="title">{{item.title}}</view>
                     <view class="other">
@@ -74,5 +74,5 @@
             </view>
         </view>
     </view>
-    <view class="{{grapher.focused ? 'focused' : 'focus'}}" data-gid="{{grapher.id}}" catchtap="focus">{{grapher.focused ? '取关' : '关注'}}</view>
+    <view class="{{grapher.focused == 1 ? 'focused' : 'focus'}}" data-gid="{{grapher.id}}" catchtap="focus">{{grapher.focused==1 ? '取关' : '关注'}}</view>
 </view>

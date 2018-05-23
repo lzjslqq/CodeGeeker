@@ -1,11 +1,13 @@
 import { promisedApi } from '../../../../utils/promisify';
+import { config } from '../../../../configs/config';
 import { common } from '../../../../utils/util';
-import { Follow } from '../../../../configs/data';
-const app = getApp()
+import { services } from '../../../../services/services';
+const app = getApp();
+let userService = new services.UserService();
 
 Page({
     data: {
-        userId: 0,
+        userInfo: {},
         followIdList: [], // 关注的摄影师id列表
         grapherList: [],
         pageIndex: 1,
@@ -14,7 +16,7 @@ Page({
         totalCount: 0,
     },
     onLoad: function() {
-        this.data.userId = app.globalData.userInfo.id;
+        this.data.userInfo = app.globalData.userInfo;
     },
     onShow: function() {
         console.log('onShow');
@@ -24,21 +26,35 @@ Page({
             totalCount: 0,
             pageIndex: 1,
             pageCount: 0,
-        })
-        this.data.followIdList = app.globalData.followList.filter(f => f.userid == this.data.userId).map(e => e.grapherid);
+        });
 
         this.requestGrapherList();
     },
     onReady: function() {},
     onReachBottom: function() {
-        console.log('reach bottom');
-        this.requestGrapherList();
+        // console.log('reach bottom');
+        // this.requestGrapherList();
     },
 
     gotoDetail(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photographer/detail/detail?id=${e.currentTarget.dataset.id}` });
     },
+    focus(e) {
+        let
+            grapherid = e.currentTarget.dataset.gid,
+            userid = this.data.userInfo.id;
+        userService.updateFollow({ userid, grapherid })
+            .then(res => {
+                this.requestGrapherList();
+            });
+    },
     requestGrapherList() {
+        userService.getGrapherListByFollow({ userid: this.data.userInfo.id })
+            .then(res => {
+                this.setData({ grapherList: res });
+            });
+    },
+    requestGrapherList1() {
         if (this.data.pageCount > 0 && this.data.pageIndex > this.data.pageCount)
             return;
 
@@ -67,7 +83,7 @@ Page({
             pageCount: pageCount,
         });
     },
-    focus(e) {
+    focus1(e) {
         let
             grapherId = e.currentTarget.dataset.gid,
             userId = this.data.userId;

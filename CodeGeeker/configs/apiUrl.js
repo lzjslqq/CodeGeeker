@@ -1,5 +1,5 @@
-export const domain = 'https://www.t278.cn/';
-// export const domain = 'http://localhost:61764/';
+// export const domain = 'https://www.t278.cn/';
+export const domain = 'http://localhost:61764/';
 
 export const apiUrl = {
     // 授权登录
@@ -7,6 +7,7 @@ export const apiUrl = {
     updateUser: `${domain}/wxa/updateUser`,
     checkToken: `${domain}/wxa/checktoken`,
     getUserInfoByToken: `${domain}/wxa/getuserinfo`,
+    updateGrapherDesc: `${domain}/wxa/updateGrapherDesc`,
     // 分类
     getCateList: `${domain}/wxa/getCateList`,
     // 主题
@@ -17,6 +18,7 @@ export const apiUrl = {
     getGrapherList: `${domain}/wxa/getGrapherList`,
     getGrapherListByFollow: `${domain}/wxa/getGrapherListByFollow`,
     getGrapherDetail: `${domain}/wxa/getGrapherDetail`,
+    updateFollow: `${domain}/wxa/updateFollow`,
     // 消息
     getMessageList: `${domain}/wxa/getMessageList`,
     updateMessageStatus: `${domain}/wxa/updateMessageStatus`,
@@ -24,6 +26,8 @@ export const apiUrl = {
     // 图集
     getAlbumList: `${domain}/wxa/getAlbumList`,
     getAlbumDetail: `${domain}/wxa/getAlbumDetail`,
+    updateAlbum: `${domain}/wxa/updateAlbum`,
+    updateAlbumPhotos: `${domain}/wxa/updateAlbumPhotos`,
     // 图片
     getPhotoListByCate: `${domain}/wxa/getPhotoListByCate`,
     getPhotoListByAlbum: `${domain}/wxa/getPhotoListByAlbum`,
