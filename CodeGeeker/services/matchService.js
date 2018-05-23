@@ -2,12 +2,12 @@ import { promisedApi } from '../utils/promisify';
 import { common } from '../utils/util';
 import { config } from '../configs/config';
 
-export default class ThemeService {
+export default class MatchService {
     constructor() {}
 
-    getThemeList() {
+    getMatchList() {
         return promisedApi.http.request({
-                url: config.apiUrl.getThemeList,
+                url: config.apiUrl.getMatchList,
                 data: {},
                 method: 'POST'
             })
@@ -18,5 +18,7 @@ export default class ThemeService {
                 return [];
             });
     }
+
+
 
 }

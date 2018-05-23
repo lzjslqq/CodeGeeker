@@ -1,12 +1,11 @@
 <view class="header">
-    <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{matchArray}}">{{matchArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
-    <picker class='picker' bindchange="bindCategoryChange" value="{{selectedMatchId}}" range="{{categoryArray}}">{{categoryArray[selectedcategoryId]||"选择分类 ▼"}}</picker>
+    <picker class='picker' bindchange="bindMatchChange" value="{{selectedMatchId}}" range="{{textArray}}">{{textArray[selectedMatchId]||"选择赛事房间 ▼"}}</picker>
 </view>
 <view class='content'>
     <view class='title'>标题</view>
-    <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text'></input>
+    <input class='input-title' placeholder='请输入图集标题' placeholder-class='input-text' value="{{album.title || ''}}"></input>
     <view class='title'>描述</view>
-    <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text'></textarea>
+    <textarea class='input-title input-textarea' placeholder='请输入图集描述' placeholder-class='input-text' value="{{album.desc || ''}}"></textarea>
     <view class='title'>添加图片</view>
     <view class='img-container'>
         <view class='img-item item-add' catchtap='bindChooseImage'>

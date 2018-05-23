@@ -1,133 +1,133 @@
 page {
-     background: #fff;
-     display: flex;
-     flex-flow: column wrap;
-     justify-content: flex-start;
-     align-items: center;
+    background: #fff;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .header {
-     width: 690rpx;
-     height: 280rpx;
-     border-bottom: 2rpx #e6e6e6 solid;
-     display: flex;
-     flex-flow: column wrap;
-     justify-content: center;
-     align-items: center;
+    width: 690rpx;
+    height: 200rpx;
+    /* border-bottom: 2rpx #e6e6e6 solid; */
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .picker {
-     height: 80rpx;
-     width: 680rpx;
-     color: black;
-     text-align: center;
-     line-height: 80rpx;
-     font-size: 28rpx;
-     border: 1rpx #ffb33a solid;
-     border-radius: 40rpx;
-     margin-bottom: 40rpx;
+    height: 80rpx;
+    width: 680rpx;
+    color: black;
+    text-align: center;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    border: 1rpx #D0D6D9 solid;
+    border-radius: 40rpx;
+    margin-bottom: 10rpx;
 }
 
 .content {
-     display: flex;
-     flex-flow: column wrap;
-     padding-bottom: 120rpx;
-     width: 690rpx;
+    display: flex;
+    flex-flow: column wrap;
+    padding-bottom: 120rpx;
+    width: 690rpx;
 }
 
 .title {
-     font-size: 32rpx;
-     color: #2e2b48;
-     margin: 40rpx 0 20rpx 0;
-     width: 690rpx;
+    font-size: 32rpx;
+    color: #2e2b48;
+    margin: 10rpx 0 20rpx 0;
+    width: 690rpx;
 }
 
 .input-title {
-     width: 660rpx;
-     height: 90rpx;
-     border-radius: 10rpx;
-     background-color: #f7f7f7;
-     padding-left: 30rpx;
-     font-size: 28rpx;
+    width: 660rpx;
+    height: 90rpx;
+    border-radius: 10rpx;
+    background-color: #f7f7f7;
+    padding-left: 30rpx;
+    font-size: 28rpx;
 }
 
 .input-text {
-     font-size: 28rpx;
-     color: #b3b3b3;
+    font-size: 28rpx;
+    color: #666666;
 }
 
 .input-textarea {
-     padding-top: 30rpx;
-     height: 170rpx;
+    padding-top: 30rpx;
+    height: 170rpx;
 }
 
 .img-container {
-     width: 690rpx;
-     display: flex;
-     flex-flow: row wrap;
-     justify-content: space-around;
-     align-content: flex-start;
+    width: 690rpx;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: flex-start;
 }
 
 .img-container .img-item {
-     position: relative;
-     width: 160rpx;
-     height: 160rpx;
-     background-color: #f7f7f7;
-     border-radius: 10rpx;
-     margin-bottom: 20rpx;
+    position: relative;
+    width: 160rpx;
+    height: 160rpx;
+    background-color: #f7f7f7;
+    border-radius: 10rpx;
+    margin-bottom: 20rpx;
 }
 
 .item-add {
-     display: flex;
-     justify-content: center;
-     align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .img-container .img-item .img-add {
-     width: 36rpx;
-     height: 36rpx;
+    width: 36rpx;
+    height: 36rpx;
 }
 
 .img-upload {
-     width: 160rpx;
-     height: 160rpx;
-     border-radius: 10rpx;
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 10rpx;
 }
 
 .img-delete {
-     width: 40rpx;
-     height: 40rpx;
-     position: absolute;
-     right: 10rpx;
-     bottom: 10rpx;
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    right: 10rpx;
+    bottom: 10rpx;
 }
 
 .empty {
-     width: 160rpx;
-     height: 0;
+    width: 160rpx;
+    height: 0;
 }
 
 .btn-publish {
-     width: 750rpx;
-     height: 100rpx;
-     font-size: 36rpx;
-     color: #fff;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     position: fixed;
-     left: 0;
-     bottom: 0;
-     background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
-     background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
-     background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
-     background: linear-gradient(to right, #ff8d1d, #ffb33a);
+    width: 750rpx;
+    height: 100rpx;
+    font-size: 36rpx;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
 }
 
 .container-desc {
-     margin: 20rpx 0;
-     font-size: 24rpx;
-     color: #b3b3b3;
-     align-self: center;
+    margin: 20rpx 0;
+    font-size: 24rpx;
+    color: #b3b3b3;
+    align-self: center;
 }

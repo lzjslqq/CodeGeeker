@@ -83,6 +83,12 @@ page {
     border-radius: 180rpx;
 }
 
+.user-logo {
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: -50rpx;
+}
+
 .user-action {
     padding-top: 40rpx;
     float: right;
@@ -91,6 +97,9 @@ page {
 .action-content {
     float: left;
     margin-left: 20rpx;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
 }
 
 .action-icon {
@@ -103,7 +112,8 @@ page {
     position: absolute;
     top: 8rpx;
     right: 8rpx;
-    width: 32rpx;
+    width: fit-content;
+    min-width: 32rpx;
     height: 32rpx;
     border-radius: 32rpx;
     font-size: 24rpx;

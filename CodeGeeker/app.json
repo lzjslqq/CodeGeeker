@@ -35,9 +35,9 @@
             "selectedIconPath": "/images/tab/photolisted.png"
         }, {
             "pagePath": "pages/activity/activity",
-            "text": "近期赛事",
-            "iconPath": "/images/tab/match.png",
-            "selectedIconPath": "/images/tab/matched.png"
+            "text": "主题专区",
+            "iconPath": "/images/tab/theme.png",
+            "selectedIconPath": "/images/tab/themed.png"
         }, {
             "pagePath": "pages/photographer/list/list",
             "text": "摄影师",

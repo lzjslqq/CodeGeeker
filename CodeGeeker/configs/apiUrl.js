@@ -15,16 +15,19 @@ export const apiUrl = {
     getMatchList: `${domain}/wxa/getMatchList`,
     // 摄影师
     getGrapherList: `${domain}/wxa/getGrapherList`,
+    getGrapherListByFollow: `${domain}/wxa/getGrapherListByFollow`,
     getGrapherDetail: `${domain}/wxa/getGrapherDetail`,
     // 消息
     getMessageList: `${domain}/wxa/getMessageList`,
-    // 图片
+    updateMessageStatus: `${domain}/wxa/updateMessageStatus`,
+    getUnReadMessageCount: `${domain}/wxa/getUnReadMessageCount`,
+    // 图集
     getAlbumList: `${domain}/wxa/getAlbumList`,
+    getAlbumDetail: `${domain}/wxa/getAlbumDetail`,
+    // 图片
     getPhotoListByCate: `${domain}/wxa/getPhotoListByCate`,
+    getPhotoListByAlbum: `${domain}/wxa/getPhotoListByAlbum`,
     getPhotoListByGrapher: `${domain}/wxa/getPhotoListByGrapher`,
-    getPhotoListByUser: `${domain}/wxa/getPhotoListByUser`,
+    getPhotoListByFav: `${domain}/wxa/getPhotoListByFav`,
     getPhotoDetail: `${domain}/wxa/getPhotoDetail`,
-    // 安全监测
-    checkContent: `${domain}/wxa/checkContent`,
-    checkImage: `${domain}/wxa/checkImage`,
 }

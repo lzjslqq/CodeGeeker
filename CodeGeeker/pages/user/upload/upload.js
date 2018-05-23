@@ -1,48 +1,64 @@
 import { promisedApi } from '../../../utils/promisify';
 import { common } from '../../../utils/util';
 import { config } from '../../../configs/config';
-const app = getApp()
+import { services } from '../../../services/services';
+const app = getApp();
+let matchService = new services.MatchService();
+let albumService = new services.AlbumService();
+let photoService = new services.PhotoService();
 
 Page({
     data: {
-        albumId: 0,
+        album: {},
         matchList: [],
-        cateList: [],
-        matchArray: [],
-        categoryArray: [],
+        textArray: [],
         selectedMatchId: null,
-        selectedcategoryId: null,
         tempPhotoPathList: [],
+        uploadPhotoPathList: [], // 上传后的图片路径
     },
     onLoad: function(options) {
         console.log(options);
-        let data = {};
-        data.matchList = config.matches;
-        data.cateList = config.categories;
-        data.matchArray = data.matchList.map(m => m.title);
-        data.categoryArray = data.cateList.map(e => e.name).slice(2);
 
-        if (options.albumid > 0) {
-            data.albumId = options.albumid;
-            data.tempPhotoPathList = config.photoes.filter(p => p.albumid == data.albumId).map(e => e.src);
+        matchService.getMatchList()
+            .then(res => {
+                common.out('======match list ======', res);
+                let textArray = res.map(m => `[${m.stage}] ${m.title} ${m.ispass==0?'（完场）':''}`);
+                this.setData({
+                    matchList: res,
+                    textArray: textArray
+                });
+            })
+            .then(() => {
+                if (options.albumid > 0) {
+                    let albumId = options.albumid;
+                    albumService.getAlbumDetail({ albumid: albumId })
+                        .then(res => {
+                            let album = res;
+                            let idx = this.data.matchList.findIndex(e => e.id == album.funcid);
+                            this.setData({
+                                album: album,
+                                selectedMatchId: idx
+                            });
+                        });
+                    photoService.getPhotoListByAlbum({ albumid: albumId })
+                        .then(res => {
+                            let paths = res.map(p => p.src);
+                            this.setData({
+                                tempPhotoPathList: paths,
+                                uploadPhotoPathList: paths
+                            });
+                        });
+                }
+            });
 
-            let album = config.albums.filter(a => a.id == data.albumId)[0] || {};
 
-            data.selectedcategoryId = config.categories.filter(c => c.id == album.cateid)[0].id || 0;
-            data.selectedMatchId = (config.matches.filter(m => m.id == album.matchid)[0].sortid || 1) - 1;
-        }
 
-        this.setData(data);
     },
     onShow: function() {},
     onReady: function() {},
     bindMatchChange: function(e) {
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({ selectedMatchId: e.detail.value });
-    },
-    bindCategoryChange: function(e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({ selectedcategoryId: e.detail.value });
     },
     bindChooseImage(e) {
         promisedApi.image.chooseImage()

@@ -10,11 +10,12 @@
     <view class='user'>
         <view class='user-header'>
             <image class='user-img' src='{{userInfo.avatarUrl}}'></image>
+            <image class="user-logo" src="/images/grapher/grapher_logo_large.png" wx:if="{{userInfo.type == 'grapher'}}"></image>
             <view class='user-action' wx:if="{{userInfo.type == 'grapher'}}">
                 <navigator class='action-content' url='/pages/user/msg/msg'>
                     <view class='action-icon'>
                         <image src='/images/user/msg.png'></image>
-                        <view class='msg-num'>2</view>
+                        <view class='msg-num'>99+</view>
                     </view>
                 </navigator>
                 <navigator class='action-content' url='/pages/user/upload/upload'>
