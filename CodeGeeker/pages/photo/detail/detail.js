@@ -126,8 +126,46 @@ Page({
      toggleInfo(e) {
 
           this.setData({ showInfo: !this.data.showInfo });
+     },
+     download(e) {
+
+          promisedApi.open.getSetting()
+               .then(res => {
+
+                    if (!res.authSetting['scope.writePhotosAlbum']) {
+                         wx.authorize({
+                              scope: 'scope.writePhotosAlbum',
+                              success() {
+                                   // 用户已经同意小程序使用相册
+                                   wx.downloadFile({
+                                        url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
+                                        success: function (res) {
+
+                                             if (res.statusCode === 200) {
+
+                                                  promisedApi.image.saveImageToPhotosAlbum({ filePath: res.tempFilePath })
+                                             }
+                                        }
+                                   })
+
+
+
+
+                              }
+                         })
+                    }
+                    else
+                         wx.downloadFile({
+                              url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
+                              success: function (res) {
+
+                                   if (res.statusCode === 200) {
+
+                                        promisedApi.image.saveImageToPhotosAlbum({ filePath: res.tempFilePath })
+                                   }
+                              }
+                         })
+               })
      }
-
-
 
 })

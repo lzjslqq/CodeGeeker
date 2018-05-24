@@ -122,7 +122,13 @@
      width: 36rpx;
      height: 32rpx;
 }
-
+.info .stat .download {
+     position: absolute;
+     left: 430rpx;
+     top: 34rpx;
+     width: 36rpx;
+     height: 32rpx;
+}
 .info .stat .btn-share {
      position: absolute;
      right: 30rpx;
