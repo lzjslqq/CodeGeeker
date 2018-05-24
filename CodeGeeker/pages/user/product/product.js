@@ -11,7 +11,8 @@ Page({
         userInfo: {},
         albumList: [],
     },
-    onLoad: function() {
+    onLoad: function() {},
+    onShow: function() {
         this.data.userInfo = app.globalData.userInfo;
 
         albumService.getAlbumList({ grapherid: this.data.userInfo.id })
@@ -19,7 +20,6 @@ Page({
                 this.setData({ albumList: res });
             });
     },
-    onShow: function() {},
     onReady: function() {},
 
     gotoAlbumDetail(e) {

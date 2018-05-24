@@ -27,7 +27,7 @@
         </view>
         <view class='user-info'>
             <view class='user-name'>{{userInfo.nickName}}</view>
-            <view class='user-btn' wx:if="{{userInfo.type == 'user'}}">认证非凡摄影师</view>
+            <view class='user-btn' wx:if="{{userInfo.type == 'user'}}" bindtap="gotoAuth">认证非凡摄影师</view>
         </view>
         <view class='user-desc' wx:if="{{userInfo.type == 'grapher'}}">
             <view class='user-desc-list1'>
@@ -35,7 +35,7 @@
                 <view class='user-desc-list1-auth'>非凡摄影师 · 已认证</view>
             </view>
             <view class='user-desc-list2'>
-                <view class='user-desc-text text'>{{ userInfo.shortDesc || '写点东西展示下自己吧' }}</view>
+                <view class='user-desc-text text'>{{ userInfo.shortDesc || '写点东西介绍下自己吧' }}</view>
                 <view class='user-desc-icon' bindtap="toEdit">
                     <image src='/images/user/edit.png'></image>
                 </view>

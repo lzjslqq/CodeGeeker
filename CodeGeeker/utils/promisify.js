@@ -59,7 +59,7 @@ const checkSession = () => { return promisify(wx.checkSession)() };
 
 
 /*----------------- 界面交互 -----------------*/
-const showToast = ({ title, icon, image, mask, duration = 500 }) => { return promisify(wx.showToast)({ title, icon, image, mask, duration }); };
+const showToast = ({ title, icon = 'none', image, mask, duration = 500 }) => { return promisify(wx.showToast)({ title, icon, image, mask, duration }); };
 const showLoading = ({ title, mask } = {}) => { return promisify(wx.showLoading)({ title, mask }); };
 const showModal = ({ title, content, showCancel, cancelText, cancelColor = "#888", confirmText, confirmColor = "#FFB33A" } = {}) => { return promisify(wx.showModal)({ title, content, showCancel, cancelText, cancelColor, confirmText, confirmColor }); };
 // 页面底部的菜单栏

@@ -4,13 +4,16 @@
     </view>
     <view class="opacity"></view>
     <view class="grapher-pane">
-        <image class="avatar" src="{{grapher.avatarUrl}}"></image>
+        <view class="img">
+            <image class="avatar" src="{{grapher.avatarUrl}}"></image>
+            <image class="logo" src="/images/grapher/grapher_logo_large.png"></image>
+        </view>
         <view class="name">{{grapher.nickName}}</view>
         <view class="stat">
             <view class="fans">{{grapher.fansCount}} 位粉丝</view>
             <view class="tag">非凡摄影师 · 已认证</view>
         </view>
-        <view class="desc">{{grapher.shortDesc}}</view>
+        <view class="desc">{{ grapher.shortDesc || '摄影师暂时还未编辑签名哦~'}}</view>
     </view>
     <view class="float-tabs">
         <view class="tab-1 {{selectedTab==0?'selected':''}}" bindtap="changeTab" data-tabid="0">全部 {{tempTotalCount}}</view>

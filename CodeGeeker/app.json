@@ -6,6 +6,7 @@
         "pages/photographer/list/list",
         "pages/photographer/detail/detail",
         "pages/user/detail/detail",
+        "pages/user/auth/auth",
         "pages/user/followee/list/list",
         "pages/user/fav/list/list",
         "pages/user/upload/upload",

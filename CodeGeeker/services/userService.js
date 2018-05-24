@@ -37,6 +37,22 @@ export default class UserService {
         });
     }
 
+
+    // 认证摄影师
+    updateUserType({ userid }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateUserType,
+                data: { userid },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return 1;
+                }
+                return 0;
+            });
+    }
+
     // 更新摄影师介绍
     updateGrapherDesc({ grapherid, desc }) {
         return promisedApi.http.request({

@@ -1,0 +1,54 @@
+page {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+}
+
+.content {
+    margin: 30rpx 50rpx;
+    width: 650rpx;
+    height: 1100rpx;
+    border-radius: 30rpx;
+    background: -webkit-linear-gradient(left, #00c3b7, #00d7cf);
+    background: -o-linear-gradient(right, #00c3b7, #00d7cf);
+    background: -moz-linear-gradient(right, #00c3b7, #00d7cf);
+    background: linear-gradient(to right, #00c3b7, #00d7cf);
+}
+
+.content .desc {
+    padding: 20px;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #fff;
+}
+
+.logo {
+    margin: 20rpx 100rpx;
+    width: 550rpx;
+    height: 240rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo .vivo {
+    width: 180rpx;
+    height: 240rpx;
+}
+
+.submit {
+    margin: 0 290rpx;
+    margin-top: -120rpx;
+    width: 170rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    text-align: center;
+    background: -webkit-linear-gradient(left, #ff8d1d, #ffb33a);
+    background: -o-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: -moz-linear-gradient(right, #ff8d1d, #ffb33a);
+    background: linear-gradient(to right, #ff8d1d, #ffb33a);
+}

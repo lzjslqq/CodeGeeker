@@ -31,6 +31,7 @@ Page({
 
         userService.getGrapherDetail({ grapherid: this.data.grapher.id, userid: this.data.userInfo.id })
             .then(res => {
+                console.log(!!res.shortDesc);
                 promisedApi.ui.setNavigationBarTitle({ title: res.nickName });
 
                 this.setData({

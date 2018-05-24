@@ -1,73 +1,75 @@
 .container {
-     position: relative;
-     background-color: #fff;
-     width: 690rpx;
-     height: 100%;
-     padding: 0 30rpx;
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-     align-items: center;
+    position: relative;
+    background-color: #fff;
+    width: 690rpx;
+    height: 100%;
+    padding: 0 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .slidup {
-     animation: slidup 0.5s;
-     -moz-animation: slidup 0.5s;
-     -webkit-animation: slidup 0.5s;
-     -o-animation: slidup 0.5s;
+    animation: slidup 0.5s;
+    -moz-animation: slidup 0.5s;
+    -webkit-animation: slidup 0.5s;
+    -o-animation: slidup 0.5s;
 }
 
 @keyframes slidup {
-     from {
-          bottom: -700rpx;
-     }
-
-     to {
-          bottom: 0rpx;
-     }
+    from {
+        bottom: -700rpx;
+    }
+    to {
+        bottom: 0rpx;
+    }
 }
+
 
 /* Safari and Chrome */
 
 @-webkit-keyframes slidup {
-     from {
-          bottom: -700rpx;
-     }
-
-     to {
-          bottom: 0rpx;
-     }
+    from {
+        bottom: -700rpx;
+    }
+    to {
+        bottom: 0rpx;
+    }
 }
 
 .activity {
-     margin-bottom: 30rpx;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
+    margin-bottom: 30rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
 }
 
 .top {
-     width: 690rpx;
-     height: 320rpx;
+    width: 690rpx;
+    height: 320rpx;
 }
 
 .activity .activity-cover {
-     width: 580rpx;
-     height: 240rpx;
+    width: 580rpx;
+    height: 240rpx;
 }
 
 .activity image {
-     margin-top: 18rpx;
+    margin-top: 18rpx;
+    margin-bottom: 10rpx;
 }
+
 .activity text {
-     font-size: 30rpx;
+    font-size: 30rpx;
 }
 
 .top-text {
-     font-size: 36rpx;
-     color: #ff8d1d;
+    font-size: 36rpx;
+    color: #ff8d1d;
 }
 
 .activity-text {
-     font-size: 28rpx;
+    font-size: 28rpx;
 }

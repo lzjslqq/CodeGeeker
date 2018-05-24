@@ -84,8 +84,8 @@ page {
 }
 
 .user-logo {
-    width: 40rpx;
-    height: 40rpx;
+    width: 60rpx;
+    height: 60rpx;
     margin-left: -50rpx;
 }
 

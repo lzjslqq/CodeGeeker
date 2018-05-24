@@ -11,6 +11,6 @@
             <view class="stat">粉丝 {{item.fansCount}} · 作品 {{item.productCount}}</view>
         </view>
         <view class="{{item.focused == 1 ? 'focused' : 'nofocus'}}" data-gid="{{item.id}}" catchtap="focus">{{item.focused ==1 ? '- 取关' : '+ 关注'}}</view>
-        <!-- <image class="focus" src="{{item.avatarUrl}}" data-gid="{{item.id}}" catchtap="focus"></image> -->
     </view>
 </view>
+<!-- <image class="bg" src="/images/grapher/bg.png" mode="scaleToFit"></image> -->

@@ -1,5 +1,5 @@
-export const domain = 'https://www.t278.cn/';
-// export const domain = 'http://localhost:61764/';
+// export const domain = 'https://www.t278.cn/';
+export const domain = 'http://localhost:61764/';
 
 export const apiUrl = {
     // 授权登录
@@ -8,6 +8,7 @@ export const apiUrl = {
     checkToken: `${domain}/wxa/checktoken`,
     getUserInfoByToken: `${domain}/wxa/getuserinfo`,
     updateGrapherDesc: `${domain}/wxa/updateGrapherDesc`,
+    updateUserType: `${domain}/wxa/updateUserType`,
     // 分类
     getCateList: `${domain}/wxa/getCateList`,
     // 主题

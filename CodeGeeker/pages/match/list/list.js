@@ -7,21 +7,52 @@ let matchService = new services.MatchService();
 
 Page({
     data: {
-        matchList: [],
+        groupList: [],
     },
     onLoad: function() {
-        let matches = app.globalData.matchList;
-        let defaultSrc = app.globalData.photoList[0].src;
-        matches.map(e => {
-            if (app.globalData.photoList.findIndex(p => p.matchid == e.id) > -1) {
-                e.bgimage = app.globalData.photoList.filter(p => p.matchid == e.id)[0].src;
-            } else {
-                e.bgimage = defaultSrc;
-            }
-            let commentList = app.globalData.commentList.filter(c => c.matchid == e.id);
-            e.commentcount = app.globalData.userList.filter(u => commentList.findIndex(c => c.userid == u.id) > -1).length;
-        });
-        this.setData({ matchList: matches });
+        matchService.getMatchList()
+            .then(res => {
+                let matchList1 = [],
+                    matchList2 = [],
+                    groupList1 = [],
+                    groupList2 = [];
+
+                matchList1 = res.filter(m => m.ispass == 1).sort((m1, m2) => m1.playtime > m2.playtime);
+                matchList2 = res.filter(m => m.ispass == 0).sort((m1, m2) => m1.playtime < m2.playtime);
+
+                // 分组
+                matchList1.forEach(m => {
+                    let idx = groupList1.findIndex(g => g.playtime == m.playtime);
+                    if (idx == -1) {
+                        groupList1.push({
+                            playtime: m.playtime,
+                            stage: m.stage,
+                            ispass: false,
+                            matchList: [m]
+                        });
+                    } else {
+                        groupList1[idx].matchList.push(m);
+                    }
+                });
+
+                matchList2.forEach(m => {
+                    let idx = groupList2.findIndex(g => g.playtime == m.playtime);
+                    if (idx == -1) {
+                        groupList2.push({
+                            playtime: m.playtime,
+                            stage: m.stage,
+                            ispass: true,
+                            matchList: [m]
+                        });
+                    } else {
+                        groupList2[idx].matchList.push(m);
+                    }
+                });
+
+                console.log(groupList1.concat(groupList2));
+
+                this.setData({ groupList: groupList1.concat(groupList2) });
+            });
     },
     onShow: function() {},
     onReady: function() {},

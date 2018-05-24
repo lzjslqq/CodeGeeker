@@ -1,0 +1,10 @@
+<view class="container">
+    <view class="content">
+        <view class="desc">非凡摄影师认证资格文案。</view>
+        <!-- <view class="logo">
+            <image class="vivo" src="/images/user/vivo.png"></image>
+            <image class="grapher" src="/images/grapher/grapher_logo_large.png"></image>
+        </view> -->
+    </view>
+    <view class="submit" bindtap="submitAuth">提交认证</view>
+</view>

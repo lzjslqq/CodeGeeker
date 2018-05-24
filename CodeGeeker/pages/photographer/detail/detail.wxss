@@ -79,6 +79,10 @@ page {
     justify-content: center;
 }
 
+.grapher-pane .img {
+    position: relative;
+}
+
 .grapher-pane .avatar {
     margin: 100rpx 286rpx 0 284rpx;
     width: 180rpx;
@@ -86,8 +90,16 @@ page {
     border-radius: 90rpx;
 }
 
+.grapher-pane .logo {
+    position: absolute;
+    top: 220rpx;
+    left: 420rpx;
+    width: 60rpx;
+    height: 60rpx;
+}
+
 .grapher-pane .name {
-    margin-top: 40rpx;
+    margin-top: 20rpx;
     line-height: 80rpx;
     width: 100%;
     font-size: 42rpx;
@@ -117,6 +129,14 @@ page {
 .grapher-pane .stat .tag {
     padding-left: 20rpx;
     line-height: 30rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.grapher-pane image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
 }
 
 .grapher-pane .desc {

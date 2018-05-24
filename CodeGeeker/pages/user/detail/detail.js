@@ -13,14 +13,19 @@ Page({
         messageCount: 0,
     },
 
-    onLoad: function() {
-        this.setData({ userInfo: app.globalData.userInfo });
-        this.getMessageUnreadCount();
-    },
+    onLoad: function() {},
     onShow: function() {
+        // this.setData({ userInfo: app.globalData.userInfo });
+        // this.getMessageUnreadCount();
+
+        app.login(() => {
+            this.setData({ userInfo: app.globalData.userInfo });
+            this.getMessageUnreadCount();
+        });
+    },
+    onReady: function() {
         this.interval = setInterval(this.getMessageUnreadCount, 5000);
     },
-    onReady: function() {},
     onHide: function() {
         clearInterval(this.interval);
     },
@@ -34,6 +39,9 @@ Page({
         app.login(() => {
             this.setData({ userInfo: app.globalData.userInfo });
         });
+    },
+    gotoAuth() {
+        promisedApi.ui.navigateTo({ url: `/pages/user/auth/auth` });
     },
     // 我的作品列表，对应图集列表页
     gotoProductList(e) {
