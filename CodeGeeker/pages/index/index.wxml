@@ -1,23 +1,27 @@
 <view class="container">
     <!-- 分类栏 -->
     <view class="cate">
-        <view class="cate-item {{selectedCateId == item.id ? 'selected':''}}" wx:for="{{cateList}}" data-id="{{item.id}}" bindtap="selectCate">{{item.name}}</view>
+        <view class="cate-item {{selectedCateId == item.sortid ? 'selected':''}}" wx:for="{{cateList}}" data-sortid="{{item.sortid}}" bindtap="selectCate">{{item.name}}</view>
         <view class="cate-item end">{{' '}}</view>
     </view>
     <!-- 瀑布流 -->
     <view class="list">
         <!-- 图片加载层 -->
         <view class="hiddenload">
-            <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-index="{{item.id}}"></image>
+            <image style="display:none;" wx:for="{{tempPhotoList}}" src="{{item.src}}" bindload="onImageLoaded" data-pid="{{item.id}}"></image>
         </view>
         <!-- 左侧列表 -->
         <view class="list-left" style="width:{{listWidth}}px;">
+            <view class="item ad">
+                <image class="adimg" wx:if="{{selectedCateId == cateList[0].sortid}}" style="height: {{ad.height}}px; width:{{ad.width}}px;" src="{{ad.src}}" mode="scaleToFill" bindtap="gotoAd"></image>
+            </view>
             <view class="item" wx:for="{{leftPhotoList}}">
-                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-albumid="{{item.albumid}}" data-sortid="{{item.sortid}}"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
-                    <view class="fav-count">{{item.favcount}}</view>
+                    <image class="fav-img" src="{{item.faved==1 ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <view class="fav-count">{{item.favcount}}
+                    </view>
                     <view class="name">{{item.grapherName}}</view>
                     <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>
                 </view>
@@ -25,11 +29,11 @@
         </view>
         <!-- 右侧列表 -->
         <view class="list-right" style="width:{{listWidth}}px;">
-            <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
-                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+            <view class="item" wx:for="{{rightPhotoList}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-albumid="{{item.albumid}}" data-sortid="{{item.sortid}}"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
-                    <image class="fav-img" src="{{item.faved ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
+                    <image class="fav-img" src="{{item.faved==1 ? '/images/index/liked.png' : '/images/index/like.png'}}"></image>
                     <view class="fav-count">{{item.favcount}}</view>
                     <view class="name">{{item.grapherName}}</view>
                     <image class="avatar" src="{{item.grapherAvatarUrl}}"></image>

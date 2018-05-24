@@ -5,10 +5,10 @@ import { config } from '../configs/config';
 export default class PhotoService {
     constructor() {}
 
-    getPhotoListByCate({ cateid, userid }) {
+    getPhotoListByCate({ sortid, userid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.getPhotoListByCate,
-                data: { cateid, userid },
+                data: { sortid, userid },
                 method: 'POST'
             })
             .then(res => {
@@ -81,6 +81,21 @@ export default class PhotoService {
             filePath: tempPath,
             name: 'file',
         });
+    }
+
+    // 更新点赞状态
+    updateFav({ userid, photoid }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.updateFav,
+                data: { userid, photoid },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return 1;
+                }
+                return 0;
+            });
     }
 
 }

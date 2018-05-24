@@ -2,28 +2,29 @@
 <text class='vote-match'>阿根廷VS巴西（小组赛）</text>
 <image class='bg' src='/images/vote/vote_bg.jpg'></image>
 <view class='vote' wx:if='{{ !hasVoted }}'>
-     <view class='vote-title'>
-          <text class='title'>球星（排名不分先后）</text>
-          <text class='endtime'>截止至赛前30分钟</text>
-     </view>
-     <checkbox-group bindchange="checkboxChange"  wx:for='{{ vote }}'>
-          <view class='item'>
-               <checkbox value="{{ item.value }}" checked="{{ false }}" />
-               <text class='item-name'>{{ item.name }}</text>
-          </view>
-     </checkbox-group>
-     <view class='submit'>
-          <view class='btn-submit' data-voteid='1' bindtap="vote">提交</view>
-     </view>
+    <view class='vote-title'>
+        <text class='title'>球星（排名不分先后）</text>
+        <text class='endtime'>截止至赛前30分钟</text>
+    </view>
+    <checkbox-group bindchange="checkboxChange" wx:for='{{ vote }}'>
+        <view class='item'>
+            <checkbox value="{{ item.value }}" checked="{{ false }}" />
+            <text class='item-name'>{{ item.name }}</text>
+        </view>
+    </checkbox-group>
+    <view class='submit'>
+        <view class='btn-submit' data-voteid='1' bindtap="vote">提交</view>
+    </view>
 </view>
 <view wx:if="{{ hasVoted }}">
-     <view class='result'>
-          <view class='result-item' wx:for='{{ result }}'>
-               <view class='vote-text'>
-                    <text>{{ item.name }}</text>
-                    <text>{{ item.count }}</text>
-               </view>
-               <progress percent="{{ (item.count / totalVotedCount)*100 }}" stroke-width="14" active />
-          </view>
-     </view>
+    <view class='result'>
+        <view class="total">共有{{totalVotedCount}}人参与</view>
+        <view class='result-item' wx:for='{{ result }}'>
+            <view class='vote-text'>
+                <text>{{ item.name }}</text>
+                <text>{{ item.count }}</text>
+            </view>
+            <progress percent="{{ (item.count / totalVotedCount)*100 }}" stroke-width="14" active />
+        </view>
+    </view>
 </view>

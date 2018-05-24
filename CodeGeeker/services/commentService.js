@@ -19,6 +19,20 @@ export default class CommentService {
             });
     }
 
+    getCommentUserCount({ matchid }) {
+        return promisedApi.http.request({
+                url: config.apiUrl.getCommentUserCount,
+                data: { matchid },
+                method: 'POST'
+            })
+            .then(res => {
+                if (res && res.data.errcode == 200) {
+                    return { code: 1, count: res.data.count };
+                }
+                return { code: 0, count: res.data.count };
+            });
+    }
+
     addComment({ matchid, type, userid, content, touserid }) {
         return promisedApi.http.request({
                 url: config.apiUrl.addComment,

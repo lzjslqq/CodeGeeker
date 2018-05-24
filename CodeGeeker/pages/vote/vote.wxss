@@ -1,134 +1,142 @@
 /* pages/vote/vote.wxss */
 
 page {
-     background-color: #fff;
-     display: flex;
-     justify-content: center;
-     flex-direction: column;
-     align-items: center;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .vote-name {
-     margin-top: 34rpx;
-     font-size: 40rpx;
-     color: #fff;
+    margin-top: 34rpx;
+    font-size: 40rpx;
+    color: #fff;
 }
 
 .vote-match {
-     margin-top: 10rpx;
-     margin-bottom: 34rpx;
-     font-size: 26rpx;
-     color: #fff;
+    margin-top: 10rpx;
+    margin-bottom: 34rpx;
+    font-size: 26rpx;
+    color: #fff;
 }
 
 .vote {
-     background-color: #fff;
-     width: 690rpx;
-     border-radius: 10rpx;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
+    background-color: #fff;
+    width: 690rpx;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .bg {
-     width: 750rpx;
-     height: 100%;
-     position: fixed;
-     top: 0;
-     left: 0;
-     z-index: -2;
+    width: 750rpx;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
 }
 
 .vote-title {
-     width: 630rpx;
-     height: 100rpx;
-     padding: 0 30rpx;
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     border-bottom: 2rpx solid #f0f0f0;
+    width: 630rpx;
+    height: 100rpx;
+    padding: 0 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2rpx solid #f0f0f0;
 }
 
 .title {
-     font-size: 26rpx;
-     color: #999;
+    font-size: 26rpx;
+    color: #999;
 }
 
 .endtime {
-     font-size: 24rpx;
-     color: red;
+    font-size: 24rpx;
+    color: red;
 }
 
 .item {
-     width: 660rpx;
-     height: 100rpx;
-     padding-left: 30rpx;
-     display: flex;
-     flex-direction: row;
-     justify-content: flex-start;
-     align-items: center;
+    width: 660rpx;
+    height: 100rpx;
+    padding-left: 30rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .item .item-name {
-     font-size: 28rpx;
-     color: #2e2b48;
+    font-size: 28rpx;
+    color: #2e2b48;
+    line-height: 90rpx;
+    margin-left: 20rpx;
 }
 
 .submit {
-     width: 100%;
-     height: 150rpx;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     border-top: 2rpx solid #f0f0f0;
+    width: 100%;
+    height: 150rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2rpx solid #f0f0f0;
 }
 
 .btn-submit {
-     height: 80rpx;
-     width: 580rpx;
-     font-size: 36rpx;
-     color: #fff;
-     border-radius: 10rpx;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background: -webkit-linear-gradient(left, #12b758, #2edd36);
-     background: -o-linear-gradient(right, #12b758, #2edd36);
-     background: -moz-linear-gradient(right, #12b758, #2edd36);
-     background: linear-gradient(to right, #12b758, #2edd36);
+    height: 80rpx;
+    width: 580rpx;
+    font-size: 36rpx;
+    color: #fff;
+    border-radius: 10rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(left, #12b758, #2edd36);
+    background: -o-linear-gradient(right, #12b758, #2edd36);
+    background: -moz-linear-gradient(right, #12b758, #2edd36);
+    background: linear-gradient(to right, #12b758, #2edd36);
 }
 
 .result {
-     background-color: #fff;
-     width: 690rpx;
-     border-radius: 10rpx;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     padding: 30rpx 0;
+    background-color: #fff;
+    width: 690rpx;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30rpx 0;
+}
+
+.result .total {
+    font-size: 26rpx;
+    text-align: center;
+    color: #888;
 }
 
 .result-item {
-     display: flex;
-     flex-direction: column;
-     width: 660rpx;
-     height: 100rpx;
-     justify-content: flex-start;
-     padding: 15rpx 0 15rpx 30rpx;
+    display: flex;
+    flex-direction: column;
+    width: 660rpx;
+    height: 100rpx;
+    justify-content: flex-start;
+    padding: 15rpx 0 15rpx 30rpx;
 }
 
 .vote-text {
-     width: 630rpx;
-     display: flex;
-     justify-content: space-between;
+    width: 630rpx;
+    display: flex;
+    justify-content: space-between;
 }
 
 .result-item text {
-     font-size: 26rpx;
-     color: #2e2b48;
+    font-size: 26rpx;
+    color: #2e2b48;
 }
 
-.result-item  progress {
-     width: 630rpx;
-     height: 40rpx;
+.result-item progress {
+    width: 630rpx;
+    height: 40rpx;
 }

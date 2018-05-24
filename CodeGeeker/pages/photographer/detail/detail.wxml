@@ -35,7 +35,7 @@
             </view>
             <!-- 左侧列表 -->
             <view class="list-left" style="width:{{listWidth}}px;">
-                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{leftPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
+                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{leftPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-sortid="{{item.sortid}}" data-aid="{{item.albumid}}">
                     <image class="photo" src="{{item.src}}" mode="widthFix"></image>
                     <view class="info">
                         <view class="title">{{item.title}}</view>
@@ -50,7 +50,7 @@
             </view>
             <!-- 右侧列表 -->
             <view class="list-right" style="width:{{listWidth}}px;">
-                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{rightPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-id="{{item.id}}">
+                <view class="item" style="margin-top: {{idx > 0 ? 60:0}}px;" wx:for="{{rightPhotoList}}" wx:for-index="idx" bindtap="gotoPhotoDetail" data-sortid="{{item.sortid}}" data-aid="{{item.albumid}}">
                     <image class="photo" src="{{item.src}}" mode="widthFix"></image>
                     <view class="info">
                         <view class="title">{{item.title}}</view>

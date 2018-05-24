@@ -1,5 +1,5 @@
-export const domain = 'https://www.t278.cn/';
-// export const domain = 'http://localhost:61764/';
+// export const domain = 'https://www.t278.cn/';
+export const domain = 'http://localhost:61764/';
 
 export const apiUrl = {
     // 授权登录
@@ -15,6 +15,10 @@ export const apiUrl = {
     getThemeList: `${domain}/wxa/getThemeList`,
     // 赛事
     getMatchList: `${domain}/wxa/getMatchList`,
+    // 评论
+    getCommentList: `${domain}/wxa/getCommentList`,
+    getCommentUserCount: `${domain}/wxa/getCommentUserCount`,
+    addComment: `${domain}/wxa/addComment`,
     // 摄影师
     getGrapherList: `${domain}/wxa/getGrapherList`,
     getGrapherListByFollow: `${domain}/wxa/getGrapherListByFollow`,
@@ -35,4 +39,5 @@ export const apiUrl = {
     getPhotoListByGrapher: `${domain}/wxa/getPhotoListByGrapher`,
     getPhotoListByFav: `${domain}/wxa/getPhotoListByFav`,
     getPhotoDetail: `${domain}/wxa/getPhotoDetail`,
+    updateFav: `${domain}/wxa/updateFav`,
 }

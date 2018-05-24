@@ -1,171 +1,118 @@
 import { promisedApi } from '../../../utils/promisify';
-import { common } from '../../../utils/util';
 import { config } from '../../../configs/config';
-import { Fav } from '../../../configs/data';
-const app = getApp()
+import { common } from '../../../utils/util';
+import { services } from '../../../services/services';
+const app = getApp();
+let albumService = new services.AlbumService();
+let photoService = new services.PhotoService();
 
 Page({
-     data: {
-          image: {},
-          album: {},
-          lastTouching: false,
-          nextTouching: false,
-          showInfo: true,
-     },
-     onLoad: function (options) {
-          let id = options.id, // image.id
-               sortId = options.sortid,
-               albumId = options.albumid,
-               userId = app.globalData.userInfo.id;
+    data: {
+        albumId: 0,
+        sortId: 0,
+        userId: 0,
+        image: {},
+        photoList: [],
+        lastTouching: false,
+        nextTouching: false,
+        showInfo: true,
+    },
+    onLoad: function(options) {
+        console.log(options);
+        this.data.albumId = options.albumid;
+        this.data.sortId = options.sortid;
+        this.data.userId = app.globalData.userInfo.id;
 
-          let image = {},
-               album = {};
+        photoService.getPhotoDetail({ albumid: this.data.albumId, sortid: this.data.sortId, userid: this.data.userId })
+            .then(res => {
+                this.setData({ image: res });
+            });
+    },
+    onShow: function() {},
+    onReady: function() {},
+    onShareAppMessage: function() {
+        common.out('onShareAppMessage');
+        let title = this.data.album.title;
+        let path = `/pages/photo/detail/detail?albumid=${this.data.album.id}&sortid=${this.data.image.sortid}`;
+        let icon = this.data.image.src;
+        return {
+            title: title,
+            path: path,
+            imageUrl: icon,
+        }
+    },
 
-          if (id > 0) {
-               image = app.globalData.photoList.filter(e => e.id == id)[0];
-               album = app.globalData.albumList.filter(e => e.id == image.albumid)[0];
-          } else if (sortId > 0 && albumId > 0) {
-               image = app.globalData.photoList.filter(e => e.albumid == albumId && e.sortid == sortId)[0];
-               album = app.globalData.albumList.filter(e => e.id == albumId)[0];
-          }
+    gotoGrapher(e) {
+        promisedApi.ui.navigateTo({ url: `/pages/photographer/detail/detail?id=${e.currentTarget.dataset.id}` });
+    },
+    gotoPainting(e) {
+        promisedApi.ui.navigateTo({ url: `/pages/painting/painting?id=${e.currentTarget.dataset.id}` });
+    },
+    last(e) {
+        this.setData({ lastTouching: true });
+        let sortid = e.currentTarget.dataset.sortid;
+        promisedApi.ui.redirectTo({ url: `/pages/photo/detail/detail?albumid=${this.data.albumId}&sortid=${sortid}` })
+    },
+    next(e) {
+        this.setData({ nextTouching: true });
+        let sortid = e.currentTarget.dataset.sortid;
+        promisedApi.ui.redirectTo({ url: `/pages/photo/detail/detail?albumid=${this.data.albumId}&sortid=${sortid}` })
+    },
+    fav(e) {
+        let photoId = e.currentTarget.dataset.id;
 
-          image.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == image.id).length > 0;
+        // 先判断，再做相应处理
+        photoService.updateFav({ userid: this.data.userId, photoid: photoId })
+            .then(res => {
+                photoService.getPhotoDetail({ albumid: this.data.albumId, sortid: this.data.sortId, userid: this.data.userId })
+                    .then(res => {
+                        this.setData({ image: res });
+                    });
+            });
+    },
 
-          this.setData({
-               image: image,
-               album: album,
-          });
-     },
-     onShow: function () { },
-     onReady: function () { },
-     onShareAppMessage: function () {
-          common.out('onShareAppMessage');
-          let title = this.data.album.title;
-          let path = `/pages/photo/detail/detail?albumid=${this.data.album.id}&sortid=${this.data.image.sortid}`;
-          let icon = this.data.image.src;
-          return {
-               title: title,
-               path: path,
-               imageUrl: icon,
-          }
-     },
+    toggleInfo(e) {
 
-     gotoGrapher(e) {
-          promisedApi.ui.navigateTo({ url: `/pages/photographer/detail/detail?id=${e.currentTarget.dataset.id}` });
-     },
-     gotoPainting(e) {
-          promisedApi.ui.navigateTo({ url: `/pages/painting/painting?id=${e.currentTarget.dataset.id}` });
-     },
-     last(e) {
-          this.setData({ lastTouching: true });
-          let sortId = e.currentTarget.dataset.sort,
-               albumId = this.data.album.id,
-               userId = app.globalData.userInfo.id;
-          let
-               image = app.globalData.photoList.filter(e => e.albumid == albumId && e.sortid == sortId)[0],
-               album = app.globalData.albumList.filter(e => e.id == albumId)[0];
+        this.setData({ showInfo: !this.data.showInfo });
+    },
+    download(e) {
 
-          image.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == image.id).length > 0;
+        promisedApi.open.getSetting()
+            .then(res => {
 
-          this.setData({
-               image: image,
-               album: album,
-               lastTouching: false
-          });
-     },
-     next(e) {
-          this.setData({ nextTouching: true });
-          let sortId = e.currentTarget.dataset.sort,
-               albumId = this.data.album.id,
-               userId = app.globalData.userInfo.id;
-          let
-               image = app.globalData.photoList.filter(e => e.albumid == albumId && e.sortid == sortId)[0],
-               album = app.globalData.albumList.filter(e => e.id == albumId)[0];
+                if (!res.authSetting['scope.writePhotosAlbum']) {
+                    wx.authorize({
+                        scope: 'scope.writePhotosAlbum',
+                        success() {
+                            // 用户已经同意小程序使用相册
+                            wx.downloadFile({
+                                url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
+                                success: function(res) {
 
-          image.faved = app.globalData.favList.filter(e => e.userid == userId && e.photoid == image.id).length > 0;
-
-          this.setData({
-               image: image,
-               album: album,
-               nextTouching: false
-          });
-     },
-     fav(e) {
-          let
-               photoId = e.currentTarget.dataset.id,
-               userId = app.globalData.userInfo.id;
-
-          // 先判断，再做相应处理
-          let allFavList = app.globalData.favList;
-
-          if (allFavList.findIndex(e => e.userid == userId && e.photoid == photoId) > -1) {
-               // 更新全局变量
-               app.globalData.favList = allFavList.filter(e => !(e.userid == userId && e.photoid == photoId));
-               // 更新页面变量
-               let favcount = this.data.image.favcount - 1;
-               this.setData({
-                    'image.faved': false,
-                    'image.favcount': favcount,
-               });
-          } else {
-               // 更新全局变量
-               allFavList.push(new Fav({
-                    photoid: photoId,
-                    userid: userId,
-               }));
-               app.globalData.favList = allFavList;
-               // 更新页面变量
-               let favcount = this.data.image.favcount + 1;
-               this.setData({
-                    'image.faved': true,
-                    'image.favcount': favcount,
-               });
-          }
-     },
-
-     toggleInfo(e) {
-
-          this.setData({ showInfo: !this.data.showInfo });
-     },
-     download(e) {
-
-          promisedApi.open.getSetting()
-               .then(res => {
-
-                    if (!res.authSetting['scope.writePhotosAlbum']) {
-                         wx.authorize({
-                              scope: 'scope.writePhotosAlbum',
-                              success() {
-                                   // 用户已经同意小程序使用相册
-                                   wx.downloadFile({
-                                        url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
-                                        success: function (res) {
-
-                                             if (res.statusCode === 200) {
-
-                                                  promisedApi.image.saveImageToPhotosAlbum({ filePath: res.tempFilePath })
-                                             }
-                                        }
-                                   })
-
-
-
-
-                              }
-                         })
-                    }
-                    else
-                         wx.downloadFile({
-                              url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
-                              success: function (res) {
-
-                                   if (res.statusCode === 200) {
+                                    if (res.statusCode === 200) {
 
                                         promisedApi.image.saveImageToPhotosAlbum({ filePath: res.tempFilePath })
-                                   }
-                              }
-                         })
-               })
-     }
+                                    }
+                                }
+                            })
+
+
+
+
+                        }
+                    })
+                } else
+                    wx.downloadFile({
+                        url: 'https://www.t278.cn//codegeek/authors/author09.jpg',
+                        success: function(res) {
+
+                            if (res.statusCode === 200) {
+
+                                promisedApi.image.saveImageToPhotosAlbum({ filePath: res.tempFilePath })
+                            }
+                        }
+                    })
+            })
+    }
 
 })

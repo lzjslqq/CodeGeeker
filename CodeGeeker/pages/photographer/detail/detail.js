@@ -57,7 +57,7 @@ Page({
         this.setData({ selectedTab: e.currentTarget.dataset.tabid });
     },
     gotoPhotoDetail(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.aid}&sortid=${e.currentTarget.dataset.sortid}` });
     },
     gotoPhotoList(e) {
         promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.aid}&sortid=1` });

@@ -39,6 +39,7 @@ page {
 .match-group text {
     font-size: 24rpx;
     color: #b3ada8;
+    line-height: 64rpx;
 }
 
 .item .bgimage {

@@ -8,7 +8,7 @@
         <!-- 左侧列表 -->
         <view class="list-left" style="width:{{listWidth}}px;">
             <view class="item" wx:for="{{leftPhotoList}}">
-                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-id="{{item.id}}"></image>
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-aid="{{item.id}}" data-sortid="{{item.sortid}}"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
                     <image class="fav-img" src="/images/index/liked.png"></image>
@@ -20,8 +20,8 @@
         </view>
         <!-- 右侧列表 -->
         <view class="list-right" style="width:{{listWidth}}px;">
-            <view class="item" wx:for="{{rightPhotoList}}" bindtap="gotoDetail" data-id="{{item.id}}">
-                <image class="photo" src="{{item.src}}" mode="widthFix"></image>
+            <view class="item" wx:for="{{rightPhotoList}}">
+                <image class="photo" src="{{item.src}}" mode="widthFix" bindtap="gotoDetail" data-aid="{{item.id}}" data-sortid="{{item.sortid}}"></image>
                 <view class="title">{{item.title}}</view>
                 <view class="stat">
                     <image class="fav-img" src="/images/index/liked.png"></image>

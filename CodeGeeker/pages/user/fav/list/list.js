@@ -34,7 +34,7 @@ Page({
     onReachBottom: function() {},
 
     gotoDetail(e) {
-        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?id=${e.currentTarget.dataset.id}` });
+        promisedApi.ui.navigateTo({ url: `/pages/photo/detail/detail?albumid=${e.currentTarget.dataset.aid}&sortid=${e.currentTarget.dataset.sortid}` });
     },
     requestImageList() {
         photoService.getPhotoListByFav({ userid: this.data.userId })
