@@ -15,17 +15,12 @@ Page({
 
     onLoad: function() {},
     onShow: function() {
-        // this.setData({ userInfo: app.globalData.userInfo });
-        // this.getMessageUnreadCount();
-
         app.login(() => {
             this.setData({ userInfo: app.globalData.userInfo });
-            this.getMessageUnreadCount();
+            this.interval = setInterval(this.getMessageUnreadCount, 5000);
         });
     },
-    onReady: function() {
-        this.interval = setInterval(this.getMessageUnreadCount, 5000);
-    },
+    onReady: function() {},
     onHide: function() {
         clearInterval(this.interval);
     },

@@ -1,4 +1,4 @@
-<view class="container" style="width:{{window.width}}px;height: {{window.height}}px;" bindtap="goBack">
+<view class="container" style="width:{{window.width}}px;height: {{window.height}}px;" bindtap="toggleShadow">
     <view class="shadow"></view>
     <view class="img" style="width:{{image.scaleWidth}}px;height:{{image.scaleHeight}}px;left:{{image.left}}px;top:{{image.top}}px;" catchtouchstart="onImageTouchStart" catchtouchmove="onImageTouchMove" catchtouchend="onImageTouchEnd">
         <image src="{{image.src}}" mode="widthFix" bindload="onImageLoaded" bindlongpress="onLongPress"></image>

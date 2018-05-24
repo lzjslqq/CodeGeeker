@@ -11,21 +11,6 @@ App({
 
         this.login();
 
-        this.globalData.userList = config.users;
-        this.globalData.cateList = config.categories;
-        this.globalData.grapherList = config.graphers;
-        this.globalData.matchList = config.matches;
-        this.globalData.albumList = config.albums;
-        this.globalData.photoList = config.photoes;
-        this.globalData.followList = config.followes;
-        this.globalData.favList = config.favs;
-        this.globalData.messageList = config.messages;
-        this.globalData.commentList = config.comments;
-
-        console.log(config);
-
-
-
         wx.getSystemInfo({
             success: function(res) {
                 that.globalData.window = {

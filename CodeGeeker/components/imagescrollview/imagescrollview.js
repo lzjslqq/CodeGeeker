@@ -22,6 +22,7 @@ Component({
         }
     },
     data: {
+        showShadow: true,
         image: {
             src: '',
             width: 0,
@@ -69,6 +70,9 @@ Component({
         logout && common.out('zoomview detached...');
     },
     methods: {
+        toggleShadow() {
+
+        },
         goBack(e) {
             promisedApi.ui.navigateBack();
         },
