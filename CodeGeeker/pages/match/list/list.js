@@ -49,8 +49,6 @@ Page({
                     }
                 });
 
-                console.log(groupList1.concat(groupList2));
-
                 this.setData({ groupList: groupList1.concat(groupList2) });
             });
     },

@@ -37,7 +37,6 @@ export default class UserService {
         });
     }
 
-
     // 认证摄影师
     updateUserType({ userid }) {
         return promisedApi.http.request({
@@ -70,6 +69,7 @@ export default class UserService {
 
 
     // ---- 摄影师
+
 
     getGrapherList({ userid }) {
         return promisedApi.http.request({

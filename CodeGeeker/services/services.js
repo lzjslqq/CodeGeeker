@@ -4,6 +4,7 @@ import ThemeService from './themeService';
 import MatchService from './matchService';
 import AlbumService from './albumService';
 import PhotoService from './photoService';
+import CommentService from './commentService';
 
 export const services = {
     UserService,
@@ -11,5 +12,6 @@ export const services = {
     ThemeService,
     MatchService,
     AlbumService,
-    PhotoService
+    PhotoService,
+    CommentService,
 }
