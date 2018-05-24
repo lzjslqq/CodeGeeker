@@ -10,6 +10,7 @@ Page({
           album: {},
           lastTouching: false,
           nextTouching: false,
+          showInfo: true,
      },
      onLoad: function (options) {
           let id = options.id, // image.id
@@ -51,7 +52,7 @@ Page({
 
      gotoGrapher(e) {
           promisedApi.ui.navigateTo({ url: `/pages/photographer/detail/detail?id=${e.currentTarget.dataset.id}` });
-     }, 
+     },
      gotoPainting(e) {
           promisedApi.ui.navigateTo({ url: `/pages/painting/painting?id=${e.currentTarget.dataset.id}` });
      },
@@ -121,6 +122,11 @@ Page({
                });
           }
      },
+
+     toggleInfo(e) {
+
+          this.setData({ showInfo: !this.data.showInfo });
+     }
 
 
 

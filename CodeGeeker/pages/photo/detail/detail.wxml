@@ -2,9 +2,9 @@
     <image-scroll-view image-src="{{image.src}}"></image-scroll-view>
     <image class="grapher" src="{{image.grapheravatar}}" bindtap="gotoGrapher" data-id="{{image.grapherid}}"></image>
     <image class="vshow" src="/images/detail/vshow.png" bindtap="gotoPainting" data-id="{{image.grapherid}}"></image>
-    <view class="info">
+    <view class="info {{ showInfo ? 'showinfo' : 'hideinfo' }}">
         <view class="title">{{album.title}}</view>
-        <view class="desc">{{album.desc}}</view>
+        <view class="desc"  bindtap="toggleInfo">{{album.desc}}</view>
         <view class="stat">
             <view class="page">{{image.sortid}}/{{album.count}}</view>
             <image class="fav" src="{{image.faved ? '/images/detail/liked.png' : '/images/detail/like.png'}}" bindtap="fav" data-id="{{image.id}}"></image>

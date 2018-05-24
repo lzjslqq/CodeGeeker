@@ -1,3 +1,4 @@
+import { promisedApi } from '../../utils/promisify';
 var app = getApp();
 Page({
 
@@ -106,7 +107,10 @@ Page({
      vote: function (e) {
           // let { voteid } = e.currentTarget.dataset;
           // 提交到服务器 用户id matchid voteid ids
-          this.setData({ hasVoted: true });
+          if (this.data.selectedIds.length == 0)
+               promisedApi.ui.showToast({ title: '至少需要选择一项喔~', icon: 'none', duration: 2000 });
+          else
+               this.setData({ hasVoted: true });
      },
 
      /**
