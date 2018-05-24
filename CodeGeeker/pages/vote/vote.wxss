@@ -8,27 +8,55 @@ page {
      align-items: center;
 }
 
+.vote-name {
+     margin-top: 34rpx;
+     font-size: 40rpx;
+     color: #fff;
+}
+
+.vote-match {
+     margin-top: 10rpx;
+     margin-bottom: 34rpx;
+     font-size: 26rpx;
+     color: #fff;
+}
+
 .vote {
-     background-color: #caf5cd;
+     background-color: #fff;
      width: 690rpx;
-     border: 2rpx solid #a9a8b2;
-     border-radius: 20rpx;
+     border-radius: 10rpx;
      display: flex;
      flex-direction: column;
      justify-content: center;
 }
 
-.title {
+.bg {
+     width: 750rpx;
+     height: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: -2;
+}
+
+.vote-title {
+     width: 630rpx;
+     height: 100rpx;
+     padding: 0 30rpx;
      display: flex;
      align-items: center;
-     justify-content: center;
-     font-size: 34rpx;
-     font-weight: bold;
-     width: 100%;
-     height: 100rpx;
-     color: #353535;
-     text-align: center;
-     border-bottom: 2rpx solid #a9a8b2;
+     justify-content: space-between;
+     border-bottom: 2rpx solid #f0f0f0;
+}
+
+.title {
+     font-size: 26rpx;
+     color: #999;
+}
+
+.endtime {
+     font-size: 24rpx;
+     color: red;
 }
 
 .item {
@@ -39,11 +67,11 @@ page {
      flex-direction: row;
      justify-content: flex-start;
      align-items: center;
-     border-bottom: 2rpx solid #a9a8b2;
 }
 
 .item .item-name {
-     font-size: 30rpx;
+     font-size: 28rpx;
+     color: #2e2b48;
 }
 
 .submit {
@@ -52,24 +80,28 @@ page {
      display: flex;
      justify-content: center;
      align-items: center;
+     border-top: 2rpx solid #f0f0f0;
 }
 
 .btn-submit {
      height: 80rpx;
-     width: 180rpx;
-     font-size: 30rpx;
-     color: #12b758;
-     border: 2rpx solid #12b758;
+     width: 580rpx;
+     font-size: 36rpx;
+     color: #fff;
      border-radius: 10rpx;
      display: flex;
      justify-content: center;
      align-items: center;
+     background: -webkit-linear-gradient(left, #12b758, #2edd36);
+     background: -o-linear-gradient(right, #12b758, #2edd36);
+     background: -moz-linear-gradient(right, #12b758, #2edd36);
+     background: linear-gradient(to right, #12b758, #2edd36);
 }
 
 .result {
-     background-color: #caf5cd;
+     background-color: #fff;
      width: 690rpx;
-     border-radius: 20rpx;
+     border-radius: 10rpx;
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -93,7 +125,7 @@ page {
 
 .result-item text {
      font-size: 26rpx;
-     color: #353535;
+     color: #2e2b48;
 }
 
 .result-item  progress {

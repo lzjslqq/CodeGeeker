@@ -10,6 +10,34 @@ Page({
           userInfo: {},
           hasVoted: false,
           selectedIds: [],
+          vote: [{
+               name: '梅西1',
+               value: 1
+          },
+          {
+               name: '梅西2',
+               value: 2
+          },
+          {
+               name: '梅西3',
+               value: 3
+          },
+          {
+               name: '梅西4',
+               value: 4
+          },
+          {
+               name: '梅西5',
+               value: 5
+          },
+          {
+               name: '梅西6',
+               value: 6
+          },
+          {
+               name: '梅西7',
+               value: 7
+          }],
           result: [{
                name: '梅西1',
                count: 54321
@@ -37,10 +65,6 @@ Page({
           {
                name: '梅西7',
                count: 15478
-          },
-          {
-               name: '梅西8',
-               count: 4321
           }],
           totalVotedCount: 0,
      },
@@ -55,7 +79,7 @@ Page({
                userInfo: app.globalData.userInfo
           });
 
-          let sum = this.data.result.map((item)=>item.count).reduce((pre, cur) => pre + cur);
+          let sum = this.data.result.map((item) => item.count).reduce((pre, cur) => pre + cur);
           this.setData({ totalVotedCount: sum });
      },
 
@@ -82,8 +106,6 @@ Page({
      vote: function (e) {
           // let { voteid } = e.currentTarget.dataset;
           // 提交到服务器 用户id matchid voteid ids
-
-
           this.setData({ hasVoted: true });
      },
 
